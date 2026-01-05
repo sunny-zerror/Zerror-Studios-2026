@@ -1,8 +1,11 @@
 import React from 'react'
+import HeroSection from '../Sections/HeroSection'
 
 const Hero = () => {
   return (
-    <div className=''>Hero</div>
+    <>
+     <HeroSection />
+    </>
   )
 }
 

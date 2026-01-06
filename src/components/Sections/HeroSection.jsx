@@ -64,7 +64,7 @@ const TextAnimation = () => {
         start: "top top",
         end: "bottom bottom",
         scrub: true,
-        // markers:true,
+        markers:true,
       },
     });
     HeroTL.to(
@@ -122,12 +122,17 @@ const HeroSection = () => {
     <div className="w-full h-[400vh] relative flex HeroMainSection ">
       {/* Canvas-Div */}
       <div className="w-full h-screen sticky top-0 left-0 ">
+        {/* Noise PNG */}
+        <div className="w-full h-screen mix-blend-overlay absolute top-0 left-0 z-40">
+          <img className="w-full h-full opacity-30" src={'https://soleilnoir.com/wp-content/themes/soleil-noir/static/images/noise.png'} alt="Noise" />
+        </div>
+       
         <TextAnimation />
         <Canvas
           className="w-full absolute top-0 h-screen z-10"
           gl={{ antialias: true }}
         >
-          <HeroScene /> {/*  // TRY */}
+          <HeroScene />
         </Canvas>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { useThree, useFrame } from "@react-three/fiber";
 import React, { useRef, useMemo, useEffect } from "react";
-import Vertex from "@/shaders/heroShaders/Vertex.glsl";
-import Fragment from "@/shaders/heroShaders/Fragment.glsl";
-// import {Vertex,Fragment} from '@/shaders/heroShaders/HeroShaderGLSL.jsx'
+// import Vertex from "@/shaders/heroShaders/Vertex.glsl";
+// import Fragment from "@/shaders/heroShaders/Fragment.glsl";
+import {Vertex,Fragment} from '@/shaders/heroShaders/HeroShaderGLSL.jsx'
 import * as THREE from "three";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";

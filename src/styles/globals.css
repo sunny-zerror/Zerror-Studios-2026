@@ -5,11 +5,17 @@
   user-select: none;
 }
 body {
-  --primary_text:"";
-  --primary_bg:""
+  --primary_text:#002BBA;
+  --primary_bg:#012CBA;
   overflow-x: hidden;
   background-color: white;
   width: 100%;
+}
+.text_blue{
+  color: var(--primary_text) !important;
+}
+.bg_blue{
+  background-color: var(--primary_bg) !important;
 }
 body::-webkit-scrollbar {
   display: none;
@@ -26,7 +32,7 @@ button {
   justify-content: center;
 }
 .padding {
-  padding-inline: 1rem;
+  padding: 2rem;
 }
 .cover {
   width: 100%;

@@ -45,7 +45,8 @@ const About = () => {
             ease: "linear",
         })
         tl.to(".letter_z", {
-            opacity: 0
+            opacity: 0,
+            duration: 0.001
         }, ">")
         tl.to(txt_anime.chars, {
             y: 0,
@@ -102,10 +103,10 @@ const About = () => {
                 </div>
 
                 <div className=" works_paren fixed overflow-hidden whitespace-nowrap top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-0 h-0 bg-white">
-                    <div className="w-full h-[20%] center">
+                    <div className="w-full h-[40%] center">
                         <p className=' txt_anime text-9xl uppercase font-bold text_blue'>Our Work</p>
                     </div>
-                    <div className="w-full h-[70%] center pt-44">
+                    <div className="w-full h-[60%] center pt-44">
                         <p className=' txt_anime_2 text-xl uppercase font-bold text_blue'>Work That Speaks for itself</p>
                     </div>
                 </div>

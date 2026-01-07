@@ -35,45 +35,45 @@ const HeroScene = () => {
     uniforms.center.value.set(size.width / 2, size.height / 2);
   }, [size, uniforms]);
 
-  useEffect(() => {
-    const tl = gsap.timeline({});
-    tl
-    .from(uniforms.inRadius, {
-      value: 10,
-      ease: "none",
-      duration:0.5,
-    },"<")
-    .to(uniforms.inRadius, {
-      value: 100,
-      ease: "none",
-      duration:0.5,
-    },"<")
-    .from(uniforms.outRadius, {
-      value: 10,
-      ease: "none",
-      duration:0.5,
-    },"<")
-    .from(uniforms.gradLength, {
-      value: 0.5,
-      ease: "none",
-      duration:0.5,
-    },"<")
-    .from(uniforms.gradStrength, {
-      value: 0.5,
-      ease: "none",
-      duration:0.5,
-    },"<")
-    .from(uniforms.sceneMix, {
-      value: 0.5,
-      ease: "none",
-      duration:1,
-    },"<")
-    .from('.heroChar',{
-      translateY:'100%',
-      stagger:0.02,
-      ease:'ease.out'
-    })   
-  }, []);
+  // useEffect(() => {
+  //   const tl = gsap.timeline({});
+  //   tl
+  //   .from(uniforms.inRadius, {
+  //     value: 10,
+  //     ease: "none",
+  //     duration:0.5,
+  //   },"<")
+  //   .to(uniforms.inRadius, {
+  //     value: 100,
+  //     ease: "none",
+  //     duration:0.5,
+  //   },"<")
+  //   .from(uniforms.outRadius, {
+  //     value: 10,
+  //     ease: "none",
+  //     duration:0.5,
+  //   },"<")
+  //   .from(uniforms.gradLength, {
+  //     value: 0.5,
+  //     ease: "none",
+  //     duration:0.5,
+  //   },"<")
+  //   .from(uniforms.gradStrength, {
+  //     value: 0.5,
+  //     ease: "none",
+  //     duration:0.5,
+  //   },"<")
+  //   .from(uniforms.sceneMix, {
+  //     value: 0.5,
+  //     ease: "none",
+  //     duration:1,
+  //   },"<")
+  //   .from('.heroChar',{
+  //     translateY:'100%',
+  //     stagger:0.02,
+  //     ease:'ease.out'
+  //   })   
+  // }, []);
 
   useFrame((state) => {
     if (meshRef.current) {

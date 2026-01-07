@@ -7,10 +7,7 @@ import Services from "@/components/home/Services";
 export default function HomePage() {
   return (
     <>
-      {/* <Hero /> */}
-      <div className="w-full h-screen center">
-        <p>hero section</p>
-      </div>
+      <Hero />
       <About />
       <OurWork />
       <Services />

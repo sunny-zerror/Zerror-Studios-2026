@@ -36,7 +36,7 @@ const Clients = () => {
     }, []);
     
     return (
-        <div className=' clients_paren relative bg-white w-full'>
+        <div className=' clients_paren relative  bg-white w-full'>
             <div
                 ref={containerRef}
                 className="w-full grid grid-cols-6 ">

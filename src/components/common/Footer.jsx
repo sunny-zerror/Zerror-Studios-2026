@@ -23,14 +23,14 @@ const footerRows = [
   {
     id: "I",
     items: [
-      { text: "Built to last.", align: "items-start" },
+      { text: "Built to last.", align: "items-start", hover: 'hover:pt-10' },
       {},
-      { img: "/svg/e.svg" },
+      { img: "/svg/e.svg", hover: 'hover:pb-10' },
       {},
-      { text: "Prototypes that bring ideas to life." },
+      { text: "Prototypes that bring ideas to life.",  hover: 'hover:pt-10' },
       {},
       {},
-      { img: "/svg/o.svg" },
+      { img: "/svg/o.svg", hover: 'hover:pb-10' },
       {},
     ],
   },
@@ -38,33 +38,35 @@ const footerRows = [
     id: "S",
     items: [
       {},
-      { img: "/svg/z.svg" },
+      { img: "/svg/z.svg", hover: 'hover:pb-10' },
       {},
       {},
       {},
-      { img: "/svg/r.svg" },
-      { text: "Bengaluru, India" },
+      { img: "/svg/r.svg", hover: 'hover:pb-10' },
+      { text: "Bengaluru, India", hover: 'hover:pt-10' },
       {
         text: "Design. Development. Marketing.",
         align: "items-end justify-center",
+        hover: 'hover:pb-10'
       },
-      { img: "/svg/r.svg" },
+      { img: "/svg/r.svg", hover: 'hover:pb-10' },
     ],
   },
   {
     id: "T",
     items: [
-      { text: "Where ideas become usable.", align: "items-end justify-center" },
+      { text: "Where ideas become usable.", align: "items-end justify-center",  hover: 'hover:pb-10' },
       {},
-      { text: "Crafted with intent.", align: "items-start justify-center" },
+      { text: "Crafted with intent.", align: "items-start justify-center",  hover: 'hover:pt-10' },
       {},
-      { img: "/svg/r.svg" },
-      { text: "Refine through feedback.", align: "justify-center " },
+      { img: "/svg/r.svg", hover: 'hover:pb-10' },
+      { text: "Refine through feedback.", align: "justify-center ", hover: 'hover:pt-10'  },
       {},
       {},
       {
         text: "© 2025 Zerror Studio. All rights reserved. Made by the Zerror Team.",
         align: "items-end justify-center",
+        hover: 'hover:pb-10'
       },
     ],
   },
@@ -88,8 +90,9 @@ const Footer = () => {
                   key={i}
                   onMouseEnter={() => hoverIn(selector)}
                   onMouseLeave={() => hoverOut(selector)}
-                  className={`w-full hoverBg${row.id}${i} glitch-item border border-white/10 rounded-lg flex text-white  leading-tight
+                  className={`w-full hoverBg${row.id}${i} glitch-item border border-white/10 transition-all duration-300 ease-in rounded-lg flex text-white  leading-tight
                     ${item.align || ""}
+                     ${item.hover || ""}
                     ${isImage ? "px-0 py-0 justify-center items-center" : "p-5"}
                   `}
                 >

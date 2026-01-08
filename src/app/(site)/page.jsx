@@ -6,7 +6,7 @@ import Services from "@/components/home/Services";
 
 export default function HomePage() {
   return (
-    <>
+    <> 
       <Hero />
       <About />
       <OurWork />

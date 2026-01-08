@@ -2,6 +2,7 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
+import SplitText from 'gsap/dist/SplitText'
 import React, { useEffect } from 'react'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,23 +10,23 @@ gsap.registerPlugin(ScrollTrigger);
 const ServicesData = [
   {
     id: 1,
-    title: 'Complete website',
-    services: ["MoodBoard", "Wireframing", "Design", "Development", "Testing", "Deployment"]
+    title: 'Website Design & Development',
+    services: ["Mood boarding", "UI/UX Design", "Frontend & Backend Development", "Responsive Design", "Performance & Security"]
   },
   {
     id: 2,
-    title: 'Ui Design',
-    services: ["MoodBoard", "design concepts", "animation", "webdesign"]
+    title: 'Custom software Development',
+    services: ["Content Architecture", "Headless CMS", "Admin Dashboards", "Custom Workflows", "Scalable Systems"]
   },
   {
     id: 3,
-    title: 'ux design',
-    services: ["Wireframing", "ux research", "website audit"]
+    title: 'ecommerce Development',
+    services: ["Store Strategy", "UX-Led Design", "Payment & Checkout", "Platform Development", "Scalable Infrastructure"]
   },
   {
     id: 4,
-    title: 'Web Development',
-    services: ["Design", "Development", "Testing", "Deployment"]
+    title: 'Branding, Marketing & SEO',
+    services: ["Brand Identity", "Visual Systems", "Digital Marketing", "SEO Strategy", "Growth Optimization"]
   },
 ]
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -33,10 +34,15 @@ const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const Services = () => {
 
   useGSAP(() => {
+
+    const split_wrd = SplitText.create(".split_wrd", { type: "words, chars" });
+    gsap.set(split_wrd.words, { y: 50, opacity: 0, display: "inline-block" })
+
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.services_paren',
         start: 'top top',
+        end: "+=250%",
         pin: true,
         scrub: true
       }
@@ -44,16 +50,19 @@ const Services = () => {
     tl.to(".expand_circ", {
       height: "120vw",
       width: "120vw",
-      ease: "none",
+      ease: "linear",
     })
+      .to(split_wrd.words, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.01
+      })
   })
 
   useEffect(() => {
-  const items = document.querySelectorAll(".service-item");
+    const items = document.querySelectorAll(".service-item");
 
-  // INTERSECTION OBSERVER
-  const observer = new IntersectionObserver(
-    (entries) => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !entry.target.dataset.animated) {
           const chars = entry.target.querySelectorAll(".char");
@@ -63,24 +72,23 @@ const Services = () => {
         }
       });
     },
-    {
-      threshold: 0.4,
-    }
-  );
+      {
+        threshold: 0.4,
+      }
+    );
 
-  items.forEach((item) => {
-    const chars = item.querySelectorAll(".char");
+    items.forEach((item) => {
+      const chars = item.querySelectorAll(".char");
 
-    observer.observe(item);
+      observer.observe(item);
 
-    // HOVER (replay allowed)
-    item.addEventListener("mouseenter", () => {
-      animateChars(chars);
+      item.addEventListener("mouseenter", () => {
+        animateChars(chars);
+      });
     });
-  });
 
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
 
   return (
@@ -92,26 +100,13 @@ const Services = () => {
       </div>
 
       <div className=" services_paren overflow-hidden w-full h-screen relative  grid grid-cols-2 gap-x-24 ">
-        <div className="expand_circ overflow-hidden size-3.5 z-10 center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 shrink-0 bg_blue rounded-full ">
-          <div className=" padding space-y-32 w-screen shrink-0 text-white font-semibold  grid grid-cols-2">
-            <div className="">
-              <p className=' font-bold  text-5xl leading-none uppercase'>Our <br /> clients</p>
-            </div>
-            <div className="text-base leading-none capitalize">
-              <p className=''>Brands we’ve </p>
-              <p className=''>worked with</p>
-            </div>
-            <div className=""></div>
-            <div className="capitalize text-3xl pl-2">
-              <p>  We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
-            </div>
-          </div>
-        </div>
+
         <div className="h-full flex flex-col items-center gap-y-12 justify-between absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="w-px bg-[#D3D3D3] h-full"></div>
           <div className="size-3.5 opacity-0 shrink-0 bg_blue rounded-full "></div>
           <div className="w-px bg-[#D3D3D3] h-full"></div>
         </div>
+
         {ServicesData.map((item, i) => {
           const words = item.title.split(" ");
           const mid = Math.ceil(words.length / 2);
@@ -122,7 +117,7 @@ const Services = () => {
               className={`service-item  w-full group center flex-col gap-y-5 uppercase text-center h-full ${i === 0 || i === 1 ? "" : "border-t border-[#D3D3D3]"
                 }`}
             >
-              <p className="text-3xl leading-none transition-all duration-300">
+              <p className="text-3xl font-bold text_blue leading-none transition-all duration-300">
                 <span className="block">
                   {splitToChars(words.slice(0, mid).join(" "))}
                 </span>
@@ -131,7 +126,7 @@ const Services = () => {
                 </span>
               </p>
 
-              <p className="text-base w-1/3 leading-none tracking-wide">
+              <p className="text-sm w-1/2 text_blue font-semibold leading-tight ">
                 {item.services.map((service, i) => (
                   <span key={service}>
                     {service}
@@ -142,6 +137,21 @@ const Services = () => {
             </div>
           );
         })}
+
+        <div className="expand_circ overflow-hidden size-3.5 z-10 center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 shrink-0 bg_blue rounded-full ">
+          <div className=" padding space-y-32 w-screen shrink-0 text-white font-semibold  grid grid-cols-2">
+            <div className="col-span-2">
+              <p className=' font-bold split_wrd   text-5xl leading-none uppercase'>Our <br /> clients</p>
+            </div>
+            <div className="text-base leading-none capitalize">
+              <p className='split_wrd'>Brands we’ve </p>
+              <p className='split_wrd'>worked with</p>
+            </div>
+            <div className="capitalize split_wrd text-3xl pl-2">
+              <p>  We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
+            </div>
+          </div>
+        </div>
 
       </div>
     </>
@@ -158,15 +168,15 @@ const splitToChars = (text) =>
   text.split("").map((char, i) => (
     <span
       key={i}
-      className="char inline-block opacity-0"
+      className={`char inline-block opacity-0 ${char === " " ? "w-[0.35em]" : ""
+        }`}
       data-char={char}
     >
       {char === " " ? "\u00A0" : char}
     </span>
   ));
 
-
-  const animateChars = (chars) => {
+const animateChars = (chars) => {
   chars.forEach((char, i) => {
     const original = char.dataset.char;
 
@@ -175,7 +185,7 @@ const splitToChars = (text) =>
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 0.6,
+        duration: 0.4,
         ease: "power2.out",
         delay: i * 0.04,
       }

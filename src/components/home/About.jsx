@@ -76,7 +76,7 @@ const About = () => {
     return (
         <>
             <div className=" about_paren text-white overflow-hidden  w-full h-[350vh] padding relative bg_blue">
-                <div className="w-full h-screen  flex flex-col justify-between">
+                {/* <div className="w-full h-screen  flex flex-col justify-between">
                     <div className="space-y-5">
                         <div className="w-full">
                             <img src="/svg/built_our.svg" alt="" />
@@ -88,7 +88,7 @@ const About = () => {
                             <img src="/svg/error.svg" alt="" />
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="w-full  grid grid-cols-[25%_25%_50%]">
                     <div className="">
                         <p className=' font-bold text-5xl uppercase'>ABOUT</p>

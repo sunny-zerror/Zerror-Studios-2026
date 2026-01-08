@@ -12,7 +12,6 @@
     })
     return config
   },
-    /* config options here */
     reactCompiler: true,
   };
 

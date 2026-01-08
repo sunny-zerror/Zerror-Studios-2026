@@ -36,11 +36,11 @@ const Clients = () => {
     }, []);
     
     return (
-        <div className=' clients_paren relative  bg-white w-full'>
+        <div className=' clients_paren relative  padding  bg-white w-full'>
             <div
                 ref={containerRef}
-                className="w-full grid grid-cols-6 ">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 1, 1, 1,1,1,1,].map((item, i) => {
+                className="w-full grid grid-cols-5 ">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 1, 1, 1].map((item, i) => {
                     return (
                         <div key={i} className="client-box w-full  overflow-hidden border border-black/10 relative aspect-square center">
                             <div className="w-full h-full center">

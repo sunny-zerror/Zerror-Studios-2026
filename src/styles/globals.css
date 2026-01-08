@@ -5,16 +5,16 @@
   user-select: none;
 }
 body {
-  --primary_text:#002BBA;
-  --primary_bg:#012CBA;
+  --primary_text: #002bba;
+  --primary_bg: #012cba;
   overflow-x: hidden;
   background-color: white;
   width: 100%;
 }
-.text_blue{
+.text_blue {
   color: var(--primary_text) !important;
 }
-.bg_blue{
+.bg_blue {
   background-color: var(--primary_bg) !important;
 }
 body::-webkit-scrollbar {
@@ -40,4 +40,29 @@ button {
   object-fit: cover;
 }
 
+.site-background:after {
+  background: url(https://soleilnoir.com/wp-content/themes/soleil-noir/static/images/noise.png)
+    50% / 512px 512px;
+  mix-blend-mode: overlay;
+  opacity: calc(0.5 * var(--scene-mix));
+  transform: rotateY(180deg) rotateX(180deg);
+}
 
+.site-background:before {
+  background: url(https://soleilnoir.com/wp-content/themes/soleil-noir/static/images/noise.png)
+      50% / 512px 512px,
+    blue;
+  background-blend-mode: color;
+  mix-blend-mode: hard-light;
+  opacity: calc(0.1 * var(--scene-mix));
+}
+.site-background:before,
+.site-background:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  content: "";
+}

@@ -1,100 +1,133 @@
-import { useThree, useFrame } from "@react-three/fiber";
-import React, { useRef, useMemo, useEffect } from "react";
-// import Vertex from "@/shaders/heroShaders/Vertex.glsl";
-// import Fragment from "@/shaders/heroShaders/Fragment.glsl";
-import {Vertex,Fragment} from '@/shaders/heroShaders/HeroShaderGLSL.jsx'
-import * as THREE from "three";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import ScrollTrigger from "gsap/ScrollTrigger";
+"use client";
+import { fragmentShader, vertexShader } from "@/shaders/heroShaders/HeroShaderGLSL";
+import { useEffect, useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+export default function SunBackground() {
+  const canvasRef = useRef(null);
 
-const HeroScene = () => {
-  const { viewport, size, pointer } = useThree();
-  const meshRef = useRef();
-
-  const uniforms = useMemo(
-    () => ({
-      time: { value: Math.random() * 99 },
-      resolution: { value: new THREE.Vector2(size.width, size.height) },
-      mouse: { value: new THREE.Vector2(0, 0) },
-      inRadius: { value: 220 },
-      outRadius: { value: 540 },
-      center: { value: new THREE.Vector2(size.width / 2, size.height / 2) },
-      gradLength: { value: 2 },
-      gradStrength: { value: 0 },
-      sceneMix: { value: 1 },
-    }),
-    [size]
-  );
-
-  // Update resolution when size changes
   useEffect(() => {
-    uniforms.resolution.value.set(size.width, size.height);
-    uniforms.center.value.set(size.width / 2, size.height / 2);
-  }, [size, uniforms]);
+    const canvas = canvasRef.current;
+    const gl = canvas.getContext("webgl", { preserveDrawingBuffer: true });
+    if (!gl) return;
 
-  // useEffect(() => {
-  //   const tl = gsap.timeline({});
-  //   tl
-  //   .from(uniforms.inRadius, {
-  //     value: 10,
-  //     ease: "none",
-  //     duration:0.5,
-  //   },"<")
-  //   .to(uniforms.inRadius, {
-  //     value: 100,
-  //     ease: "none",
-  //     duration:0.5,
-  //   },"<")
-  //   .from(uniforms.outRadius, {
-  //     value: 10,
-  //     ease: "none",
-  //     duration:0.5,
-  //   },"<")
-  //   .from(uniforms.gradLength, {
-  //     value: 0.5,
-  //     ease: "none",
-  //     duration:0.5,
-  //   },"<")
-  //   .from(uniforms.gradStrength, {
-  //     value: 0.5,
-  //     ease: "none",
-  //     duration:0.5,
-  //   },"<")
-  //   .from(uniforms.sceneMix, {
-  //     value: 0.5,
-  //     ease: "none",
-  //     duration:1,
-  //   },"<")
-  //   .from('.heroChar',{
-  //     translateY:'100%',
-  //     stagger:0.02,
-  //     ease:'ease.out'
-  //   })   
-  // }, []);
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.material.uniforms.time.value = state.clock.elapsedTime;
-      meshRef.current.material.uniforms.mouse.value.set(
-        (pointer.x * size.width) / 2 + size.width / 2,
-        (pointer.y * size.height) / 2 + size.height / 2
+    const compile = (type, src) => {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    };
+
+    const program = gl.createProgram();
+    gl.attachShader(program, compile(gl.VERTEX_SHADER, vertexShader));
+    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragmentShader));
+    gl.linkProgram(program);
+    gl.useProgram(program);
+
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+      gl.STATIC_DRAW
+    );
+
+    const pos = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(pos);
+    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+    const u = n => gl.getUniformLocation(program, n);
+
+    const targetMouse = { x: 0, y: 0 };
+    const mouse = { x: 0, y: 0 };
+
+    window.addEventListener("mousemove", e => {
+      targetMouse.x = e.clientX;
+      targetMouse.y = e.clientY;
+    });
+
+
+    let start = performance.now();
+    let intro = true;
+
+    const animate = (now) => {
+      const introDuration = 2000;
+      const expandDelay = 1800;
+      const elapsed = now - start;
+      const easeCustom = cubicBezier(0.165, 0.84, 0.44, 1);
+
+      const t = elapsed * 0.0003;
+
+      const p = Math.min(elapsed / introDuration, 1);
+      const easeOut = easeCustom(p);
+
+      const movePhase = Math.min(easeOut / 0.6, 1);
+
+      const moveEndTime = start + introDuration * 0.6;
+      const expandStartTime = moveEndTime + expandDelay;
+
+      let expandPhase = 0;
+      if (now > expandStartTime) {
+        const expandElapsed = now - expandStartTime;
+        expandPhase = Math.min(expandElapsed / (introDuration * 0.4), 1);
+      }
+
+      const centerY =
+        canvas.height +
+        (canvas.height / 2 - canvas.height) * movePhase;
+
+      mouse.x += (targetMouse.x - mouse.x) * 0.05;
+      mouse.y += (targetMouse.y - mouse.y) * 0.05;
+
+      const maxRadius = Math.sqrt(
+        canvas.width * canvas.width +
+        canvas.height * canvas.height
       );
-    }
-  });
 
-  return (
-    <mesh ref={meshRef}>
-      <planeGeometry args={[viewport.width, viewport.height]} />
-      <shaderMaterial
-        vertexShader={Vertex}
-        fragmentShader={Fragment}
-        uniforms={uniforms}
-      />
-    </mesh>
-  );
-};
+      const baseRadius = canvas.width * 0.2;
+      const radius =
+        expandPhase === 0
+          ? baseRadius
+          : baseRadius + expandPhase * maxRadius;
 
-export default HeroScene;
+      if (expandPhase >= 1) intro = false;
+
+      gl.uniform1f(u("time"), t);
+      gl.uniform2f(u("resolution"), canvas.width, canvas.height);
+      gl.uniform2f(u("mouse"), mouse.x, canvas.height - mouse.y);
+      gl.uniform1f(u("inRadius"), radius * 0.3);
+      gl.uniform1f(u("outRadius"), radius);
+      gl.uniform2f(u("center"), canvas.width / 2, centerY);
+      gl.uniform1f(u("gradLength"), 2);
+      gl.uniform1f(u("gradStrength"), intro ? 0.6 : 0.0);
+      gl.uniform1f(u("sceneMix"), intro ? expandPhase : 1);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
+  return <canvas ref={canvasRef} className="w-full h-full" />;
+}
+
+function cubicBezier(p0, p1, p2, p3) {
+  return function (t) {
+    const u = 1 - t;
+    return (
+      3 * u * u * t * p1 +
+      3 * u * t * t * p2 +
+      t * t * t
+    );
+  };
+}

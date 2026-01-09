@@ -161,7 +161,7 @@ const OurWork = () => {
                                 <p className="text-xl font-bold uppercase">disrptve</p>
                                 <p className="text-xl font-bold uppercase">2025</p>
                             </div>
-                            <p className="font-semibold capitalize">Website Design</p>
+                            <p className=" capitalize">Website Design</p>
                         </div>
                     </div>
                 ))}

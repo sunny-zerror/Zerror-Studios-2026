@@ -36,13 +36,13 @@ const Clients = () => {
     }, []);
     
     return (
-        <div className=' clients_paren relative  padding  bg-white w-full'>
+        <div className=' clients_paren relative bg_blue -mt-1 text-white w-full'>
             <div
                 ref={containerRef}
                 className="w-full grid grid-cols-5 ">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 1, 1, 1].map((item, i) => {
                     return (
-                        <div key={i} className="client-box w-full  overflow-hidden border border-black/10 relative aspect-square center">
+                        <div key={i} className="client-box w-full  overflow-hidden border border-white/10 relative aspect-square center">
                             <div className="w-full h-full center">
                                 <img className='client-icon w-[60%] absolute z-[1]' src="/images/homePage/clients_logos/manifest.svg" alt="" />
                                 <img
@@ -51,7 +51,7 @@ const Clients = () => {
                                     alt="loading" title="Disrptive"
                                 />
                             </div>
-                            <div className="w-full text_blue absolute z-[4] bottom-0 flex justify-between p-3">
+                            <div className="w-full  absolute z-[4] bottom-0 flex justify-between p-3">
                                 <p>Manifest</p>
                                 <p>2025</p>
                             </div>

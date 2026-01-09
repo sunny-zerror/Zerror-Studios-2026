@@ -58,17 +58,18 @@ export default function SunBackground() {
     let intro = true;
 
     const animate = (now) => {
-      const introDuration = 2000;
-      const expandDelay = 1800;
+      const introDuration = 2500;
+      const expandDelay = 500;
       const elapsed = now - start;
-      const easeCustom = cubicBezier(0.165, 0.84, 0.44, 1);
-
       const t = elapsed * 0.0003;
 
-      const p = Math.min(elapsed / introDuration, 1);
-      const easeOut = easeCustom(p);
+      const easeOutExpo = (t) =>
+        t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 
-      const movePhase = Math.min(easeOut / 0.6, 1);
+      const p = Math.min(elapsed / introDuration, 1);
+      const ease = easeOutExpo(p);
+
+      const movePhase = ease;
 
       const moveEndTime = start + introDuration * 0.6;
       const expandStartTime = moveEndTime + expandDelay;
@@ -76,7 +77,7 @@ export default function SunBackground() {
       let expandPhase = 0;
       if (now > expandStartTime) {
         const expandElapsed = now - expandStartTime;
-        expandPhase = Math.min(expandElapsed / (introDuration * 0.4), 1);
+        expandPhase = Math.min(expandElapsed / (introDuration * 0.3), 1);
       }
 
       const centerY =
@@ -121,13 +122,3 @@ export default function SunBackground() {
   return <canvas ref={canvasRef} className="w-full h-full" />;
 }
 
-function cubicBezier(p0, p1, p2, p3) {
-  return function (t) {
-    const u = 1 - t;
-    return (
-      3 * u * u * t * p1 +
-      3 * u * t * t * p2 +
-      t * t * t
-    );
-  };
-}

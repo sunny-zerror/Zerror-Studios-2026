@@ -94,7 +94,7 @@ const Services = () => {
   return (
     <>
       <div className="w-full relative h-screen center flex-col gap-y-8 text-center">
-        <p className="text-6xl pb-5 capitalize font-semibold w-1/2 bg-clip-text text-transparent bg-[url('/images/homePage/mask_img.webp')] bg-fixed bg-cover bg-center">
+        <p className="text-7xl pb-5 capitalize font-semibold w-1/2 bg-clip-text text-transparent bg-[url('/images/homePage/mask_img.webp')] bg-fixed bg-cover bg-center">
           To build zero-error digital products where design and technology move as one.
         </p>
       </div>
@@ -139,16 +139,16 @@ const Services = () => {
         })}
 
         <div className="expand_circ overflow-hidden size-3.5 z-10 center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 shrink-0 bg_blue rounded-full ">
-          <div className=" padding space-y-32 w-screen shrink-0 text-white font-semibold  grid grid-cols-2">
-            <div className="col-span-2">
-              <p className=' font-bold split_wrd   text-5xl leading-none uppercase'>Our <br /> clients</p>
+          <div className=" padding space-y-32 w-screen shrink-0 text-white   grid grid-cols-[25%_32%_43%]">
+            <div className="col-span-3">
+              <p className='split_wrd  capitalize pf_nine text-6xl   leading-none'>Our <br /> clients</p>
             </div>
-            <div className="text-base leading-none capitalize">
+            <div className="text-xs col-span-2 capitalize leading-tight pt-5">
               <p className='split_wrd'>Brands we’ve </p>
               <p className='split_wrd'>worked with</p>
             </div>
-            <div className="capitalize split_wrd text-3xl pl-2">
-              <p>  We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
+            <div className=" split_wrd capitalize text-4xl leading-none pl-2">
+              <p> <span className='opacity-0'>...................................</span>  We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
             </div>
           </div>
         </div>

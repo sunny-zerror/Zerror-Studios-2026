@@ -23,7 +23,7 @@ uniform float gradStrength;
 
 uniform float sceneMix;
 
-#define t time/2.0
+#define t (time * 3.0) / 2.0
 #define X uv.x*32.0
 #define Y uv.y*32.0
 
@@ -31,19 +31,19 @@ vec3 bgColor() {
   vec2 uv = (gl_FragCoord.xy - resolution.xy) / resolution.xy;
 
   float c = sin(
-    (X + mouse.x * 0.008) / (20. + cos((t + 100.) * 1.) * 10.) +
-    (Y + mouse.y * 0.01) / (25. + sin(t * 0.5) * 15.)
+    (X + mouse.x * 0.0092) / (20. + cos((t + 100.) * 1.) * 10.) +
+    (Y + mouse.y * 0.0115) / (25. + sin(t * 0.5) * 15.)
   ) * sin(
-    (((X + mouse.x * 0.015) * cos(t) +
-    (Y + mouse.y * 0.025) * sin(t) * 1.5)
+    (((X + mouse.x * 0.01725) * cos(t) +
+    (Y + mouse.y * 0.02875) * sin(t) * 1.5)
     * (.025 + sin(t) * .05))
   );
 
-  c += cos((X + mouse.x * 0.015) * (.075 + cos(t) * .025) + t)
+  c += cos((X + mouse.x * 0.01725) * (.075 + cos(t) * .025) + t)
        * abs(sin(Y * (.05 + sin(t + 75.) * .025)));
 
-  c = smoothstep(-1., 1., c);
-  c = clamp(c, 0., 1.);
+c = smoothstep(-1., 1., c);
+c = mix(0.25, 1.0, c); 
 
   vec3 blueColor = vec3(1.0/255.0, 44.0/255.0, 186.0/255.0);
 

@@ -1,8 +1,26 @@
 @font-face {
-     font-family:RF_Font;
-     src: url('/fonts/RetroFloral.otf');
+  font-family: pp_new;
+  src: url(../../public/fonts/67fcd4974b30a00d13095559_PPNeueMontreal-Regular.otf);
+}
+@font-face {
+  font-family: PerfectlyNineties;
+  src: url(../../public/fonts/67fcd59caa79d68d8f41d825_PerfectlyNineties-Regular.otf);
 }
 
-.RF_Font{
-     font-family:RF_Font;
+.pp_new {
+  font-family: pp_new;
+}
+
+.pf_nine {
+  font-family: PerfectlyNineties;
+}
+
+a,
+p,
+span,
+input,
+li,
+ul,
+button {
+  font-family: pp_new;
 }

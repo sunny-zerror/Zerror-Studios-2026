@@ -44,79 +44,33 @@ const Header = () => {
     menuTL.current = gsap.timeline({ paused: true });
 
     menuTL.current
-      .set(".opnMenu", {
-        transformOrigin: "top",
-        scaleY: 0,
-        height: "48px",
-        opacity: 0,
-        pointerEvents: "none",
-      })
       .to(".opnMenu", {
-        scaleY: 1,
-        height: "auto",
         opacity: 1,
         duration: 0.9,
         ease: "power4.out",
         pointerEvents: "auto",
       })
-      .to(
-        ".fixMenu",
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power3.out",
-        },
-        "-=0.3"
-      )
-
-       // MENU ITEMS ANIMATION
-  .to(
-    ".menu-item",
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.6,
-      stagger: 0.08,
-      ease: "power3.out",
-    },
-    "-=0.3"
-  )
-
-  // IMAGE ZOOM-IN
-  .to(
-    ".menu-img",
-    {
-      scale: 1,
-      duration: 0.8,
-      stagger: 0.08,
-      ease: "power3.out",
-    },
-    "<"
-  )
-
-  // SOCIAL LINKS
-  .to(
-    ".social-item",
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.4,
-      stagger: 0.06,
-      ease: "power3.out",
-    },
-    "-=0.3"
-  )
-
-  // HIDE PRE MENU
-  .to(
-    ".pre-menu",
-    {
-      opacity: 0,
-      pointerEvents: "none",
-    },
-    0
-  )
+      .to(".premenu", {
+        opacity: 0,
+        duration: 0.9,
+        ease: "power4.out",
+        pointerEvents: "none",
+      },"<")
+     .fromTo(".OMI", 
+      {
+        opacity: 0,
+        y: 20, // Start 20px down
+      },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.08, // Stagger each item by 0.08s
+        duration: 0.5,
+        ease: "power2.out",
+      }, 
+      "-=0.5" // Start 0.5s before menu finishes opening
+    );
+      
   }, []);
 
   const ManuActivate = () => {
@@ -124,7 +78,7 @@ const Header = () => {
   };
 
   const ManuDeActivate = () => {
-    menuTL.current.reverse();
+     menuTL.current.timeScale(2).reverse(); 
   };
 
   const socialLinks = ["LinkedIn", "Instagram", "Behance"];
@@ -139,17 +93,17 @@ const Header = () => {
         /> */}
 
         <div className="w-fit h-fit flex  gap-4  ">
-          <div className="w-full h-12 rounded-lg relative flex  bg-[#FFFFFF5C] backdrop-blur-3xl group gap-88 transition-all ease-in cursor-pointer duration-200 px-7 justify-center items-center">
+          <div className="w-full h-12 rounded-lg relative flex  bg-[#FFFFFF5C] backdrop-blur-3xl group gap-99 transition-all ease-in cursor-pointer duration-200 px-7 justify-center items-center">
             <p
               onClick={ManuActivate}
-              className="RF_Font text-[0.8rem] text-[#f5f5f5] tracking-wide pre-menu"
+              className="RF_Font text-[0.8rem] text-[#f5f5f5] tracking-wide premenu"
             >
               MENU
             </p>
 
             <div
               onClick={ManuActivate}
-              className="w-fit h-12 flex flex-col gap-1 group-hover:gap-2 z-70 pre-menu justify-center items-center transition-all ease-in cursor-pointer duration-200"
+              className="w-fit h-12 flex flex-col gap-1 group-hover:gap-2 z-70 premenu justify-center items-center transition-all ease-in cursor-pointer duration-200"
             >
               <div className="w-[0.5rem] h-[0.10rem] rounded-full bg-[#f5f5f5] flex mr-auto"></div>
               <div className="w-[0.9rem] h-[0.10rem] rounded-full bg-[#f5f5f5] flex"></div>
@@ -157,12 +111,11 @@ const Header = () => {
             </div>
 
             {/* Open-Menu */}
-
-            <div className="w-full opnMenu h-12 opacity-0 pb-5 rounded-lg flex flex-col bg-white pointer-events-none absolute top-0 left-0 z-60">
+            <div className="w-full opnMenu h-'auto' opacity-0  pb-5 rounded-lg flex flex-col bg-white pointer-events-none absolute top-0 left-0 z-60">
               {/* Lable */}
               <div
                 onClick={ManuDeActivate}
-                className="w-full h-12 flex justify-between fixMenu opacity-0 items-center px-7 pt-3 whitespace-nowrap"
+                className="w-full h-12 flex justify-between fixMenu  items-center px-7 pt-3 whitespace-nowrap"
               >
                 <img
                   src={"/svg/zerror.svg"}
@@ -173,14 +126,14 @@ const Header = () => {
               </div>
 
               {/* Menu-Content */}
-              <div className="w-full h-fit   flex flex-col px-4 pt-10 ">
+              <div className="w-full h-fit   flex flex-col px-4 pt-10 z-[100]">
                 {menuItems.map((item, index) => {
                   return (
                     <div
                       key={index}
                       className={`w-full menu-item ${
                         index == 0 && "border-t border-[#e0e0e0]"
-                      } h-fit flex border-b border-[#e0e0e0] items-center gap-4 py-4 ${
+                      } h-fit flex border-b border-[#e0e0e0] items-center OMI opacity-0 gap-4 py-4 ${
                         index == 3 && " justify-between items-start"
                       } `}
                     >
@@ -197,33 +150,33 @@ const Header = () => {
                       </p>
 
                       <div
-                        className={` w-1/2 h-fit flex flex-col items-end text-[#002BBA]  gap-4 ${
+                        className={` w-1/2 h-fit flex flex-col items-end text-[#002BBA] ${
                           index !== 3 && "hidden"
                         } `}
                       >
                         {/* Top */}
-                        <div className="w-full h-fit flex  text-[0.9rem] leading-[0.9rem] justify-center items-center">
+                        <div className="w-full h-fit flex   text-[0.9rem] leading-[0.9rem]   justify-center items-center">
                           {/* Left */}
-                          <div className="w-1/2 h-fit flex flex-col justify-center  gap-2">
-                            <p className="font-semibold">01/</p>
+                          <div className="w-1/2 h-fit flex flex-col border-l border-[#e0e0e0] pt-4 px-4  justify-center  gap-1">
+                            <p className=" RF_Font  ">01/</p>
                             <p>Website Development</p>
                           </div>
                           {/* right */}
-                          <div className="w-1/2 h-fit flex flex-col justify-center  gap-2">
-                            <p className="font-semibold">02/</p>
+                          <div className="w-1/2 h-fit flex flex-col border-l border-r border-[#e0e0e0] pt-4 px-4  justify-center  gap-1">
+                            <p className=" RF_Font ">02/</p>
                             <p>Website Development</p>
                           </div>
                         </div>
                         {/* Bottom */}
-                        <div className="w-full h-fit flex text-[0.9rem] leading-[0.9rem] justify-center items-center ">
+                        <div className="w-full h-fit flex  text-[0.9rem] leading-[0.9rem]  justify-center items-center ">
                           {/* Left */}
-                          <div className="w-1/2 h-fit flex flex-col justify-center  gap-2">
-                            <p className="font-semibold">03/</p>
+                          <div className="w-1/2 h-fit flex flex-col border-l border-[#e0e0e0] pt-4 px-4 pb-4 justify-center  gap-1">
+                            <p className=" RF_Font "  >03/</p>
                             <p>Website Development</p>
                           </div>
                           {/* right */}
-                          <div className="w-1/2 h-fit flex flex-col justify-center  gap-2">
-                            <p className="font-semibold">04/</p>
+                          <div className="w-1/2 h-fit flex flex-col border-l border-r border-[#e0e0e0] pb-4 pt-4 px-4 justify-center  gap-1">
+                            <p className=" RF_Font  ">04/</p>
                             <p>Website Development</p>
                           </div>
                         </div>
@@ -238,7 +191,7 @@ const Header = () => {
                     return (
                       <div
                         key={index}
-                        className="social-item w-full h-fit flex items-center"
+                        className="social-item w-full OMI h-fit flex items-center"
                       >
                         <p className="text-[#002BBA] leading-normal">{item}</p>
                       </div>
@@ -251,21 +204,18 @@ const Header = () => {
 
           {/* SecondMenu */}
           <Link href={"/deck"}>
-            <div className="w-17 flex h-12 bg-[#FFFFFF5C]  backdrop-blur-3xl group transition-all duration-150 ease-out relative rounded-lg select-none cursor-pointer justify-center items-center ">
+            <div className="w-17 flex h-12 bg-[#FFFFFF5C]  backdrop-blur-3xl group transition-all duration-250 ease-out relative rounded-lg select-none cursor-pointer justify-center items-center ">
+              
+              <div className="w-[17px] h-[12px] border-l border-t absolute top-[39%] left-[43%] group-hover:top-1/2 group-hover:left-1/2 -translate-x-1/2 -translate-y-1/2 border-[#f5f5f5]">
+
+              </div>
+              <div className="w-[17px] h-[12px] border-l border-t absolute top-[45%] left-[47%] group-hover:top-1/2 group-hover:left-1/2 -translate-x-1/2 -translate-y-1/2 border-[#f5f5f5]">
+
+              </div>
               <img
                 src={`/svg/MenuVectorBox.svg`}
                 alt="MVB"
-                className="w-[1rem] absolute top-[45%] left-[45%] group-hover:top-1/2  group-hover:left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-150 ease-out "
-              />
-              <img
-                src={`/svg/MenuVectorBox.svg`}
-                alt="MVB"
-                className="w-[1rem] absolute top-[48%] left-[48%] group-hover:top-1/2 group-hover:left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-150 ease-out "
-              />
-              <img
-                src={`/svg/MenuVectorBox.svg`}
-                alt="MVB"
-                className="w-[1rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
+                className="w-[1rem] absolute top-[52%] left-[51%] group-hover:top-1/2 group-hover:left-1/2 -translate-x-1/2 -translate-y-1/2 "
               />
             </div>
           </Link>

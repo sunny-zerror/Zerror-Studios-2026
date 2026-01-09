@@ -41,7 +41,7 @@ const Hero = () => {
     );
 
     const sliderTween = gsap.to(".hero_scroll_txt", {
-      transform: "translateX(-300vw) translateY(-50%)",
+      transform: "translateX(-270vw) translateY(-50%)",
       top: "50%",
       ease: "linear",
       scrollTrigger: {
@@ -93,7 +93,7 @@ const Hero = () => {
 
       <div className=" txt_slider_paren w-full h-[400vh]  ">
         <div className="w-full h-screen top-0 sticky overflow-hidden">
-          <div className=" z-[2] hero_scroll_txt w-full translate-x-[22.5vw] absolute top-[80%] -translate-y-1/2 text-white  whitespace-nowrap left-0  ">
+          <div className=" z-[2] hero_scroll_txt w-full translate-x-[30vw] absolute top-[80%] -translate-y-1/2 text-white  whitespace-nowrap left-0  ">
             <p className=" split_hero_title text-[12vw] origin-bottom-left tracking-tighter font-bold">We design and build thoughtful digital experiences that go beyond visuals.</p>
           </div>
         </div>

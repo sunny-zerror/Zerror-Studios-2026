@@ -61,7 +61,7 @@ const TicketEffect = () => {
 
     return (
         <div>
-            <div className="w-full center text_blue text-center space-y-10 flex-col">
+            <div className="w-full pt-32 center text_blue text-center space-y-10 flex-col">
                 <p className='text-[7.5rem] pf_nine  leading-none'>Ready for your <br />
                     game-changing <br />
                     <i>   website?</i></p>

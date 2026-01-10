@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -612,44 +613,94 @@ export default function deck() {
     );
   }, []);
 
-  useEffect(() => {
-    const tlLast = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".div10",
-        start: "bottom top",
-        end: "bottom top",
-        scrub: true,
-        // markers: true,
-      },
+  useGSAP(() => {
+    gsap.set(".SXCrd", {
+      xPercent: 0,
+      yPercent: -100,
+      opacity: 0,
+      scale: 2,
     });
-    // Show SMBOX
-    tlLast.to(".SMBOX", { opacity: 1, pointerEvents: "auto" }, "l1");
+  });
 
-    // Hide main cards
-    tlLast.to(".crd", { opacity: 0 }, "l1");
+  // useEffect(() => {
+  //   const tlLast = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: ".div10",
+  //       start: "bottom top",
+  //       end: "bottom top",
+  //       scrub: true,
+  //       // markers: true,
+  //     },
+  //   });
+  //   // Show SMBOX
+  //   tlLast.to(".SMBOX", { opacity: 1, pointerEvents: "auto" }, "l1");
 
-    // SXCrd (small cards) grow out staggered
-    tlLast.fromTo(
-      ".SXCrd",
-      {
-        opacity: 0,
-        scale: 3,
-        xPercent: -0,
-        yPercent: -100,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        xPercent: 0,
-        yPercent: 0,
-        stagger: 0.7,
-        ease: "linear",
-        duration: 3,
-      },
-      "l1"
-    );
-  }, []);
+  //   // Hide main cards
+  //   tlLast.to(".crd", { opacity: 0 }, "l1");
 
+  //   // ".SXCrd",
+  //   //   {
+  //   //     opacity: 0,
+  //   //     scale: 3,
+  //   //     xPercent: -0,
+  //   //     yPercent: -100,
+  //   //   },
+
+  //   // SXCrd (small cards) grow out staggered
+  //   tlLast.to(
+  //     ".SXCrd",
+  //     {
+  //       // opacity: 1,
+  //       // scale: 1,
+  //       // xPercent: 0,
+  //       // yPercent: 0,
+  //       // stagger: 0.7,
+  //       // ease: "linear",
+  //       // duration: 3,
+  //       xPercent: 0,
+  //       yPercent: 0,
+  //       opacity: 1,
+  //       scale: 1,
+  //       stagger: 0.23,
+  //       duration:1,
+
+  //       ease: "expo.out",
+  //     },
+  //     "<0.1"
+  //   );
+  // }, []);
+
+
+  useEffect(() => {
+  const tlLast = gsap.timeline({
+    paused: true, // we control manually
+  });
+
+  // Show SMBOX
+  tlLast.to(".SMBOX", { opacity: 1, pointerEvents: "auto" }, "l1");
+
+  // Hide main cards
+  tlLast.to(".crd", { opacity: 0 }, "l1");
+
+  // Small cards grow staggered
+  tlLast.to(".SXCrd", {
+    xPercent: 0,
+    yPercent: 0,
+    opacity: 1,
+    scale: 1,
+    duration: 0.1,
+    stagger: 0.01,
+    ease: "linear",
+  });
+
+  // ScrollTrigger to control timeline manually
+  ScrollTrigger.create({
+    trigger: ".div10",
+    start: "bottom top",
+    onEnter: () => tlLast.play(),        // play when entering viewport
+    onLeaveBack: () => tlLast.reverse(), // optional: reverse if scrolling back
+  });
+}, []);
   const aHash = [
     "div1",
     "div2",
@@ -822,7 +873,6 @@ export default function deck() {
             </div>
             <div className="w-full h-full absolute top-0 left-0 gap-5 pointer-events-none flex justify-center items-center">
               <h1 className="text-white font3 text-[3.3vw]">ZERROR STUDIO</h1>
-              <div className="h-[2.2vw] w-4.5 rounded-sm bg-white"></div>
             </div>
           </div>
 
@@ -1087,9 +1137,9 @@ export default function deck() {
         })}
 
         {/* SMBOX */}
-        <div className="w-full opacity-0 max-w-[1300] SMBOX pointer-events-none  h-fit gap-5 scale-[0.6] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   flex justify-center flex-wrap">
+        <div className="w-full  opacity-0  SMBOX pointer-events-none  h-fit gap-5 scale-[0.6] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   flex justify-center flex-wrap">
           {/* CARD 1 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd p-3 bg-[#E62200] rounded-xl select-none relative overflow-hidden">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd p-3 bg-[#E62200] lgunded-xl select-none relative overflow-hidden">
             <div className="w-full h-[33%] flex gap-1">
               {[
                 "Pich dech 2025--",
@@ -1118,14 +1168,14 @@ export default function deck() {
             </div>
 
             <div className="absolute inset-0  flex justify-center items-center pointer-events-none">
-              <h1 className="text-white font3 text-[20px]">FLABBERGAST</h1>
+              <h1 className="text-white font3 text-[20px]">Zerror Studio</h1>
             </div>
           </div>
 
           {/* CARD 2 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[18px] leading-tight">
-              Hi, we are Flabbergast
+              Hi, we are Zerror Studio
             </p>
 
             <div className="flex justify-between gap-3">
@@ -1142,7 +1192,7 @@ export default function deck() {
           </div>
 
           {/* CARD 3 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px] leading-tight">
               simply dummy text of the printing and typesetting industry.
             </p>
@@ -1165,8 +1215,8 @@ export default function deck() {
           </div>
 
           {/* CARD 4 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
-            <p className="font3 text-[18px]">Hi, we are Flabbergast</p>
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+            <p className="font3 text-[18px]">Hi, we are Zerror Studio</p>
 
             <div className="flex justify-between gap-3">
               <p className="uppercase font1 text-[8px] w-[40%]">
@@ -1180,8 +1230,8 @@ export default function deck() {
             </div>
           </div>
           {/* CARD 4 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
-            <p className="font3 text-[18px]">Hi, we are Flabbergast</p>
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+            <p className="font3 text-[18px]">Hi, we are Zerror Studio</p>
 
             <div className="flex justify-between gap-3">
               <p className="uppercase font1 text-[8px] w-[40%]">
@@ -1196,7 +1246,7 @@ export default function deck() {
           </div>
 
           {/* CARD 5 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px] leading-tight">
               simply dummy text of the printing and typesetting industry.
             </p>
@@ -1219,7 +1269,7 @@ export default function deck() {
           </div>
 
           {/* CARD 6 — WITH IMAGE */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px] leading-tight">
               simply dummy text of the printing and typesetting industry.
             </p>
@@ -1248,9 +1298,9 @@ export default function deck() {
           </div>
 
           {/* CARD 7 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[18px] leading-tight">
-              Hi, we are Flabbergast
+              Hi, we are Zerror Studio
             </p>
 
             <div className="flex justify-between gap-3">
@@ -1265,7 +1315,7 @@ export default function deck() {
           </div>
 
           {/* CARD 8 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px]">
               simply dummy text of the printing industry.
             </p>
@@ -1288,9 +1338,9 @@ export default function deck() {
           </div>
 
           {/* CARD 9 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[18px] leading-tight">
-              Hi, we are Flabbergast
+              Hi, we are Zerror Studio
             </p>
 
             <div className="flex justify-between gap-3">
@@ -1305,7 +1355,7 @@ export default function deck() {
           </div>
 
           {/* CARD 10 */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px]">
               simply dummy text of the printing industry.
             </p>
@@ -1328,7 +1378,7 @@ export default function deck() {
           </div>
 
           {/* CARD 11 — WITH IMAGE */}
-          <div className="w-100 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-xl p-4 select-none flex flex-col justify-between">
+          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px]">
               simply dummy text of the printing industry.
             </p>

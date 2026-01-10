@@ -23,7 +23,7 @@ const contact = () => {
         <div className="w-full h-[80vh] relative">
           {/* Sections with smooth transitions */}
           <div className="w-full h-full relative overflow-hidden">
-            <div className={`absolute inset-0 transition-all duration-500 ${Num === 1 ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full pointer-events-none'}`}>
+            <div className={`absolute inset-0 transition-all duration-500 ${Num === 1 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}`}>
               <FormSection />
             </div>
             <div className={`absolute inset-0 transition-all duration-500 ${Num === 2 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}`}>

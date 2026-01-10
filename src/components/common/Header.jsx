@@ -9,67 +9,67 @@ const MENU_ITEMS = [
   {
     id: "home",
     label: "Home",
-    image: "/images/plpImg/img1.webp",
+    image: "/images/menu/1.jpg",
     href: `/`,
   },
   {
     id: "studio",
     label: "Studio",
-    image: "/images/plpImg/img2.webp",
+    image: "/images/menu/2.jpg",
     href: `/`,
   },
   {
     id: "work",
     label: "Our Work",
-    image: "/images/plpImg/img3.webp",
+    image: "/images/menu/3.jpg",
     href: `/`,
   },
   {
     id: "expertise",
     label: "Expertise",
-    image: "/images/plpImg/img4.webp",
+    image: "/images/menu/4.jpg",
     expertise: [
-      "Website Development",
-      "UI/UX Design, Development",
-      "Brand Identity",
-      "Motion Design",
+      "⁠Website Development",
+      "E-commerce Development",
+      "Custom CMS Development",
+      "Branding, Marketing & SEO",
     ],
      href: `/`,
   },
   {
     id: "contact",
     label: "Contact",
-    image: "/images/plpImg/img5.webp",
+    image: "/images/menu/5.jpg",
     href: `/contact`,
   },
 ];
 
 const SOCIAL_LINKS = ["LinkedIn", "Instagram", "Behance"];
 
-const MenuItem = React.forwardRef(({ item, showBorderTop, href }, ref) => {
+const MenuItem = React.forwardRef(({ item, showBorderTop, href, closeMenu }, ref) => {
   return (
-    <Link href={href} >
+    <Link href={href} onClick={closeMenu} >
     
     <div
       ref={ref}
-      className={`w-full flex gap-4 py-4 border-b border-[#e0e0e0]
+      className={`w-full flex gap-2 py-2.5 border-b border-[#c9cfe482]
       ${showBorderTop ? "border-t" : ""}`}
     >
       <div className="w-20.5 h-13.5 overflow-hidden">
         <img src={item.image} className="w-full h-full object-cover" />
       </div>
 
-      <p className="mr-auto text-[#002BBA]">{item.label}</p>
+      <p className="mr-auto IBM_M text-[1rem] text-[#002BBA] mt-3">{item.label}</p>
 
       {item.expertise && (
-        <div className="w-1/2 grid grid-cols-2 border-l border-[#e0e0e0] text-[#001BA7]">
+        <div className="w-1/2 grid grid-cols-2 border-l border-[#c9cfe482] text-[#001BA7]">
           {item.expertise.map((text, i) => (
             <div
               key={i}
-              className="px-4 py-4 border-r border-[#e0e0e0] text-[0.9rem]"
+              className="px-3 py-2 border-r border-[#c9cfe482] flex flex-col text-[0.9rem] gap-1"
             >
-              <p className="RF_Font">{String(i + 1).padStart(2, "0")}/</p>
-              <p>{text}</p>
+              <p className="IBM_M text-[12px] font-extrabold">{String(i + 1).padStart(2, "0")}/</p>
+              <p className="text-[12px] leading-3.75">{text}</p>
             </div>
           ))}
         </div>
@@ -84,38 +84,6 @@ const Header = () => {
   const menuRef = useRef();
   const preMenuRef = useRef();
   const itemsRef = useRef([]);
-
-  // useEffect(() => {
-  //   menuTL.current = gsap.timeline({ paused: true });
-
-  //   menuTL.current
-  //     .to(menuRef.current, {
-  //       opacity: 1,
-  //       pointerEvents: "auto",
-  //       duration: 0.8,
-  //       ease: "power4.out",
-  //     })
-  //     .to(
-  //       preMenuRef.current,
-  //       {
-  //         opacity: 0,
-  //         pointerEvents: "none",
-  //         duration: 0.8,
-  //       },
-  //       "<"
-  //     )
-  //     .from(
-  //       itemsRef.current,
-  //       {
-  //         opacity: 0,
-  //         y: 20,
-  //         stagger: 0.08,
-  //         duration: 0.5,
-  //         ease: "power2.out",
-  //       },
-  //       "-=0.4"
-  //     );
-  // }, []);
 
   useLayoutEffect(() => {
     // INITIAL STATES (CRITICAL)
@@ -142,7 +110,7 @@ const Header = () => {
         autoAlpha: 1,
         pointerEvents: "auto",
         duration: 0.8,
-        ease: "power4.out",
+        ease: "power1.out",
       })
       .to(
         preMenuRef.current,
@@ -150,7 +118,7 @@ const Header = () => {
           autoAlpha: 0,
           pointerEvents: "none",
           duration: 0.8,
-          ease: "power4.out",
+          ease: "power1.out",
         },
         "<"
       )
@@ -161,7 +129,7 @@ const Header = () => {
           y: 0,
           stagger: 0.08,
           duration: 0.5,
-          ease: "power2.out",
+          ease: "power1.out",
         },
         "-=0.4"
       );
@@ -176,39 +144,48 @@ const Header = () => {
     <div className="fixed top-0 left-0 w-full  z-80 px-10 py-5 flex justify-center">
       <div className="flex gap-4">
         {/* MENU BUTTON */}
-        <div className="relative w-[30vw] h-12 bg-[#FFFFFF5C] backdrop-blur-3xl rounded-lg px-7  group transition-all duration-150 ease-out  flex justify-between items-center gap-4">
+        <div className="relative w-[35vw] h-12 bg-[#FFFFFF5C] backdrop-blur-3xl rounded-lg px-7  group transition-all duration-150 ease-out  flex justify-between items-center gap-4">
+          
+          <div onClick={openMenu} className="w-full h-12 flex justify-between items-center select-none cursor-pointer">
+
           <p
             ref={preMenuRef}
-            onClick={openMenu}
+            // onClick={openMenu}
             className="premenu text-white select-none cursor-pointer"
-          >
+            >
             MENU
           </p>
 
           <div
-            onClick={openMenu}
+            // onClick={openMenu}
             className="w-fit h-12 select-none cursor-pointer  flex flex-col justify-center items-center gap-1 group transition-all duration-150 ease-in hover:gap-2 "
-          >
+            >
             <span className="w-8 h-[1px] bg-[#ffffff]" />
             <span className="w-8 h-[1px] bg-[#ffffff]" />
           </div>
 
+          </div>
+
+
           {/* OPEN MENU */}
           <div
             ref={menuRef}
-            className="absolute top-0 left-0 w-full bg-white rounded-lg  pointer-events-none pb-4 pt-2"
+            className="absolute top-0 left-0 w-full bg-white rounded-lg  pointer-events-none pt-2"
           >
             <div
               onClick={closeMenu}
               className="h-12 px-7 flex justify-between items-center  select-none cursor-pointer"
-            >
+            > 
+             <Link href={'/'}>
               <img src="/svg/zerror.svg" className="h-4" />
-              <span className="w-6 h-[2px] bg-[#001BA7]" />
+             </Link>
+              <span className="w-4 h-[2px] bg-[#001BA7]" />
             </div>
 
-            <div className="px-4 pt-10">
+            <div className="px-7 pt-4 pb-7">
               {MENU_ITEMS.map((item, i) => (
                 <MenuItem
+                 closeMenu={closeMenu}
                   key={item.id}
                   item={item}
                   showBorderTop={i === 0}
@@ -222,7 +199,7 @@ const Header = () => {
                   <p
                     key={link}
                     ref={(el) => (itemsRef.current[MENU_ITEMS.length + i] = el)}
-                    className="text-[#002BBA]"
+                    className="text-[#002BBA] IBM_M leading-[1.4rem]"
                   >
                     {link}
                   </p>
@@ -235,11 +212,11 @@ const Header = () => {
         {/* SECOND BUTTON */}
         <Link href="/deck">
           <div className="w-17 h-12 bg-[#FFFFFF5C] backdrop-blur-3xl group transition-all duration-150 ease-out rounded-lg overflow-hidden flex items-center relative justify-center">
-            <div className="w-4 h-3 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  absolute top-[55%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
-            <div className="w-4 h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] absolute top-[48%] left-[50%] -translate-x-[50%] -translate-y-[50%] "></div>
-            <div className="w-4 h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] absolute top-[42%] left-[45%] -translate-x-[50%] -translate-y-[50%] "></div>
+            <div className="w-3 h-2 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
+            <div className="w-3 h-2 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
+            <div className="w-3 h-2 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
 
-            <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)] -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
+            <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
           </div>
         </Link>
       </div>

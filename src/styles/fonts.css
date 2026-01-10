@@ -6,9 +6,16 @@
   font-family: PerfectlyNineties;
   src: url(../../public/fonts/67fcd59caa79d68d8f41d825_PerfectlyNineties-Regular.otf);
 }
+@font-face {
+  font-family: IBM_M;
+  src: url(../../public/fonts/IBM_M.ttf);
+}
 
 .pp_new {
   font-family: pp_new;
+}
+.IBM_M {
+  font-family: IBM_M;
 }
 
 .pf_nine {

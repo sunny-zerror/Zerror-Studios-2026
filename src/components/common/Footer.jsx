@@ -1,6 +1,7 @@
 "use client";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import gsap from "gsap";
+import { usePathname } from "next/navigation";
 
 const hoverIn = (selector) => {
   gsap.to(selector, {
@@ -17,8 +18,6 @@ const hoverOut = (selector) => {
     duration: 0.4,
   });
 };
-
-
 
 const footerRows = [
   {
@@ -98,46 +97,53 @@ const footerRows = [
 ];
 
 const Footer = () => {
+  const pathname = usePathname();
 
-   useEffect(() => {
-  const textEls = document.querySelectorAll(".glitch-text");
+  // Hide footer on /contact
+  if (pathname === "/contact") return null;
+  else{
+    
+  }
 
-  const glitchRandomTwo = () => {
-    if (textEls.length < 2) return;
+  useEffect(() => {
+    const TEXTS = document.querySelectorAll(".glitch-text");
 
-    const allEls = Array.from(textEls);
-    const shuffled = allEls.sort(() => Math.random() - 0.5);
-    const selected = shuffled.slice(0, 2);
+    const glitchAnim = () => {
+      if (TEXTS.length < 1) return;
 
-    gsap.fromTo(
-      selected,
-      { opacity: 1 },
-      {
-        opacity: 0,
-        duration: 0.1,
-        repeat: 5,
-        yoyo: true,
-        ease: "steps(1)",
-        immediateRender: true,
-        overwrite: 'auto',
-        onComplete: () => {
-          gsap.set(selected, { opacity: 1 }); // Ensure it returns to visible
-          gsap.delayedCall(
-            gsap.utils.random(0.08, 0.2),
-            glitchRandomTwo
-          );
-        },
-      }
-    );
-  };
+      // pick 1–2 random
+      const sample = gsap.utils.shuffle(Array.from(TEXTS)).slice(0, 2);
 
-  gsap.delayedCall(0.1, glitchRandomTwo); // Slight delay to ensure DOM is ready
+      gsap
+        .timeline()
+        .to(sample, {
+          opacity: 0,
+          x: () => gsap.utils.random(-3, 3),
+          y: () => gsap.utils.random(-2, 2),
+          duration: 0.08,
+          ease: "steps(1)",
+          stagger: 0.02,
+        })
+        .to(sample, {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          duration: 0.15,
+          ease: "power1.out",
+          stagger: 0.03,
+          onComplete: () => {
+            // random recur
+            gsap.delayedCall(gsap.utils.random(0.2, 0.6), glitchAnim);
+          },
+        });
+    };
 
-  return () => {
-    gsap.killTweensOf(".glitch-text");
-  };
-}, []);
+    glitchAnim();
 
+    return () => {
+      gsap.killTweensOf(TEXTS);
+    };
+  }, []);
 
   return (
     <div className="w-full h-screen bg-[#012CBA] p-[2vw]">
@@ -163,15 +169,18 @@ const Footer = () => {
                   `}
                 >
                   {item.img && (
-                    <img src={item.img} alt="icon" className="w-[4vw]" />
+                    <img src={item.img} alt="icon" className="h-[4vw]" />
                   )}
 
                   {item.text && (
                     <span
-                      className={`glitch-text  transition-all duration-300  ${item.align}
+                      className={`glitch-text text-[12px] uppercase text-[#f5f5f5]  transition-all duration-300  ${item.align}
                         ${item.hover}
                      `}
-                     style={{ willChange: 'opacity',  transition: 'top 0.3s ease-in, bottom 0.3s ease-in' }} // Only transition position, not opacity  }}
+                      style={{
+                        willChange: "opacity",
+                        transition: "top 0.3s ease-in, bottom 0.3s ease-inOut",
+                      }} // Only transition position, not opacity  }}
                     >
                       {item.text}
                     </span>

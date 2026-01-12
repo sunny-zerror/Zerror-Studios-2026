@@ -15,16 +15,16 @@ const MENU_ITEMS = [
     href: `/`,
   },
   {
-    id: "studio",
-    label: "Studio",
+    id: "about",
+    label: "About",
     image: "/images/menu/2.jpg",
-    href: `/`,
+    href: `/about`,
   },
   {
     id: "work",
     label: "Our Work",
     image: "/images/menu/3.jpg",
-    href: `/`,
+    href: `/work`,
   },
   {
     id: "expertise",

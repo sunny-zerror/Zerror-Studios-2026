@@ -20,7 +20,7 @@ const ServicesData = [
   },
   {
     id: 3,
-    title: 'ecommerce Development',
+    title: 'Ecommerce Development',
     services: ["Store Strategy", "UX-Led Design", "Payment & Checkout", "Platform Development", "Scalable Infrastructure"]
   },
   {
@@ -94,7 +94,7 @@ const Services = () => {
   return (
     <>
       <div className="w-full relative h-screen center flex-col gap-y-8 text-center">
-        <p className="text-7xl pb-5 capitalize font-semibold w-1/2 bg-clip-text text-transparent bg-[url('/images/homePage/mask_img.webp')] bg-fixed bg-cover bg-center">
+        <p className="text-7xl pb-5 spirit capitalize w-1/2 bg-clip-text text-transparent bg-[url('/images/homePage/mask_img.webp')] bg-fixed bg-cover bg-center">
           To build zero-error digital products where design and technology move as one.
         </p>
       </div>
@@ -114,10 +114,10 @@ const Services = () => {
           return (
             <div
               key={item.id}
-              className={`service-item  w-full group center flex-col gap-y-5 uppercase text-center h-full ${i === 0 || i === 1 ? "" : "border-t border-[#D3D3D3]"
+              className={`service-item  w-full group center flex-col gap-y-5  text-center h-full ${i === 0 || i === 1 ? "" : "border-t border-[#D3D3D3]"
                 }`}
             >
-              <p className="text-3xl font-bold text_blue leading-none transition-all duration-300">
+              <p className="text-3xl  text_blue leading-none transition-all duration-300">
                 <span className="block">
                   {splitToChars(words.slice(0, mid).join(" "))}
                 </span>
@@ -126,7 +126,7 @@ const Services = () => {
                 </span>
               </p>
 
-              <p className="text-sm w-1/2 text_blue font-semibold leading-tight ">
+              <p className="text-sm w-1/2 uppercase text_blue leading-tight ">
                 {item.services.map((service, i) => (
                   <span key={service}>
                     {service}
@@ -139,16 +139,16 @@ const Services = () => {
         })}
 
         <div className="expand_circ overflow-hidden size-3.5 z-10 center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 shrink-0 bg_blue rounded-full ">
-          <div className=" padding space-y-32 w-screen shrink-0 text-white   grid grid-cols-[25%_32%_43%]">
-            <div className="col-span-3">
-              <p className='split_wrd  capitalize pf_nine text-6xl   leading-none'>Our <br /> clients</p>
+          <div className="w-screen  padding text-white grid grid-cols-[25%_32%_43%]">
+            <div className="">
+              <p className=' split_wrd text-6xl spirit leading-none'>Our <br /> Clients</p>
             </div>
-            <div className="text-xs col-span-2 capitalize leading-tight pt-5">
+            <div className="text-xs uppercase leading-tight pt-5">
               <p className='split_wrd'>Brands we’ve </p>
-              <p className='split_wrd'>worked with</p>
+              <p className='split_wrd'>worked with.</p>
             </div>
-            <div className=" split_wrd capitalize text-4xl leading-none pl-2">
-              <p> <span className='opacity-0'>...................................</span>  We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
+            <div className="text-4xl  pl-2">
+              <p className="spirit split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@ const splitToChars = (text) =>
   text.split("").map((char, i) => (
     <span
       key={i}
-      className={`char inline-block opacity-0 ${char === " " ? "w-[0.35em]" : ""
+      className={`char inline-block spirit opacity-0 ${char === " " ? "w-[0.35em]" : ""
         }`}
       data-char={char}
     >

@@ -2,6 +2,7 @@
 import React, { useRef } from 'react'
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import gsap from 'gsap';
+import { RiArrowRightUpLine } from '@remixicon/react';
 
 const TicketEffect = () => {
 
@@ -62,21 +63,17 @@ const TicketEffect = () => {
     return (
         <div>
             <div className="w-full pt-32 center text_blue text-center space-y-10 flex-col">
-                <p className='text-[7.5rem] pf_nine  leading-none'>Ready for your <br />
+                <p className='text-[7.5rem] spirit  leading-none'>Ready for your <br />
                     game-changing <br />
                     <i>   website?</i></p>
 
-                <p className='text-lg'>Step on the Double Play court and <br />
+                <p className='text-sm uppercase'>Step on the Zerror Studios and <br />
                     request a project with a few clicks.</p>
 
-                <button className='flex group items-center gap-2'>
-                    <p className=''>Contact</p>
-                    <DotLottieReact
-                        src="/icons/tennis_ball_spin.lottie"
-                        loop
-                        autoplay
-                        className="w-5 h-5 group-hover:scale-[.8] transition-all duration-300"
-                    />
+                <button className='flex relative group items-center gap-1'>
+                    <div className="w-0 group-hover:w-full transition-all duration-300 absolute bg_blue bottom-0 rounded-full h-0.5"></div>
+                    <p className='uppercase'>Contact</p>
+                    <RiArrowRightUpLine size={18}/>
                 </button>
 
 
@@ -93,7 +90,7 @@ const TicketEffect = () => {
                     >
                         <img
                             className="w-full pointer-events-none select-none"
-                            src="https://cdn.prod.website-files.com/67fcd4974b30a00d13095550/685475608688de6dd0a58668_ticket_layer_1.avif"
+                            src="/images/homePage/ticket_back.svg"
                             alt=""
                         />
                     </div>
@@ -104,7 +101,7 @@ const TicketEffect = () => {
                     >
                         <img
                             className="w-full pointer-events-none select-none"
-                            src="https://cdn.prod.website-files.com/67fcd4974b30a00d13095550/685ba89e7b72a33dd98defc0_d571628e17f0e46b5e7b1559aaeecb3e_ticket-p-2000.png"
+                            src="/images/homePage/ticket_front.svg"
                             alt=""
                         />
                     </div>

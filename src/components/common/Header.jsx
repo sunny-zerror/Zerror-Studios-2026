@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Link } from "next-view-transitions";
 import { useLayoutEffect } from "react";
+import { usePathname } from "next/navigation";
+import { RiArrowRightUpLine } from "@remixicon/react";
 
 const MENU_ITEMS = [
   {
@@ -34,7 +36,7 @@ const MENU_ITEMS = [
       "Custom CMS Development",
       "Branding, Marketing & SEO",
     ],
-     href: `/`,
+    href: `/`,
   },
   {
     id: "contact",
@@ -49,37 +51,39 @@ const SOCIAL_LINKS = ["LinkedIn", "Instagram", "Behance"];
 const MenuItem = React.forwardRef(({ item, showBorderTop, href, closeMenu }, ref) => {
   return (
     <Link href={href} onClick={closeMenu} >
-    
-    <div
-      ref={ref}
-      className={`w-full flex gap-2 py-2.5 border-b border-[#c9cfe482]
+
+      <div
+        ref={ref}
+        className={`w-full flex gap-2 py-2.5 border-b border-[#c9cfe482]
       ${showBorderTop ? "border-t" : ""}`}
-    >
-      <div className="w-20.5 h-13.5 overflow-hidden">
-        <img src={item.image} className="w-full h-full object-cover" />
-      </div>
-
-      <p className="mr-auto IBM_M text-[1rem] text-[#002BBA] mt-3">{item.label}</p>
-
-      {item.expertise && (
-        <div className="w-1/2 grid grid-cols-2 border-l border-[#c9cfe482] text-[#001BA7]">
-          {item.expertise.map((text, i) => (
-            <div
-              key={i}
-              className="px-3 py-2 border-r border-[#c9cfe482] flex flex-col text-[0.9rem] gap-1"
-            >
-              <p className="IBM_M text-[12px] font-extrabold">{String(i + 1).padStart(2, "0")}/</p>
-              <p className="text-[12px] leading-3.75">{text}</p>
-            </div>
-          ))}
+      >
+        <div className="w-24 aspect-4/3 overflow-hidden">
+          <img src={item.image} className="w-24 aspect-4/3  object-cover" />
         </div>
-      )}
-    </div>
+
+        <p className="mr-auto  uppercase text-sm text-[#002BBA] ">{item.label}</p>
+
+        {item.expertise && (
+          <div className="w-1/2 grid grid-cols-2 border-l border-[#c9cfe482] text-[#001BA7]">
+            {item.expertise.map((text, i) => (
+              <div
+                key={i}
+                className="px-3 py-2 border-r border-[#c9cfe482] flex flex-col text-[0.9rem] gap-1"
+              >
+                <p className=" text-sm ">{String(i + 1).padStart(2, "0")}/</p>
+                <p className="text-sm leading-3.75">{text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </Link>
   );
 });
 
 const Header = () => {
+
+  const pathname = usePathname()
   const menuTL = useRef();
   const menuRef = useRef();
   const preMenuRef = useRef();
@@ -145,24 +149,24 @@ const Header = () => {
       <div className="flex gap-4">
         {/* MENU BUTTON */}
         <div className="relative w-[35vw] h-12 bg-[#FFFFFF5C] backdrop-blur-3xl rounded-lg px-7  group transition-all duration-150 ease-out  flex justify-between items-center gap-4">
-          
+
           <div onClick={openMenu} className="w-full h-12 flex justify-between items-center select-none cursor-pointer">
 
-          <p
-            ref={preMenuRef}
-            // onClick={openMenu}
-            className="premenu text-white select-none cursor-pointer"
+            <p
+              ref={preMenuRef}
+              // onClick={openMenu}
+              className="premenu text-white select-none cursor-pointer"
             >
-            MENU
-          </p>
+              MENU
+            </p>
 
-          <div
-            // onClick={openMenu}
-            className="w-fit h-12 select-none cursor-pointer  flex flex-col justify-center items-center gap-1 group transition-all duration-150 ease-in hover:gap-2 "
+            <div
+              // onClick={openMenu}
+              className="w-fit h-12 select-none cursor-pointer  flex flex-col justify-center items-center gap-1 group transition-all duration-150 ease-in hover:gap-2 "
             >
-            <span className="w-8 h-[1px] bg-[#ffffff]" />
-            <span className="w-8 h-[1px] bg-[#ffffff]" />
-          </div>
+              <span className="w-8 h-[1px] bg-[#ffffff]" />
+              <span className="w-8 h-[1px] bg-[#ffffff]" />
+            </div>
 
           </div>
 
@@ -170,22 +174,22 @@ const Header = () => {
           {/* OPEN MENU */}
           <div
             ref={menuRef}
-            className="absolute top-0 left-0 w-full bg-white rounded-lg  pointer-events-none pt-2"
+            className="absolute top-0 left-0 w-full opacity-0 bg-white rounded-lg  pointer-events-none pt-2"
           >
             <div
               onClick={closeMenu}
               className="h-12 px-7 flex justify-between items-center  select-none cursor-pointer"
-            > 
-             <Link href={'/'}>
-              <img src="/svg/zerror.svg" className="h-4" />
-             </Link>
+            >
+              <Link href={'/'}>
+                <img src="/svg/zerror.svg" className="h-4" />
+              </Link>
               <span className="w-4 h-[2px] bg-[#001BA7]" />
             </div>
 
             <div className="px-7 pt-4 pb-7">
               {MENU_ITEMS.map((item, i) => (
                 <MenuItem
-                 closeMenu={closeMenu}
+                  closeMenu={closeMenu}
                   key={item.id}
                   item={item}
                   showBorderTop={i === 0}
@@ -194,31 +198,45 @@ const Header = () => {
                 />
               ))}
 
-              <div className="pt-6">
+              <div className="pt-6 flex  gap-8 uppercase text_blue">
                 {SOCIAL_LINKS.map((link, i) => (
-                  <p
+                  <button
                     key={link}
                     ref={(el) => (itemsRef.current[MENU_ITEMS.length + i] = el)}
-                    className="text-[#002BBA] IBM_M leading-[1.4rem]"
+                    className="flex relative items-center gap-1 group/cd"
                   >
-                    {link}
-                  </p>
+                    <div className="absolute bottom-0 h-0.5 w-0 rounded-full bg_blue transition-all duration-300 group-hover/cd:w-full" />
+
+                    <p className="uppercase text-sm">{link}</p>
+                    <RiArrowRightUpLine size={18} />
+                  </button>
                 ))}
+
               </div>
             </div>
           </div>
         </div>
 
         {/* SECOND BUTTON */}
-        <Link href="/deck">
-          <div className="w-17 h-12 bg-[#FFFFFF5C] backdrop-blur-3xl group transition-all duration-150 ease-out rounded-lg overflow-hidden flex items-center relative justify-center">
-            <div className="w-3 h-2 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
-            <div className="w-3 h-2 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
-            <div className="w-3 h-2 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
-
-            <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
-          </div>
-        </Link>
+        {pathname === '/deck' ? (
+          <Link href={"/"}>
+            <div className="w-17 h-12 bg-[#FFFFFF5C] backdrop-blur-3xl group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
+              <div className="w-5 h-3 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5 h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5 h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
+            </div>
+          </Link>
+        ) : (
+          <Link href="/deck">
+            <div className="w-17 h-12 bg-[#FFFFFF5C] backdrop-blur-3xl group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
+              <div className="w-5 h-3 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5 h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5 h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -157,17 +157,17 @@ const OurWork = () => {
                         </div>
 
                         <div className="w-full text_blue">
-                            <div className="flex justify-between">
-                                <p className="text-xl font-bold uppercase">disrptve</p>
-                                <p className="text-xl font-bold uppercase">2025</p>
+                            <div className="flex font-semibold justify-between">
+                                <p className="text-xl uppercase">disrptve</p>
+                                <p className="text-xl uppercase">2025</p>
                             </div>
-                            <p className=" capitalize">Website Design</p>
+                            <p className=" uppercase text-sm">Website Design</p>
                         </div>
                     </div>
                 ))}
             </div>
             <div className="w-full center py-10">
-                <button className="px-4 font-bold uppercase text_blue py-2 rounded-md border-[#012CBA] border ">
+                <button className="px-4 uppercase text_blue py-2 rounded-md border-[#012CBA] border ">
                     view All
                 </button>
             </div>

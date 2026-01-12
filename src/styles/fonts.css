@@ -1,25 +1,18 @@
 @font-face {
-  font-family: pp_new;
-  src: url(../../public/fonts/67fcd4974b30a00d13095559_PPNeueMontreal-Regular.otf);
+  font-family: ibm;
+  src: url(../../public/fonts/IBM_Plex_Sans/IBMPlexSans-Medium.ttf);
 }
 @font-face {
-  font-family: PerfectlyNineties;
-  src: url(../../public/fonts/67fcd59caa79d68d8f41d825_PerfectlyNineties-Regular.otf);
-}
-@font-face {
-  font-family: IBM_M;
-  src: url(../../public/fonts/IBM_M.ttf);
+  font-family: spirit;
+  src: url(../../public/fonts/spirits/fonnts.com-Spirits-Sharp-Light.otf);
 }
 
-.pp_new {
-  font-family: pp_new;
-}
-.IBM_M {
-  font-family: IBM_M;
+.ibm {
+  font-family: ibm;
 }
 
-.pf_nine {
-  font-family: PerfectlyNineties;
+.spirit {
+  font-family: spirit;
 }
 
 a,
@@ -29,5 +22,5 @@ input,
 li,
 ul,
 button {
-  font-family: pp_new;
+  font-family: ibm;
 }

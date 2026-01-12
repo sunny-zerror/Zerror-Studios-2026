@@ -55,34 +55,9 @@ export default function SunBackground() {
 
 
     let start = performance.now();
-    let intro = true;
 
     const animate = (now) => {
-      const introDuration = 2500;
-      const expandDelay = 500;
-      const elapsed = now - start;
-      const t = elapsed * 0.0003;
-
-      const easeOutExpo = (t) =>
-        t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-
-      const p = Math.min(elapsed / introDuration, 1);
-      const ease = easeOutExpo(p);
-
-      const movePhase = ease;
-
-      const moveEndTime = start + introDuration * 0.6;
-      const expandStartTime = moveEndTime + expandDelay;
-
-      let expandPhase = 0;
-      if (now > expandStartTime) {
-        const expandElapsed = now - expandStartTime;
-        expandPhase = Math.min(expandElapsed / (introDuration * 0.3), 1);
-      }
-
-      const centerY =
-        canvas.height +
-        (canvas.height / 2 - canvas.height) * movePhase;
+      const t = (now - start) * 0.0003;
 
       mouse.x += (targetMouse.x - mouse.x) * 0.05;
       mouse.y += (targetMouse.y - mouse.y) * 0.05;
@@ -93,12 +68,9 @@ export default function SunBackground() {
       );
 
       const baseRadius = canvas.width * 0.2;
-      const radius =
-        expandPhase === 0
-          ? baseRadius
-          : baseRadius + expandPhase * maxRadius;
+      const radius = baseRadius + maxRadius;
 
-      if (expandPhase >= 1) intro = false;
+      const centerY = canvas.height / 2;
 
       gl.uniform1f(u("time"), t);
       gl.uniform2f(u("resolution"), canvas.width, canvas.height);
@@ -107,12 +79,13 @@ export default function SunBackground() {
       gl.uniform1f(u("outRadius"), radius);
       gl.uniform2f(u("center"), canvas.width / 2, centerY);
       gl.uniform1f(u("gradLength"), 2);
-      gl.uniform1f(u("gradStrength"), intro ? 0.6 : 0.0);
-      gl.uniform1f(u("sceneMix"), intro ? expandPhase : 1);
+      gl.uniform1f(u("gradStrength"), 0.0); // no intro glow
+      gl.uniform1f(u("sceneMix"), 1.0);     // no transition
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       requestAnimationFrame(animate);
     };
+
 
     requestAnimationFrame(animate);
 

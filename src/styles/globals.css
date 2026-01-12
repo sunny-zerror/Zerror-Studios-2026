@@ -5,6 +5,7 @@
   user-select: none;
 }
 body {
+  --scene-mix: 0;
   --primary_text: #002bba;
   --primary_bg: #012cba;
   overflow-x: hidden;

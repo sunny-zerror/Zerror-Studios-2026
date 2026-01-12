@@ -8,10 +8,15 @@ gsap.registerPlugin(ScrollTrigger);
 const About = () => {
 
     useGSAP(() => {
-
+        const wrk_split_wrd = SplitText.create(".wrk_split_wrd", { type: "words, chars" });
+        gsap.set(wrk_split_wrd.words, { y: 50, opacity: 0, display: "inline-block" })
+        const abt_spt_1 = SplitText.create(".abt_spt_1", { type: "words, chars" });
+        const abt_spt_2 = SplitText.create(".abt_spt_2", { type: "words, chars" });
+        const abt_spt_3 = SplitText.create(".abt_spt_3", { type: "words, chars" });
+        const abt_spt_4 = SplitText.create(".abt_spt_4", { type: "words, chars" });
         const txt_anime = SplitText.create(".txt_anime", { type: "words, chars" });
         const txt_anime_2 = SplitText.create(".txt_anime_2", { type: "words, chars" });
-        gsap.set([txt_anime.chars,txt_anime_2.words], { yPercent: 100,  display: "inline-block" })
+        gsap.set([txt_anime.chars, txt_anime_2.words], { yPercent: 100, display: "inline-block" })
 
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -22,33 +27,48 @@ const About = () => {
             }
         })
         tl.from(".circ_3", {
-            x: "25vw",
-            ease:"linear"
+            x: "11vw",
+            ease: "linear"
         })
-        tl.from(".circ_1", {
-            x: "-25vw",
-            ease:"linear"
+        tl.from(".circ_4", {
+            x: "33vw",
+            ease: "linear"
         }, "<")
-        tl.to([".circ_1 p", ".circ_2 p", ".circ_3 p"], {
-            y: -15,
-            opacity: 0,
-        })
-        tl.to([".circ_1", ".circ_2", ".circ_3"], {
-            backgroundColor: "#07207100"
+        tl.from(".circ_2", {
+            x: "-11vw",
+            ease: "linear"
+        }, "<")
+        tl.from(".circ_1", {
+            x: "-33vw",
+            ease: "linear"
+        }, "<")
+        tl.to([abt_spt_1.chars, abt_spt_2.chars, abt_spt_3.chars], {
+            yPercent: -100,
+            ease: "expo.out",
+            stagger: {
+                each: 0.01,
+                from: "start"
+            }
+        }, "<");
+
+        tl.to(abt_spt_4.chars, {
+            yPercent: -100,
+            ease: "expo.out",
+            stagger: 0.02
         })
         tl.from(".anim_letter", {
             yPercent: 100,
             ease: "expo.out",
             stagger: 0.05
-        }, "<")
+        }, "<+=0.1")
         tl.to(".div_scale", {
             scale: 1,
             ease: "expo.out",
             duration: 1
         })
-        tl.to([".circ_1", ".circ_2", ".circ_3"], {
+        tl.to([".circ_1", ".circ_2", ".circ_3", ".circ_4"], {
             opacity: 0,
-            duration: 0.5
+            duration: 0.2
         }, "<")
 
         tl.to(".opacity_z", {
@@ -59,20 +79,58 @@ const About = () => {
             opacity: 1,
             duration: 0.01
         }, "<")
-        tl.to(".opacity_z", {
-            rotate: -180,
-            clipPath: "inset(42.5% 42.5% 42.5% 42.5%)",
-            ease: "linear",
-        }, "<")
         tl.to(".drop_ltr_z", {
             rotate: -180,
-            clipPath: "inset(42.5% 42.5% 42.5% 42.5%)",
+            // clipPath: "inset(42.5% 42.5% 42.5% 42.5%)",
             ease: "linear",
         }, "<")
         tl.to(".div_scale", {
             top: "-12vw",
             ease: "linear",
         }, "<")
+        tl.to(".bar_center", {
+            rotate: 0,
+            ease: "linear",
+        }, "<")
+        tl.to(".bar_top", {
+            top: "0%",
+            rotate: 90,
+            left: "50%",
+            transform: "translateX(-50%)",
+            ease: "linear",
+        }, "<")
+        tl.to(".bar_bottom", {
+            bottom: "0%",
+            rotate: 90,
+            right: "50%",
+            transform: "translateX(50%)",
+            ease: "linear",
+        }, "<")
+
+        tl.to(".bar_top", {
+            top: "50%",
+            rotate: 90,
+            left: "50%",
+            transform: "translateX(-50%) translateY(-50%)",
+            ease: "linear",
+        })
+        tl.to(".drop_ltr_z", {
+            rotate: -360,
+            ease: "linear",
+        }, "<")
+        tl.to(".bar_bottom", {
+            bottom: "50%",
+            rotate: 90,
+            right: "50%",
+            transform: "translateX(20%) translateY(50%)",
+            ease: "linear",
+        }, "<")
+
+        tl.to([".bar_bottom", ".bar_top", ".bar_center"], {
+            width: "2.2vw",
+            ease: "linear",
+        }, "<")
+
         tl.to(".drop_ltr_z", {
             left: "50%",
             ease: "linear",
@@ -82,19 +140,15 @@ const About = () => {
             height: "100vh",
             ease: "linear",
         })
+            .to(wrk_split_wrd.words, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.01
+            })
         tl.to(".drop_ltr_z", {
             opacity: 0,
             duration: 0.001
         }, ">")
-        tl.to(txt_anime.chars, {
-            yPercent: 0,
-            stagger: 0.05
-        })
-        tl.to(txt_anime_2.words, {
-            yPercent: 0,
-            stagger: 0.05
-        }, "<+=0.1")
-
 
     })
 
@@ -104,18 +158,33 @@ const About = () => {
             <div className=" about_paren   text-white   w-full h-[500vh] relative ">
 
                 <div className="sticky top-0 center w-full h-screen ">
-                    <div className="circ_1 size-[25vw] center bg-[#071F71] absolute  border border-white rounded-full">
-                        <p className=' text-5xl uppercase'>Creativity</p>
+                    <div className="circ_1 size-[22vw] center  absolute  border border-white rounded-full">
+                        <div className="block w-fit overflow-hidden">
+                            <p className=' abt_spt_1 text-3xl uppercase'>Creativity</p>
+                        </div>
                     </div>
-                    <div className="circ_2 size-[25vw] center bg-[#071F71] absolute  border border-white rounded-full">
-                        <p className=' text-5xl uppercase'>Efficiency</p>
+                    <div className="circ_2 size-[22vw] center  absolute  border border-white rounded-full">
+                        <div className="block w-fit overflow-hidden">
+                            <p className='abt_spt_2 text-3xl uppercase'>Efficiency</p>
+                        </div>
                     </div>
-                    <div className="circ_3 size-[25vw] center bg-[#071F71] absolute  border border-white rounded-full">
-                        <p className=' text-5xl uppercase'>Empathy</p>
+                    <div className="circ_3 size-[22vw] center  absolute  border border-white rounded-full">
+                        <div className="block w-fit overflow-hidden">
+                            <p className='abt_spt_3 text-3xl uppercase'>Entertainment</p>
+                        </div>
+                    </div>
+                    <div className="circ_4 size-[22vw] center  absolute  border border-white rounded-full">
+                        <div className="block w-fit overflow-hidden">
+                            <p className='abt_spt_4 text-3xl uppercase'>Empathy</p>
+                        </div>
                     </div>
 
                     <div className=" drop_ltr_z opacity-0 z-[2] fixed top-1/2 left-[30%] -translate-x-1/2 -translate-y-1/2">
-                        <img className='h-[10vw]' src="/svg/z.svg" alt="" />
+                        <div className="relative h-[10vw]  center w-[12vw]">
+                            <div className=" bar_center w-[12vw] absolute  -rotate-45 h-[2.25vw] rounded-xs bg-white"></div>
+                            <div className=" bar_top w-[6vw] absolute  top-0 left-[1.25vw] h-[2.25vw] rounded-xs bg-white"></div>
+                            <div className=" bar_bottom w-[6vw] absolute  bottom-0 right-[1.25vw] h-[2.25vw] rounded-xs bg-white "></div>
+                        </div>
                     </div>
 
                     <div className=" div_scale overflow-hidden scale-[.25]  gap-4 absolute flex justify-center items-center">
@@ -141,15 +210,17 @@ const About = () => {
                         </div>
                     </div>
 
-                    <div className=" works_paren_header fixed overflow-hidden whitespace-nowrap top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-0 h-0 bg-white">
-                        <div className="w-full h-[40%] center">
-                            <div className="block shrink-0 overflow-hidden">
-                            <p className=' txt_anime text-9xl uppercase font-bold text_blue'>Our Work</p>
+                    <div className=" works_paren_header center fixed overflow-hidden  top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-0 h-0 bg-white">
+                        <div className="w-full  padding text_blue grid grid-cols-[25%_32%_43%]">
+                            <div className="">
+                                <p className=' wrk_split_wrd text-6xl spirit leading-none'>Projects</p>
                             </div>
-                        </div>
-                        <div className="w-full h-[60%] center pt-44">
-                            <div className="block shrink-0 overflow-hidden">
-                            <p className=' txt_anime_2 text-xl uppercase font-bold text_blue'>Work That Speaks for itself</p>
+                            <div className="text-xs uppercase leading-tight pt-5">
+                                <p className='wrk_split_wrd'>Thoughtful design.</p>
+                                <p className='wrk_split_wrd'>Strong technology.</p>
+                            </div>
+                            <div className="text-4xl  pl-2">
+                                <p className="spirit wrk_split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
                             </div>
                         </div>
                     </div>

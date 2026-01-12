@@ -20,8 +20,7 @@ const Hero = () => {
       { "--scene-mix": 0 },
       {
         "--scene-mix": 1,
-        delay: 2,
-        duration: 1,
+        duration: 2,
         ease: "power2.out"
       }
     );
@@ -29,14 +28,14 @@ const Hero = () => {
     const firstChars = split_hero_title.chars.slice(0, 11);
     gsap.fromTo(
       firstChars,
-      { yPercent: 100, opacity: 0 },
+      { yPercent: 50, opacity: 0 },
       {
         yPercent: 0,
         opacity: 1,
         duration: .8,
         ease: "expo.out",
         stagger: 0.03,
-        delay: 2.5,
+        delay: .5,
       }
     );
 
@@ -57,7 +56,7 @@ const Hero = () => {
     text_chars.forEach((char) => {
       gsap.fromTo(
         char,
-        { yPercent: 100, opacity: 0 },
+        { yPercent: 50, opacity: 0 },
         {
           yPercent: 0,
           opacity: 1,
@@ -72,7 +71,7 @@ const Hero = () => {
         });
     });
 
-    gsap.to([".site-background",".drop_ltr_z", ".works_paren_header"], {
+    gsap.to([".site-background", ".drop_ltr_z", ".works_paren_header"], {
       scrollTrigger: {
         trigger: ".work_paren",
         start: "bottom bottom",
@@ -85,7 +84,7 @@ const Hero = () => {
 
 
   return (
-    <div className=" hero_paren w-full relative   ">
+    <div className=" hero_paren w-full relative">
 
       <div className="site-background fixed top-0 left-0   w-full h-screen z-[-1]">
         <HeroScene />
@@ -94,7 +93,7 @@ const Hero = () => {
       <div className=" txt_slider_paren w-full h-[400vh]  ">
         <div className="w-full h-screen top-0 sticky overflow-hidden">
           <div className=" z-[2] hero_scroll_txt w-full translate-x-[30vw] absolute top-[80%] -translate-y-1/2 text-white  whitespace-nowrap left-0  ">
-            <p className=" split_hero_title text-[12vw] origin-bottom-left tracking-tighter font-bold">We design and build thoughtful digital experiences that go beyond visuals.</p>
+            <p className=" split_hero_title text-[12vw] origin-bottom-left tracking-tighter">We design and build thoughtful digital experiences that go beyond visuals.</p>
           </div>
         </div>
       </div>
@@ -103,14 +102,14 @@ const Hero = () => {
       <div className="w-full   padding text-white ">
         <div className="w-full  grid grid-cols-[25%_32%_43%]">
           <div className="">
-            <p className='capitalize pf_nine text-6xl  leading-none'>about us</p>
+            <p className='capitalize text-6xl spirit leading-none'>about us</p>
           </div>
-          <div className="text-xs capitalize leading-tight pt-5">
+          <div className="text-xs uppercase leading-tight pt-5">
             <p className=''>Thoughtful design.</p>
             <p className=''>Strong technology.</p>
           </div>
-          <div className="capitalize text-4xl leading-none pl-2">
-            <p> <span className='opacity-0 pointer-events-none'>......................................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
+          <div className="capitalize  text-4xl  pl-2">
+            <p className="spirit"> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
           </div>
         </div>
       </div>

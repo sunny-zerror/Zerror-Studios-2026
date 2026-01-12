@@ -43,7 +43,7 @@ vec3 bgColor() {
        * abs(sin(Y * (.05 + sin(t + 75.) * .025)));
 
 c = smoothstep(-1., 1., c);
-c = mix(0.25, 1.0, c); 
+c = mix(0.45, 1.0, c); 
 
   vec3 blueColor = vec3(1.0/255.0, 44.0/255.0, 186.0/255.0);
 

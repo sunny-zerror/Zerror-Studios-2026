@@ -5,7 +5,7 @@ const InfoSection = () => {
     <div className="w-full px-10 py-25 text-[#002BBA] ">
       <div className="w-full  grid grid-cols-[25%_32%_43%]">
         <div className="">
-          <p className="capitalize pf_nine text-5xl  leading-none">Our team</p>
+          <p className="capitalize  text-5xl  leading-none">Our team</p>
         </div>
         <div className="text-xs capitalize leading-tight pt-5">
           <p className="">Thoughtful design.</p>

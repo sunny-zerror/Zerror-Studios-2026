@@ -63,17 +63,16 @@ const TicketEffect = () => {
     return (
         <div>
             <div className="w-full pt-32 center text_blue text-center space-y-10 flex-col">
-                <p className='text-[7.5rem] spirit  leading-none'>Ready for your <br />
-                    game-changing <br />
-                    <i>   website?</i></p>
+                <p className='text-8xl font-bold uppercase   leading-none'>Ready for your <br />
+                    game-changing <br />website?</p>
 
-                <p className='text-sm uppercase'>Step on the Zerror Studios and <br />
+                <p className='text-sm '>Step on the Zerror Studios and <br />
                     request a project with a few clicks.</p>
 
                 <button className='flex relative group items-center gap-1'>
                     <div className="w-0 group-hover:w-full transition-all duration-300 absolute bg_blue bottom-0 rounded-full h-0.5"></div>
-                    <p className='uppercase'>Contact</p>
-                    <RiArrowRightUpLine size={18}/>
+                    <p className=''>Contact</p>
+                    <RiArrowRightUpLine size={18} />
                 </button>
 
 

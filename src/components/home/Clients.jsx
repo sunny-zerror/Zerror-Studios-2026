@@ -79,17 +79,61 @@ const Clients = () => {
         boxes.forEach((box) => {
             const icon = box.querySelector(".client-icon");
             const img = box.querySelector(".client-img");
+            const inr_boxes = box.querySelectorAll(".client_innr_box");
 
             box.addEventListener("mouseenter", () => {
-                gsap.to(icon, { filter: "invert(100%)", duration: 0.3, ease: "power1.out" });
-                gsap.to(img, { opacity: 1, scale: 1, duration: 0.3, ease: "power1.out" });
+                gsap.killTweensOf([icon, img, inr_boxes]);
+
+                gsap.to(icon, {
+                    filter: "invert(100%)",
+                    duration: 0.25,
+                    ease: "power2.out",
+                });
+
+                gsap.to(inr_boxes, {
+                    opacity: 1,
+                    duration: 0.05,
+                    ease: "expo.out",
+                    stagger: {
+                        each: 0.009,
+                        from: "random", // 🔥 much better than random
+                    },
+                });
+
+                gsap.to(img, {
+                    opacity: 1,
+                    duration: 0.35,
+                    ease: "power2.out",
+                });
             });
 
             box.addEventListener("mouseleave", () => {
-                gsap.to(icon, { filter: "invert(0%)", duration: 0.3, ease: "power1.in" });
-                gsap.to(img, { opacity: 0, scale: 1.05, duration: 0.3, ease: "power1.in" });
+                gsap.killTweensOf([icon, img, inr_boxes]);
+
+                gsap.to(icon, {
+                    filter: "invert(0%)",
+                    duration: 0.25,
+                    ease: "power2.in",
+                });
+
+                gsap.to(inr_boxes, {
+                    opacity: 0,
+                    duration: 0.05,
+                    ease: "expo.in",
+                    stagger: {
+                        each: 0.009,
+                        from: "random",
+                    },
+                });
+
+                gsap.to(img, {
+                    opacity: 0,
+                    duration: 0.25,
+                    ease: "power2.in",
+                });
             });
         });
+
 
         return () => {
             boxes.forEach((box) => {
@@ -106,13 +150,21 @@ const Clients = () => {
                 {clientsData.map((item, i) => {
                     return (
                         <div key={i} className="client-box w-full  overflow-hidden border border-white/10 relative aspect-square center">
+                            <div className="w-full h-full absolute grid grid-cols-7 pointer-events-none">
+                                {[...Array(49)].map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className="client_innr_box w-full aspect-square bg-white opacity-0"
+                                    />
+                                ))}
+                            </div>
                             <div className="w-full h-full center">
-                                <img className='client-icon w-[80%] absolute z-[1]' src={item.icon} alt="" />
-                                <img
+                                <img className='client-icon w-[90%] absolute z-[1]' src={item.icon} alt="" />
+                                {/* <img
                                     className="client-img absolute w-full h-full object-cover opacity-0 "
                                     src="https://www.zerrorstudios.com/projects/Manifest/manifest_cover.webp"
                                     alt="loading" title="Disrptive"
-                                />
+                                /> */}
                             </div>
                             <div className="w-full  uppercase text-sm absolute z-[4] bottom-0 flex justify-between p-3">
                                 <p>Manifest</p>

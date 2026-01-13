@@ -157,11 +157,11 @@ const OurWork = () => {
                         </div>
 
                         <div className="w-full text_blue">
-                            <div className="flex font-semibold justify-between">
+                            <div className="flex font-bold justify-between">
                                 <p className="text-xl uppercase">disrptve</p>
                                 <p className="text-xl uppercase">2025</p>
                             </div>
-                            <p className=" uppercase text-sm">Website Design</p>
+                            <p className="  text-sm">Website Design</p>
                         </div>
                     </div>
                 ))}

@@ -42,7 +42,7 @@ const About = () => {
             x: "-33vw",
             ease: "linear"
         }, "<")
-        tl.to([abt_spt_1.chars, abt_spt_2.chars, abt_spt_3.chars], {
+        tl.to([abt_spt_1.chars, abt_spt_2.chars, abt_spt_3.chars, abt_spt_4.chars], {
             yPercent: -100,
             ease: "expo.out",
             stagger: {
@@ -50,11 +50,15 @@ const About = () => {
                 from: "start"
             }
         }, "<");
-
-        tl.to(abt_spt_4.chars, {
+        tl.from(".err_anim_letter", {
+            yPercent: 100,
+            ease: "expo.out",
+            stagger: 0.05
+        }, "<+=0.4")
+        tl.to(".err_anim_letter", {
             yPercent: -100,
             ease: "expo.out",
-            stagger: 0.02
+            stagger: 0.05
         })
         tl.from(".anim_letter", {
             yPercent: 100,
@@ -187,8 +191,25 @@ const About = () => {
                         </div>
                     </div>
 
-                    <div className=" div_scale overflow-hidden scale-[.25]  gap-4 absolute flex justify-center items-center">
-                        <div className="  word_error flex gap-4">
+                    <div className=" div_scale overflow-hidden scale-[.25]  gap-4 absolute center">
+                        <div className=" absolute  word_error flex gap-4">
+                            <div className=" err_anim_letter">
+                                <img className='h-[10vw]' src="/svg/e.svg" alt="" />
+                            </div>
+                            <div className=" err_anim_letter">
+                                <img className='h-[10vw]' src="/svg/r.svg" alt="" />
+                            </div>
+                            <div className=" err_anim_letter">
+                                <img className='h-[10vw]' src="/svg/r.svg" alt="" />
+                            </div>
+                            <div className=" err_anim_letter">
+                                <img className='h-[10vw]' src="/svg/o.svg" alt="" />
+                            </div>
+                            <div className=" err_anim_letter">
+                                <img className='h-[10vw]' src="/svg/r.svg" alt="" />
+                            </div>
+                        </div>
+                        <div className="  word_zerror flex gap-4">
                             <div className=" anim_letter opacity_z">
                                 <img className='h-[10vw]' src="/svg/z.svg" alt="" />
                             </div>
@@ -211,16 +232,16 @@ const About = () => {
                     </div>
 
                     <div className=" works_paren_header center fixed overflow-hidden  top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-0 h-0 bg-white">
-                        <div className="w-full  padding text_blue grid grid-cols-[25%_32%_43%]">
+                        <div className="w-full  padding text_blue grid grid-cols-[28%_29%_43%]">
                             <div className="">
-                                <p className=' wrk_split_wrd text-6xl spirit leading-none'>Projects</p>
+                                <p className=' wrk_split_wrd text-6xl font-bold uppercase  leading-none'>Projects</p>
                             </div>
                             <div className="text-xs uppercase leading-tight pt-5">
                                 <p className='wrk_split_wrd'>Thoughtful design.</p>
                                 <p className='wrk_split_wrd'>Strong technology.</p>
                             </div>
                             <div className="text-4xl  pl-2">
-                                <p className="spirit wrk_split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
+                                <p className=" wrk_split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
                             </div>
                         </div>
                     </div>

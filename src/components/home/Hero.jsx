@@ -93,23 +93,23 @@ const Hero = () => {
       <div className=" txt_slider_paren w-full h-[400vh]  ">
         <div className="w-full h-screen top-0 sticky overflow-hidden">
           <div className=" z-[2] hero_scroll_txt w-full translate-x-[30vw] absolute top-[80%] -translate-y-1/2 text-white  whitespace-nowrap left-0  ">
-            <p className=" split_hero_title text-[12vw] origin-bottom-left tracking-tighter">We design and build thoughtful digital experiences that go beyond visuals.</p>
+            <p className=" split_hero_title text-[12vw] font-bold origin-bottom-left tracking-tighter">We design and build thoughtful digital experiences that go beyond visuals.</p>
           </div>
         </div>
       </div>
 
 
       <div className="w-full   padding text-white ">
-        <div className="w-full  grid grid-cols-[25%_32%_43%]">
+        <div className="w-full  grid grid-cols-[28%_29%_43%]">
           <div className="">
-            <p className='capitalize text-6xl spirit leading-none'>about us</p>
+            <p className='uppercase font-bold text-6xl   leading-none'>about us</p>
           </div>
           <div className="text-xs uppercase leading-tight pt-5">
             <p className=''>Thoughtful design.</p>
             <p className=''>Strong technology.</p>
           </div>
           <div className="capitalize  text-4xl  pl-2">
-            <p className="spirit"> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
+            <p className=""> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
           </div>
         </div>
       </div>

@@ -6,15 +6,15 @@ import { usePathname } from "next/navigation";
 const hoverIn = (selector) => {
   gsap.to(selector, {
     backgroundColor: "#2147c4",
-    ease: "power4.in",
-    duration: 0.06,
+    ease: "power3.out",
+    duration: 0.4,
   });
 };
 
 const hoverOut = (selector) => {
   gsap.to(selector, {
     backgroundColor: "#2147c400",
-    ease: "power1.in",
+    ease: "power3.in",
     duration: 0.4,
   });
 };
@@ -33,8 +33,8 @@ const footerRows = [
       {},
       {
         text: "Prototypes that bring ideas to life.",
-        align: "absolute top-[5%] left-[5%]",
-        hover: "group-hover:top-[80%]",
+        align: "absolute bottom-[5%] left-[5%]",
+        hover: "group-hover:bottom-[80%]",
       },
       {},
       {},
@@ -83,14 +83,14 @@ const footerRows = [
       {
         text: "Refine through feedback.",
         align: "absolute top-[5%] left-[5%]",
-        hover: "group-hover:top-[85%]",
+        hover: "group-hover:top-[82%]",
       },
       {},
       {},
       {
         text: "© 2025 Zerror Studio. All rights reserved. Made by the Zerror Team.",
         align: "absolute bottom-[5%] left-[5%]",
-        hover: "group-hover:bottom-[70%]",
+        hover: "group-hover:bottom-[67%]",
       },
     ],
   },
@@ -161,7 +161,7 @@ const Footer = () => {
                   onMouseLeave={() => hoverOut(selector)}
                   className={`w-full hoverBg${
                     row.id
-                  }${i}  border relative  group border-white/10 transition-all duration-300 ease-in rounded-lg flex text-white  leading-tight
+                  }${i}  border relative  group border-white/10 rounded-md flex text-white  leading-tight
                    
                     ${
                       isImage ? "px-0 py-0 justify-center  items-center" : "p-5"
@@ -169,12 +169,12 @@ const Footer = () => {
                   `}
                 >
                   {item.img && (
-                    <img src={item.img} alt="icon" className="h-[4vw]" />
+                    <img src={item.img} alt="icon" className="h-[6vw]" />
                   )}
 
                   {item.text && (
                     <span
-                      className={`glitch-text text-[12px] uppercase text-[#f5f5f5]  transition-all duration-300  ${item.align}
+                      className={`glitch-text text-xs leading-tight  uppercase text-[#f5f5f5]  transition-all duration-300  ${item.align}
                         ${item.hover}
                      `}
                       style={{

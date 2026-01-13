@@ -94,7 +94,7 @@ const Services = () => {
   return (
     <>
       <div className="w-full relative h-screen center flex-col gap-y-8 text-center">
-        <p className="text-7xl pb-5 spirit capitalize w-1/2 bg-clip-text text-transparent bg-[url('/images/homePage/mask_img.webp')] bg-fixed bg-cover bg-center">
+        <p className="text-7xl pb-5  uppercase font-bold w-[60%] bg-clip-text text-transparent bg-[url('/images/homePage/mask_img.webp')] bg-fixed bg-cover bg-center">
           To build zero-error digital products where design and technology move as one.
         </p>
       </div>
@@ -126,7 +126,7 @@ const Services = () => {
                 </span>
               </p>
 
-              <p className="text-sm w-1/2 uppercase text_blue leading-tight ">
+              <p className=" w-1/2  text_blue leading-tight ">
                 {item.services.map((service, i) => (
                   <span key={service}>
                     {service}
@@ -139,16 +139,16 @@ const Services = () => {
         })}
 
         <div className="expand_circ overflow-hidden size-3.5 z-10 center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 shrink-0 bg_blue rounded-full ">
-          <div className="w-screen  padding text-white grid grid-cols-[25%_32%_43%]">
+          <div className="w-screen  padding text-white grid grid-cols-[28%_29%_43%]">
             <div className="">
-              <p className=' split_wrd text-6xl spirit leading-none'>Our <br /> Clients</p>
+              <p className=' split_wrd text-6xl  uppercase font-bold leading-none'>Our <br /> Clients</p>
             </div>
             <div className="text-xs uppercase leading-tight pt-5">
               <p className='split_wrd'>Brands we’ve </p>
               <p className='split_wrd'>worked with.</p>
             </div>
             <div className="text-4xl  pl-2">
-              <p className="spirit split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
+              <p className=" split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@ const splitToChars = (text) =>
   text.split("").map((char, i) => (
     <span
       key={i}
-      className={`char inline-block spirit opacity-0 ${char === " " ? "w-[0.35em]" : ""
+      className={`char inline-block uppercase font-bold  opacity-0 ${char === " " ? "w-[0.35em]" : ""
         }`}
       data-char={char}
     >

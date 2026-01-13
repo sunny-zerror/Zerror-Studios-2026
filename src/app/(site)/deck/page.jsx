@@ -622,85 +622,89 @@ export default function deck() {
     });
   });
 
+  useEffect(() => {
+    const tlLast = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".div10",
+        start: "bottom top",
+        end: "bottom top",
+        // scrub: true,
+        toggleActions: "play none none reverse",
+        // markers: true,
+      },
+    });
+    // Show SMBOX
+    tlLast.to(".SMBOX", { opacity: 1, pointerEvents: "auto" }, "l1");
+
+    // Hide main cards
+    tlLast.to(".crd", { opacity: 0 }, "l1");
+
+    // ".SXCrd",
+    //   {
+    //     opacity: 0,
+    //     scale: 3,
+    //     xPercent: -0,
+    //     yPercent: -100,
+    //   },
+
+    // SXCrd (small cards) grow out staggered
+    tlLast.fromTo(
+      ".SXCrd",
+      {
+        xPercent: 0,
+        yPercent: -100, 
+        scale: 1.3,
+        opacity:0,
+        opacity: 1,
+      },
+      {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 1,
+        stagger: {
+          each: 0.05,
+          from: "end",
+          grid: [4, 3], 
+        },
+        duration: 0.1,
+        scale: 1,
+        // ease: "power2.out",
+      },
+      "<0.1"
+    );
+  }, []);
+
   // useEffect(() => {
   //   const tlLast = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: ".div10",
-  //       start: "bottom top",
-  //       end: "bottom top",
-  //       scrub: true,
-  //       // markers: true,
-  //     },
+  //     paused: true, // we control manually
   //   });
+
   //   // Show SMBOX
   //   tlLast.to(".SMBOX", { opacity: 1, pointerEvents: "auto" }, "l1");
 
   //   // Hide main cards
   //   tlLast.to(".crd", { opacity: 0 }, "l1");
 
-  //   // ".SXCrd",
-  //   //   {
-  //   //     opacity: 0,
-  //   //     scale: 3,
-  //   //     xPercent: -0,
-  //   //     yPercent: -100,
-  //   //   },
+  //   // Small cards grow staggered
+  //   tlLast.to(".SXCrd", {
+  //     xPercent: 0,
+  //     yPercent: 0,
+  //     opacity: 1,
+  //     scale: 1,
+  //     duration: 0.1,
+  //     stagger: 0.01,
+  //     ease: "linear",
+  //   });
 
-  //   // SXCrd (small cards) grow out staggered
-  //   tlLast.to(
-  //     ".SXCrd",
-  //     {
-  //       // opacity: 1,
-  //       // scale: 1,
-  //       // xPercent: 0,
-  //       // yPercent: 0,
-  //       // stagger: 0.7,
-  //       // ease: "linear",
-  //       // duration: 3,
-  //       xPercent: 0,
-  //       yPercent: 0,
-  //       opacity: 1,
-  //       scale: 1,
-  //       stagger: 0.23,
-  //       duration:1,
-
-  //       ease: "expo.out",
-  //     },
-  //     "<0.1"
-  //   );
+  //   // ScrollTrigger to control timeline manually
+  //   ScrollTrigger.create({
+  //     trigger: ".div10",
+  //     start: "bottom top",
+  //     onEnter: () => tlLast.play(), // play when entering viewport
+  //     onLeaveBack: () => tlLast.reverse(), // optional: reverse if scrolling back
+  //   });
   // }, []);
 
-
-  useEffect(() => {
-  const tlLast = gsap.timeline({
-    paused: true, // we control manually
-  });
-
-  // Show SMBOX
-  tlLast.to(".SMBOX", { opacity: 1, pointerEvents: "auto" }, "l1");
-
-  // Hide main cards
-  tlLast.to(".crd", { opacity: 0 }, "l1");
-
-  // Small cards grow staggered
-  tlLast.to(".SXCrd", {
-    xPercent: 0,
-    yPercent: 0,
-    opacity: 1,
-    scale: 1,
-    duration: 0.1,
-    stagger: 0.01,
-    ease: "linear",
-  });
-
-  // ScrollTrigger to control timeline manually
-  ScrollTrigger.create({
-    trigger: ".div10",
-    start: "bottom top",
-    onEnter: () => tlLast.play(),        // play when entering viewport
-    onLeaveBack: () => tlLast.reverse(), // optional: reverse if scrolling back
-  });
-}, []);
   const aHash = [
     "div1",
     "div2",
@@ -782,7 +786,7 @@ export default function deck() {
           </div>
 
           {/* Card-1 */}
-          <div className="w-[69%] crd card1 h-[76vh] p-3 bg-[#E62200] absolute top-[12%] left-1/2 -translate-x-1/2 rounded-xl select-none">
+          <div className="w-[69%]  crd card1 h-[76vh] p-3 bg-[#E62200] absolute top-[12%] left-1/2 -translate-x-1/2 rounded-xl select-none">
             <div className="w-full h-1/3 flex">
               {[
                 "Pich dech 2025--",
@@ -1137,9 +1141,12 @@ export default function deck() {
         })}
 
         {/* SMBOX */}
-        <div className="w-full  opacity-0  SMBOX pointer-events-none  h-fit gap-5 scale-[0.6] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   flex justify-center flex-wrap">
+        <div
+          className="w-full opacity-0 SMBOX pointer-events-none scale-[0.65] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 grid grid-cols-4 grid-rows-3 gap-5
+  "
+        >
           {/* CARD 1 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd p-3 bg-[#E62200] lgunded-xl select-none relative overflow-hidden">
+          <div className="w-full h-full hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd p-3 bg-[#E62200] rounded-xl select-none relative overflow-hidden">
             <div className="w-full h-[33%] flex gap-1">
               {[
                 "Pich dech 2025--",
@@ -1159,21 +1166,22 @@ export default function deck() {
                   onMouseEnter={() => handelMouseEnter(`.hoverBgAnimateT${i}`)}
                   onMouseLeave={() => handelMouseLeave(`.hoverBgAnimateT${i}`)}
                   key={i}
-                  className={`w-1/12 hoverBgAnimateT${i} border bg-[#fa331000] border-[#FA3310] flex items-center justify-center 
-        text-[#ffffffb6] rounded-lg text-[7px] p-1`}
+                  className={`w-1/12 hoverBgAnimateT${i} border bg-[#fa331000] border-[#FA3310]
+            flex items-center justify-center text-[#ffffffb6]
+            rounded-lg text-[7px] p-1`}
                 >
                   {item}
                 </div>
               ))}
             </div>
 
-            <div className="absolute inset-0  flex justify-center items-center pointer-events-none">
+            <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
               <h1 className="text-white font3 text-[20px]">Zerror Studio</h1>
             </div>
           </div>
 
           {/* CARD 2 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[18px] leading-tight">
               Hi, we are Zerror Studio
             </p>
@@ -1185,14 +1193,13 @@ export default function deck() {
 
               <p className="font1 text-[10px] leading-tight w-[69%]">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s.
+                industry.
               </p>
             </div>
           </div>
 
           {/* CARD 3 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px] leading-tight">
               simply dummy text of the printing and typesetting industry.
             </p>
@@ -1215,7 +1222,7 @@ export default function deck() {
           </div>
 
           {/* CARD 4 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[18px]">Hi, we are Zerror Studio</p>
 
             <div className="flex justify-between gap-3">
@@ -1224,29 +1231,13 @@ export default function deck() {
               </p>
 
               <p className="font1 text-[10px] leading-tight w-[69%]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry...
-              </p>
-            </div>
-          </div>
-          {/* CARD 4 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
-            <p className="font3 text-[18px]">Hi, we are Zerror Studio</p>
-
-            <div className="flex justify-between gap-3">
-              <p className="uppercase font1 text-[8px] w-[40%]">
-                Here How we Got FROM 0 To 30
-              </p>
-
-              <p className="font1 text-[10px] leading-tight w-[69%]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry...
+                Lorem Ipsum is simply dummy text...
               </p>
             </div>
           </div>
 
           {/* CARD 5 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px] leading-tight">
               simply dummy text of the printing and typesetting industry.
             </p>
@@ -1268,8 +1259,8 @@ export default function deck() {
             </div>
           </div>
 
-          {/* CARD 6 — WITH IMAGE */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          {/* CARD 6 — IMAGE */}
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px] leading-tight">
               simply dummy text of the printing and typesetting industry.
             </p>
@@ -1298,7 +1289,7 @@ export default function deck() {
           </div>
 
           {/* CARD 7 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[18px] leading-tight">
               Hi, we are Zerror Studio
             </p>
@@ -1315,7 +1306,7 @@ export default function deck() {
           </div>
 
           {/* CARD 8 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px]">
               simply dummy text of the printing industry.
             </p>
@@ -1338,7 +1329,7 @@ export default function deck() {
           </div>
 
           {/* CARD 9 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[18px] leading-tight">
               Hi, we are Zerror Studio
             </p>
@@ -1355,7 +1346,7 @@ export default function deck() {
           </div>
 
           {/* CARD 10 */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px]">
               simply dummy text of the printing industry.
             </p>
@@ -1377,8 +1368,36 @@ export default function deck() {
             </div>
           </div>
 
-          {/* CARD 11 — WITH IMAGE */}
-          <div className="w-85 h-50 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+          {/* CARD 11 */}
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
+            <p className="font3 text-[16px]">
+              simply dummy text of the printing industry.
+            </p>
+
+            <div className="flex justify-between gap-3 items-end">
+              <div className="w-[45%] h-[120px] rounded-xl overflow-hidden">
+                <Image
+                  src="/img.jpg"
+                  width={500}
+                  height={500}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="w-[55%] font1 text-[10px] flex flex-col gap-1">
+                {Array(4)
+                  .fill(0)
+                  .map((_, i) => (
+                    <p key={i} className="border-b border-[#20202038] pb-1">
+                      Lorem Ipsum is simply dummy
+                    </p>
+                  ))}
+              </div>
+            </div>
+          </div>
+          {/* CARD 12 */}
+          <div className="w-full h-60 hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd bg-white rounded-lg p-4 select-none flex flex-col justify-between">
             <p className="font3 text-[16px]">
               simply dummy text of the printing industry.
             </p>

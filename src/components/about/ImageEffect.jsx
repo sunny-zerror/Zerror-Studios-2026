@@ -6,8 +6,8 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ImageEffect = () => {
-  const rows = 20;
-  const cols = 10;
+  const rows = 40;
+  const cols = 20;
   const totalCells = rows * cols;
   const gridRef = useRef(null);
 
@@ -27,7 +27,7 @@ const ImageEffect = () => {
             opacity: 0,
             duration:0.5,
             stagger: {
-                each: 0.01,
+                each: 0.001,
                 from: "random",
             },
             ease: "expo.out",
@@ -50,7 +50,7 @@ const ImageEffect = () => {
 
       <div className="w-full h-screen absolute top-0 left-0 overflow-hidden z-30 ">
         <PixelTrail
-          gridSize={20}
+          gridSize={30}
           trailSize={0.1}
           maxAge={250}
           interpolate={5.4}
@@ -59,7 +59,7 @@ const ImageEffect = () => {
         />
       </div>
 
-      <div ref={gridRef} className=" absolute pointer-events-none top-0 left-0 w-full h-full  z-40 grid grid-rows-10 grid-cols-20">
+      <div ref={gridRef} className=" absolute pointer-events-none top-0 left-0 w-full h-full  z-40 grid grid-rows-20 grid-cols-40">
          {Array.from({ length: totalCells }).map((_, i) => (
                         <div key={i} className="bg-white opacity-100" />
                     ))}

@@ -2,6 +2,7 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import gsap from "gsap";
 import CustomEase from "gsap/dist/CustomEase";
+import { Link } from "next-view-transitions";
 import React, { useEffect, useRef, useState } from 'react'
 
 const caseStudies = [
@@ -134,7 +135,8 @@ const OurWork = () => {
         <div className="work_paren w-full relative bg-white">
             <div className="w-full grid grid-cols-2 padding gap-x-5 gap-y-10">
                 {caseStudies.map((item, i) => (
-                    <div
+                    <Link
+                        href={"/work/disrptve"}
                         key={i}
                         className="w-full relative group space-y-2"
                     >
@@ -163,13 +165,15 @@ const OurWork = () => {
                             </div>
                             <p className="  text-sm">Website Design</p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
             <div className="w-full center py-10">
-                <button className="px-4 uppercase text_blue py-2 rounded-md border-[#012CBA] border ">
-                    view All
-                </button>
+                <Link href={"/work"}>
+                    <button className="px-4 uppercase text_blue py-2 rounded-md border-[#012CBA] border ">
+                        view All
+                    </button>
+                </Link>
             </div>
         </div>
     );

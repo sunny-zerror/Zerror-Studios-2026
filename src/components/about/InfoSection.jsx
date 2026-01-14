@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoSection = () => {
   return (
-    <div className="w-full px-10 py-32 text-[#002BBA] ">
+    <div className="w-full px-10 py-32 text-[#002BBA] relative bg-white z-100 ">
       <div className="w-full  grid grid-cols-[25%_32%_43%]">
         <div className="">
           <p className="capitalize  text-5xl  leading-none">Our team</p>

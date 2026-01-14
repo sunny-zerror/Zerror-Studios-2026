@@ -146,7 +146,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-[#012CBA] p-[2vw]">
+    <div className="w-full h-screen bg-[#012CBA] p-[2vw] relative z-100">
       <div className="w-full h-full p-3">
         {footerRows.map((row) => (
           <div key={row.id} className="w-full h-1/3 grid grid-cols-9">

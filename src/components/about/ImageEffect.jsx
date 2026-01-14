@@ -6,65 +6,183 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ImageEffect = () => {
-  const rows = 40;
-  const cols = 20;
-  const totalCells = rows * cols;
-  const gridRef = useRef(null);
-
   useEffect(() => {
-        const cells = gridRef.current.children;
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".ImgEffectCont",
-                start: "top 50%",
-                toggleActions: "play none none reverse",
-                //   markers: true,
-            },
-        });
-
-        tl.to(cells, {
-            opacity: 0,
-            duration:0.5,
-            stagger: {
-                each: 0.001,
-                from: "random",
-            },
-            ease: "expo.out",
-        });
-
-        return () => {
-            tl.scrollTrigger.kill();
-        };
-    }, []);
+    const TLVI = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".IVMainCont",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        // markers: true,
+      },
+    });
+    TLVI.to(".cardVI", {
+      top: "50%",
+      ease: "linear",
+    });
+    TLVI.to(".cardVI", {
+      rotateY: 90,
+      ease: "linear",
+    });
+    TLVI.to(
+      ".VCI ",
+      {
+        opacity: 0,
+        ease: "linear",
+      },
+      "a11"
+    );
+    TLVI.to(
+      ".cardVI",
+      {
+        rotateY: 0,
+        ease: "linear",
+      },
+      "a11"
+    );
+    TLVI.to(
+      ".cardVI",
+      {
+        delay: 0.5,
+        width: "100%",
+        height: "100vh",
+        ease: "linear",
+      },
+      "a11"
+    );
+    TLVI.to(
+      ".OTI1",
+      {
+         delay:0.5,
+        y:0
+      },
+    );
+    TLVI.to(
+      ".OTI1",
+      {
+        delay:0.5,
+        y:'100%'
+      },
+    );
+    TLVI.to(
+      ".OTI2",
+      {
+        y:0
+      },
+    );
+    TLVI.to(
+      ".OTI2",
+      {
+        delay:0.5,
+        y:'100%'
+      },
+    );
+    TLVI.to(
+      ".OTI3",
+      {
+        y:0
+      },
+    );
+    TLVI.to(
+      ".OTI3",
+      {
+        delay:0.5,
+        y:'100%'
+      },
+    );
+  }, []);
 
   return (
-    <div className="w-full ImgEffectCont h-screen overflow-hidden relative">
-      <Image
-        src={"/images/about/AboutMainBg.jpg"}
-        className="w-full h-full object-center object-cover"
-        width={1000}
-        height={1000}
-        alt="img"
-      />
+    <>
+      <div className="w-full h-[700vh] relative IVMainCont">
+        {/* Cont */}
+        <div className="w-full h-screen sticky top-0 left-0 flex flex-col justify-center items-center text-[#002BBA] scene">
+          <p className=" uppercase font-semibold text-[1vw] leading-[1.5vw]">
+            WHY US?
+          </p>
+          <h1 className=" uppercase text-[3vw] leading-[3vw] font-bold">
+            5 Reasons
+          </h1>
+          <h1 className=" uppercase text-[3vw] leading-[3vw] font-bold">
+            To Be With Zerrorian
+          </h1>
 
-      <div className="w-full h-screen absolute top-0 left-0 overflow-hidden z-30 ">
-        <PixelTrail
-          gridSize={30}
-          trailSize={0.1}
-          maxAge={250}
-          interpolate={5.4}
-          color="#FFFFFF80"
-          gooeyFilter={{ id: "custom-goo-filter", strength: 2 }}
-        />
-      </div>
+          {/* Video & Img  */}
+          <div className=" absolute w-[300px] h-[400px] top-[200%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-700 cardVI overflow-hidden ">
+            <div className="w-[100vw] h-[100vh]  relative">
+              {/* Img */}
+              <div className="w-[100vw] h-[100vh] absolute top-0 left-0 z-40  VCI ">
+                <img
+                  src={"/images/about/AboutMainBg.jpg"}
+                  alt="IMGR"
+                  className="w-[100vw] h-[100vh] object-cover  whitespace-nowrap"
+                />
+              </div>
 
-      <div ref={gridRef} className=" absolute pointer-events-none top-0 left-0 w-full h-full  z-40 grid grid-rows-20 grid-cols-40">
-         {Array.from({ length: totalCells }).map((_, i) => (
-                        <div key={i} className="bg-white opacity-100" />
-                    ))}
+              {/* Video */}
+              <div className="w-full h-[100vh] absolute top-0 left-0 z-20  VCV ">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  src="https://www.pexels.com/download/video/6773762/"
+                  className="w-[100vw] h-[100vh] object-cover  whitespace-nowrap"
+                ></video>
+              </div>
+
+              {/* Text-Animater */}
+              <div className="w-full h-screen relative z-80 ">
+                <div className="w-full h-fit absolute top-[60%] left-0 -translate-y-1/2">
+                  <div className="w-full h-fit relative text-white">
+
+                    {/* Text-1 */}
+                    <div className="w-full OT1 absolute top-0 left-0 ">
+                      {/* top */}
+                      <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
+                        <p className="OTI1 font-bold translate-y-[100%]">15 YEA</p>
+                      </div>
+
+                      {/* bottom */}
+                      <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
+                        <p className="OTI1 font-bold translate-y-[100%]">OF EXPERTIE</p>
+                      </div>
+                    </div>
+
+                    {/* Text-2 */}
+                    <div className="w-full OT2 absolute top-0 left-0 ">
+                      {/* top */}
+                      <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
+                        <p className="OTI2 font-bold translate-y-[100%]">100+</p>
+                      </div>
+
+                      {/* bottom */}
+                      <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
+                        <p className="OTI2 font-bold translate-y-[100%]">AWARDS</p>
+                      </div>
+                    </div>
+
+                    {/* Text-3 */}
+                    <div className="w-full OT3 absolute top-0 left-0 ">
+                      {/* top */}
+                      <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
+                        <p className=" OTI3 font-bold translate-y-[100%]">1500+</p>
+                      </div>
+
+                      {/* bottom */}
+                      <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
+                        <p className=" OTI3 font-bold translate-y-[100%]">PROJECTS</p>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

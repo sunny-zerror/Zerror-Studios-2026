@@ -139,12 +139,12 @@ const ImageEffect = () => {
                     <div className="w-full OT1 absolute top-0 left-0 ">
                       {/* top */}
                       <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
-                        <p className="OTI1 font-bold translate-y-[100%]">15 YEA</p>
+                        <p className="OTI1 font-bold translate-y-[100%]">15 YEAR</p>
                       </div>
 
                       {/* bottom */}
                       <div className="w-full h-[5vw] overflow-hidden text-[5vw] flex leading-[5vw] flex text-center justify-center items-center" >
-                        <p className="OTI1 font-bold translate-y-[100%]">OF EXPERTIE</p>
+                        <p className="OTI1 font-bold translate-y-[100%]">OF EXPERTIES</p>
                       </div>
                     </div>
 

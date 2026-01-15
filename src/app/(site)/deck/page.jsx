@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function deck() {
   const handelMouseEnter = (item) => {
     gsap.to(item, {
-      backgroundColor: "#FA3310",
+      backgroundColor: "#2147c4",
       ease: "power4.in",
       duration: 0.06,
     });
@@ -19,7 +19,7 @@ export default function deck() {
 
   const handelMouseLeave = (item) => {
     gsap.to(item, {
-      backgroundColor: "#fa331000",
+      backgroundColor: "#012CBA",
       ease: "power1.in",
       duration: 0.4,
     });
@@ -786,7 +786,7 @@ export default function deck() {
           </div>
 
           {/* Card-1 */}
-          <div className="w-[69%]  crd card1 h-[76vh] p-3 bg-[#E62200] absolute top-[12%] left-1/2 -translate-x-1/2 rounded-xl select-none">
+          <div className="w-[69%]  crd card1 h-[76vh] p-3 bg-[#012CBA] absolute top-[12%] left-1/2 -translate-x-1/2 rounded-xl select-none">
             <div className="w-full h-1/3 flex">
               {[
                 "Pich dech 2025--",
@@ -811,7 +811,7 @@ export default function deck() {
                       handelMouseLeave(`.hoverBgAnimateT${i}`)
                     }
                     key={i}
-                    className={` w-1/12 glitch-item  hoverBgAnimateT${i}  border bg-[#fa331000] border-[#FA3310] flex ${
+                    className={` w-1/12 glitch-item  hoverBgAnimateT${i}  border bg-[#2147c400] border-[#2147c4] flex ${
                       i == 0 && "items-end"
                     } text-[#f5f5f5b6] rounded-xl text-[11px] p-2 `}
                   >
@@ -832,7 +832,7 @@ export default function deck() {
                         handelMouseLeave(`.hoverBgAnimateM${i}`)
                       }
                       key={i}
-                      className={` w-1/12 glitch-item  hoverBgAnimateM${i} border bg-[#fa331000] border-[#FA3310] flex rounded-xl text-[11px] p-2 text-[#f5f5f5b6] `}
+                      className={` w-1/12 glitch-item  hoverBgAnimateM${i} border bg-[#2147c400] border-[#2147c4] flex rounded-xl text-[11px] p-2 text-[#f5f5f5b6] `}
                     >
                       {item}
                     </div>
@@ -864,7 +864,7 @@ export default function deck() {
                       handelMouseLeave(`.hoverBgAnimateB${i}`)
                     }
                     key={i}
-                    className={` w-1/12 glitch-item  hoverBgAnimateB${i} border bg-[#fa331000] border-[#FA3310] flex rounded-xl  ${
+                    className={` w-1/12 glitch-item  hoverBgAnimateB${i} border bg-[#2147c400] border-[#2147c4] flex rounded-xl  ${
                       i == 3 && "items-end"
                     }  ${i == 9 && "items-end"}  ${
                       i == 11 && "items-end"
@@ -1146,7 +1146,7 @@ export default function deck() {
   "
         >
           {/* CARD 1 */}
-          <div className="w-full h-full hover:bg-[#666666] transition-all ease-in cursor-pointer duration-200 SXCrd p-3 bg-[#E62200] rounded-xl select-none relative overflow-hidden">
+          <div className="w-full h-full hover:bg-[#012CBA] transition-all ease-in cursor-pointer duration-200 SXCrd p-3 bg-[#012CBA] rounded-xl select-none relative overflow-hidden">
             <div className="w-full h-[33%] flex gap-1">
               {[
                 "Pich dech 2025--",
@@ -1166,7 +1166,7 @@ export default function deck() {
                   onMouseEnter={() => handelMouseEnter(`.hoverBgAnimateT${i}`)}
                   onMouseLeave={() => handelMouseLeave(`.hoverBgAnimateT${i}`)}
                   key={i}
-                  className={`w-1/12 hoverBgAnimateT${i} border bg-[#fa331000] border-[#FA3310]
+                  className={`w-1/12 hoverBgAnimateT${i} border bg-[#012cba00] border-[#2147c4]
             flex items-center justify-center text-[#ffffffb6]
             rounded-lg text-[7px] p-1`}
                 >

@@ -1,11 +1,17 @@
 import React from "react";
 
-const Form = ({SetmemberActive}) => {
+const Form = ({SetmemberActive,SetFormAnimDeactive}) => {
+
+  const CloseForm = () => {
+    SetmemberActive(false)
+    SetFormAnimDeactive(false)
+  }
+
   return (
-    <div className="h-[95%] w-[70%] flex-col gap-5 bg-[#1239B7]  text-white flex items-center justify-end px-12 pb-5 pt-20 relative">
+    <div className="h-[95%] w-[70%] flex-col gap-5 bg-[#1239B7]  text-white flex items-center justify-end px-12 pb-5 pt-20 relative z-181">
 
          {/* Close Icon */}
-        <button onClick={()=>SetmemberActive(false)} className="absolute right-8 top-6 text-2xl font-light">✕</button>
+        <button onClick={CloseForm} className="absolute right-10 top-8 text-2xl font-light z-181">✕</button>
 
       {/* Info */}
       <div className="w-full  grid grid-cols-[25%_32%_43%] pb-5">
@@ -40,7 +46,7 @@ const Form = ({SetmemberActive}) => {
           <input
             type="text"
             placeholder="Your First Name"
-             className=" mt-1   bg-white  w-full   text-base  text-[#1239B7]   placeholder:text-[#C9D4F6]  "
+             className=" mt-1   bg-white  w-full   text-base  text-[#1239B7]   placeholder:text-[#C9D4F6] outline-none focus:outline-none focus:ring-0" 
           />
         </div>
 
@@ -48,14 +54,14 @@ const Form = ({SetmemberActive}) => {
         <div className="w-1/2 bg-white  px-4 py-2 rounded-sm ">
           {/* Label */}
           <label className="block text-[#1239B7] text-sm font-medium ">
-            First Name
+            Last Name
           </label>
 
           {/* Input */}
           <input
             type="text"
-            placeholder="Your First Name"
-            className=" mt-1 bg-white w-full text-base text-[#1239B7] placeholder:text-[#C9D4F6] "
+            placeholder="Your Last Name"
+            className=" mt-1 bg-white w-full text-base text-[#1239B7] placeholder:text-[#C9D4F6] outline-none focus:outline-none focus:ring-0"
           />
         </div>
       </div>
@@ -73,7 +79,7 @@ const Form = ({SetmemberActive}) => {
           <input
             type="text"
             placeholder="Your Email Address"
-          className=" mt-1   bg-white  w-full   text-base  text-[#1239B7]   placeholder:text-[#C9D4F6]  "
+          className=" mt-1   bg-white  w-full   text-base  text-[#1239B7]   placeholder:text-[#C9D4F6] outline-none focus:outline-none focus:ring-0  "
           />
         </div>
 
@@ -88,7 +94,7 @@ const Form = ({SetmemberActive}) => {
           <input
             type="text"
             placeholder="9xxxxxxxxx"
-            className=" mt-1   bg-white  w-full   text-base  text-[#1239B7]   placeholder:text-[#C9D4F6]  "
+            className=" mt-1   bg-white  w-full   text-base  text-[#1239B7]   placeholder:text-[#C9D4F6] outline-none focus:outline-none focus:ring-0  "
           />
         </div>
       </div>
@@ -124,7 +130,7 @@ const Form = ({SetmemberActive}) => {
         </label>
         <textarea
           rows="2"
-          className="w-full bg-white text-black px-4 py-3 rounded-sm outline-none resize-none"
+          className="w-full bg-white text-black px-4 py-3 rounded-sm outline-none resize-none outline-none focus:outline-none focus:ring-0"
         ></textarea>
       </div>
 

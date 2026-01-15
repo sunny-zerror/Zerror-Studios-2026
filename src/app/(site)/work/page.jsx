@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import fragmen from "../shaders/fragmen.glsl";
 
 import {Vertex, Fragment} from '@/shaders/plpShaders/PLPShaderGLSL' 
+import { useRouter } from "next/navigation";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -18,6 +19,7 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 const plp = () => {
+  const router = useRouter();
   const meshRef = useRef();
   const img = [
     "/images/plpImg/img1.webp",
@@ -656,9 +658,9 @@ const plp = () => {
           ".OptionCont",
           {
             opacity: 0,
-            // onComplete: () => {
-            //   navigate("/work");
-            // },
+            onComplete: () => {
+             router.push("/work/disrptve");
+            },
           },
           0
         );

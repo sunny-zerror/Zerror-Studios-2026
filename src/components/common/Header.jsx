@@ -252,6 +252,16 @@ const Header = () => {
         },
         "<"
       )
+      .to(
+        '.bgBlur'
+        ,
+        {
+          opacity:1,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        "<"
+      )
 
       /* Items cascade */
       .to(
@@ -282,10 +292,10 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full  z-80 px-10 py-5 flex justify-center">
-      <div className="flex gap-4">
+    <div className="fixed top-0 left-0 w-full   z-180 px-10 pt-5 flex justify-center">
+      <div className="flex gap-4 z-100 backdrop-blur-sm  rounded-lg ">
         {/* MENU BUTTON */}
-        <div className="relative border border-black/20 w-[35vw] h-12 bg-[#FFFFFF5C] backdrop-blur-3xl rounded-lg px-7  group transition-all duration-150 ease-out  flex justify-between items-center gap-4">
+        <div className="relative   w-[35vw] h-12 bg-[#81818159] backdrop-blur-sm rounded-lg px-7  group transition-all duration-150 ease-out  flex justify-between items-center gap-4">
           <div
             onClick={openMenu}
             className="  w-full h-12 flex justify-between items-center select-none cursor-pointer group transition-all duration-150 ease-in"
@@ -357,24 +367,30 @@ const Header = () => {
         {/* SECOND BUTTON */}
         {pathname === "/deck" ? (
           <Link href={"/"}>
-            <div className="w-17 h-12 border border-black/20 mix-blend-difference bg-[#FFFFFF5C] backdrop-blur-3xl group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
+            <div className="w-17 h-12   bg-[#81818159] backdrop-blur-sm group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
               <div className="w-5  h-3 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
               <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
             </div>
           </Link>
         ) : (
           <Link href="/deck">
-            <div className="w-17 h-12 border border-black/20 mix-blend-difference bg-[#FFFFFF5C] backdrop-blur-3xl group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
-              <div className="w-5  h-3 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#d4d4d4bd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
+            <div className="w-17 h-12   bg-[#81818159] backdrop-blur-sm  group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
+              <div className="w-5  h-3 border border-[#ffffff] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
+              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
               <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
             </div>
           </Link>
         )}
       </div>
+
+
+      <div className=" bgBlur w-full h-screen absolute top-0 left-0 pointer-events-none opacity-0  bg-black/20 backdrop-blur-sm z-90">
+
+      </div>
+
     </div>
   );
 };

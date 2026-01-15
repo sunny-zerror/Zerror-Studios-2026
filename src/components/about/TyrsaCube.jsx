@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import gsap from "gsap";
@@ -119,6 +119,40 @@ const TyrsaCube = () => {
         scrub: true,
       },
     });
+    // tl.to(groupRef.current.position, {
+    //   x: 0,
+    //   y: 0.5,
+    //   z: 0,
+    //   ease: "none",
+    // },'a1');
+    tl.to(groupRef.current.rotation, {
+      y: "+=" + Math.PI * 2, // full rotation
+      x: "+=" + Math.PI * 2, // full rotation
+      ease: "none",
+    },'a1');
+    tl.to(groupRef.current.rotation, {
+      x: "+=" + Math.PI * 2,
+      y: "+=" + Math.PI / 2,
+      ease: "none",
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
+
+  useLayoutEffect(() => {
+    if (!groupRef.current) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".ModelAnimationStartCont",
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
     tl.to(groupRef.current.position, {
       x: 0,
       y: 0.5,
@@ -140,6 +174,26 @@ const TyrsaCube = () => {
       tl.kill();
     };
   }, []);
+
+
+  useEffect(()=>{
+
+    const ST = gsap.timeline({
+      scrollTrigger:{
+        trigger:'.stoperSection',
+        start:'top top',
+        end:'bottom bottom',
+        toggleActions: "play none none reverse",
+        // markers:true
+      }
+    })
+
+    ST.to('.CanvasDiv',{
+      // position:'sticky'
+      position:'absolute'
+    })
+
+  },[])
 
   return (
     <group ref={groupRef} position={[-5.5, 3, 0]}>

@@ -101,6 +101,8 @@ const Footer = () => {
 
   // Hide footer on /contact
   if (pathname === "/contact") return null;
+  if (pathname === "/deck") return null;
+  // if (pathname === "/about") return null;
   else{
     
   }

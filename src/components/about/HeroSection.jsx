@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+import PixelTrail from "@/components/about/PixelTrail";
 
 const HeroSection = () => {
   const rows = 40;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { useEffect, useRef } from "react";
@@ -7,7 +7,12 @@ gsap.registerPlugin(Flip);
 
 gsap.registerPlugin(ScrollTrigger);
 
-const OurTeam = ({ SetmemberActive, flipStateRef, FormAnimDeactive , SetFormAnimDeactive }) => {
+const OurTeam = ({
+  SetmemberActive,
+  flipStateRef,
+  FormAnimDeactive,
+  SetFormAnimDeactive,
+}) => {
   const teamMembers = [
     {
       id: 1,
@@ -80,32 +85,99 @@ const OurTeam = ({ SetmemberActive, flipStateRef, FormAnimDeactive , SetFormAnim
     },
   ];
 
-  const ActiveAinmationGrid = (selector) => {
-    const GT = gsap.timeline();
+  // const ActiveAinmationGrid = (selector) => {
+  //   const GT = gsap.timeline();
 
-    const pixels = document.querySelectorAll(`${selector} div`);
+  //   // ❌ hovered grid ke pixels
+  //   const excludedPixels = document.querySelectorAll(`${selector} .GDdiv`);
 
-    GT.killTweensOf(pixels);
+  //   // ✅ saare pixels
+  //   const allPixels = document.querySelectorAll(".GDdiv");
 
-    GT.to(pixels, {
-      opacity: 1,
-      duration: 0.03,
+  //   // 🔥 baaki sab (except hovered)
+  //   const pixelsToAnimate = Array.from(allPixels).filter(
+  //     (el) => !Array.from(excludedPixels).includes(el)
+  //   );
+
+  //   // safety
+  //   gsap.killTweensOf(pixelsToAnimate);
+
+  //   GT.to(pixelsToAnimate, {
+  //     opacity: 1,
+  //     duration: 0.001,
+  //     stagger: {
+  //       each: 0.0001,
+  //       from: "random",
+  //     },
+  //     ease: "expo.out",
+  //   });
+
+  //   // GT.to(pixelsToAnimate, {
+  //   //   opacity: 0,
+  //   //   duration: 0.03,
+  //   //   stagger: {
+  //   //     each: 0.001,
+  //   //     from: "random",
+  //   //   },
+  //   //   ease: "expo.out",
+  //   // });
+  // };
+
+  // const DeActiveAinmationGrid = (selector) => {
+  //   const GTB = gsap.timeline();
+
+  //   // ❌ hovered grid ke pixels
+  //   const excludedPixels = document.querySelectorAll(`${selector} .GDdiv`);
+
+  //   // ✅ saare pixels
+  //   const allPixels = document.querySelectorAll(".GDdiv");
+
+  //   // 🔥 baaki sab (except hovered)
+  //   const pixelsToAnimate = Array.from(allPixels).filter(
+  //     (el) => !Array.from(excludedPixels).includes(el)
+  //   );
+
+  //   // safety
+  //   gsap.killTweensOf(pixelsToAnimate);
+
+  //   GTB.to(pixelsToAnimate, {
+  //     opacity: 0,
+  //     duration: 0.001,
+  //     stagger: {
+  //       each: 0.0001,
+  //       from: "random",
+  //     },
+  //     ease: "expo.out",
+  //   });
+  // };
+
+  /* ---------------- GRID ANIMATION ---------------- */
+
+  const animateGridExcept = useCallback((excludeSelector, opacity) => {
+    const excluded = document.querySelectorAll(`${excludeSelector} .GDdiv`);
+    const excludedSet = new Set(excluded);
+
+    const pixels = gsap.utils
+      .toArray(".GDdiv")
+      .filter((el) => !excludedSet.has(el));
+
+    gsap.killTweensOf(pixels);
+
+    gsap.to(pixels, {
+      opacity,
+      duration: 0.001,
       stagger: {
-        each: 0.001,
-        from: "random", // 🔥 RANDOM EFFECT
+        each: 0.0001,
+        from: "random",
       },
       ease: "expo.out",
+      overwrite: "auto",
     });
-    GT.to(pixels, {
-      opacity: 0,
-      duration: 0.03,
-      stagger: {
-        each: 0.001,
-        from: "random", // 🔥 RANDOM EFFECT
-      },
-      ease: "expo.out",
-    });
-  };
+  }, []);
+
+  const ActiveAinmationGrid = (selector) => animateGridExcept(selector, 1);
+
+  const DeActiveAinmationGrid = (selector) => animateGridExcept(selector, 0);
 
   const div99Ref = useRef(null);
 
@@ -120,8 +192,8 @@ const OurTeam = ({ SetmemberActive, flipStateRef, FormAnimDeactive , SetFormAnim
     div99Ref.current.style.position = "fixed";
     div99Ref.current.style.top = "50%";
     div99Ref.current.style.left = "50%";
-    div99Ref.current.style.width = "70vw";
-    div99Ref.current.style.height = "95vh";
+    div99Ref.current.style.width = "75vw";
+    div99Ref.current.style.height = "80vh";
     div99Ref.current.style.transform = "translate(-50%, -50%)";
     div99Ref.current.style.zIndex = "120";
 
@@ -129,7 +201,7 @@ const OurTeam = ({ SetmemberActive, flipStateRef, FormAnimDeactive , SetFormAnim
     gsap.to(".OTText", {
       opacity: 0,
       duration: 0.5,
-      ease: "power2.inOut",
+      ease: "power4.Out",
     });
 
     // 4️⃣ FLIP animation (magic ✨)
@@ -138,8 +210,8 @@ const OurTeam = ({ SetmemberActive, flipStateRef, FormAnimDeactive , SetFormAnim
       ease: "power3.inOut",
       absolute: true,
       onComplete: () => {
-        SetmemberActive(true)
-        SetFormAnimDeactive(true)
+        SetmemberActive(true);
+        SetFormAnimDeactive(true);
       },
     });
   };
@@ -175,13 +247,12 @@ const OurTeam = ({ SetmemberActive, flipStateRef, FormAnimDeactive , SetFormAnim
     });
   };
 
-
   useEffect(() => {
-  // jab FormAnimDeactive false ho
-  if (FormAnimDeactive === false && div99Ref.current) {
-    DeactivateForm();
-  }
-}, [FormAnimDeactive]);
+    // jab FormAnimDeactive false ho
+    if (FormAnimDeactive === false && div99Ref.current) {
+      DeactivateForm();
+    }
+  }, [FormAnimDeactive]);
 
   return (
     <div className="w-full min-h-screen z-100 relative bg-white  ">
@@ -223,12 +294,15 @@ const OurTeam = ({ SetmemberActive, flipStateRef, FormAnimDeactive , SetFormAnim
                     onMouseEnter={() =>
                       ActiveAinmationGrid(`.GridBox${member.id} `)
                     }
+                    onMouseLeave={() =>
+                      DeActiveAinmationGrid(`.GridBox${member.id} `)
+                    }
                     className={` GridBox${member.id} absolute top-0 left-0 w-full h-full grid grid-cols-20 grid-rows-20`}
                   >
                     {[...Array(20 * 20)].map((_, i) => (
                       <div
                         key={i}
-                        className="w-full h-full bg-white opacity-0"
+                        className="w-full GDdiv h-full bg-white opacity-0"
                       />
                     ))}
                   </div>

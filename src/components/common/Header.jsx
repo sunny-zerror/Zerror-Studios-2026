@@ -253,10 +253,9 @@ const Header = () => {
         "<"
       )
       .to(
-        '.bgBlur'
-        ,
+        ".bgBlur",
         {
-          opacity:1,
+          opacity: 1,
           duration: 0.2,
           ease: "power2.out",
         },
@@ -276,6 +275,16 @@ const Header = () => {
           },
         },
         "-=0.25"
+      )
+      .to(
+        ".bgBlur",
+        {
+          opacity: 1,
+          pointerEvents: "auto",
+          duration: 0.4,
+          ease: "power2.out",
+        },
+        "<"
       );
 
     return () => menuTL.current?.kill();
@@ -386,11 +395,10 @@ const Header = () => {
         )}
       </div>
 
-
-      <div className=" bgBlur w-full h-screen absolute top-0 left-0 pointer-events-none opacity-0  bg-black/20 backdrop-blur-sm z-90">
-
-      </div>
-
+      <div
+        onClick={closeMenu}
+        className={` bgBlur w-full h-screen absolute top-0 left-0 inset-0 bg-black/20 backdrop-blur-sm z-90 opacity-0 pointer-events-none `}
+      ></div>
     </div>
   );
 };

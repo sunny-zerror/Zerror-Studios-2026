@@ -28,9 +28,9 @@ const SceneComp = () => {
 
 const CanvasSection = () => {
   return (
-    <div className="CanvasDiv w-full h-screen  fixed top-0 left-0 z-60 pointer-events-none ">
+    <div className="CanvasDiv w-full h-screen fixed top-0 left-0 z-100 pointer-events-none ">
       <Canvas
-        className=" w-full h-full pointer-events-none"
+        className=" w-full h-full pointer-events-none "
         camera={{ position: [0, 0, 7], fov: 45 }}
       >
         <SceneComp />
@@ -47,19 +47,20 @@ const about = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen relative ABOUTMAINCONT">
+      <div className="w-full h-fit relative ABOUTMAINCONT">
         <HeroSection />
-        <ImageEffect />
+
+        <CanvasSection />
       </div>
 
-      <div className="w-full ModelAnimationStartCont">
+      <div className="w-full ModelAnimationStartCont ">
+        <ImageEffect />
         <InfoSection />
         <OurTeam SetmemberActive={SetmemberActive} flipStateRef={flipStateRef} FormAnimDeactive={FormAnimDeactive} SetFormAnimDeactive={SetFormAnimDeactive} />
 
-        <div className="w-full relative">
-        <CanvasSection />
+        {/* <div className="w-full relative">
         <StoperSection />
-        </div>
+        </div> */}
       </div>
 
       {/* Contact-FORM */}

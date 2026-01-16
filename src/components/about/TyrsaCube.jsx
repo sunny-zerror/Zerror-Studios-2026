@@ -119,12 +119,12 @@ const TyrsaCube = () => {
         scrub: true,
       },
     });
-    // tl.to(groupRef.current.position, {
-    //   x: 0,
-    //   y: 0.5,
-    //   z: 0,
-    //   ease: "none",
-    // },'a1');
+    tl.to(groupRef.current.position, {
+      x: 0,
+      y: 0.5,
+      z: 0,
+      ease: "none",
+    },'a1');
     tl.to(groupRef.current.rotation, {
       y: "+=" + Math.PI * 2, // full rotation
       x: "+=" + Math.PI * 2, // full rotation
@@ -180,9 +180,9 @@ const TyrsaCube = () => {
 
     const ST = gsap.timeline({
       scrollTrigger:{
-        trigger:'.stoperSection',
-        start:'top top',
-        end:'bottom bottom',
+        trigger:'.ABOUTMAINCONT',
+        start:'bottom 50%',
+        // end:'bottom bottom',
         toggleActions: "play none none reverse",
         // markers:true
       }
@@ -190,7 +190,9 @@ const TyrsaCube = () => {
 
     ST.to('.CanvasDiv',{
       // position:'sticky'
-      position:'absolute'
+      position:'absolute',
+      top:200,
+      // left:0
     })
 
   },[])

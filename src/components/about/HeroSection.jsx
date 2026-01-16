@@ -48,11 +48,23 @@ const HeroSection = () => {
     };
   }, []);
 
+
+  useEffect(() => {
+    // Animate the form once when it mounts
+    gsap.to('.aboutTitle', {
+      opacity: 1,
+      y: 0,          // slide up from below
+      duration: 1,
+      ease: "power3.out",
+      stagger: 0.1,   // if multiple child elements, animate them one by one
+    });
+  }, []);
+
   return (
-    <div className="w-full flex flex-col px-10 pb-[10vw]">
+    <div className="w-full min-h-screen flex flex-col px-10 pb-[10vw]">
       {/* Title */}
-      <div className="w-full flex py-[10vw]">
-        <h1 className="text-[6.5vw] leading-[6.5vw] capitalize spirit text-[#002BBA]">
+      <div className="w-full aboutTitle flex py-[10vw] translate-y-50 opacity-0">
+        <h1 className="text-[6vw] leading-[6vw] capitalize spirit text-[#002BBA]">
           We believe a great user experience is not just intuitive it’s
           entertaining. Because clarity is good, but delight is better.
         </h1>
@@ -91,7 +103,7 @@ const HeroSection = () => {
           {/* cont*/}
           <div className="w-1/2 flex flex-col gap-3">
             {/* Text */}
-            <h1 className="text-[1rem] uppercase ibm font-medium">
+            <h1 className="text-[1rem] capitalize ibm font-semibold">
               Why we exist
             </h1>
             <div className="w-full flex flex-col gap-3">

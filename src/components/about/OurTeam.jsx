@@ -13,6 +13,7 @@ const OurTeam = ({
   FormAnimDeactive,
   SetFormAnimDeactive,
 }) => {
+
   const teamMembers = [
     {
       id: 1,
@@ -151,6 +152,44 @@ const OurTeam = ({
   //   });
   // };
 
+
+  // let scrollY = 0;
+
+// const disableScroll = () => {
+//   scrollY = window.scrollY;
+
+//   document.body.style.position = "fixed";
+//   document.body.style.top = `-${scrollY}px`;
+//   document.body.style.left = "0";
+//   document.body.style.right = "0";
+//   document.body.style.width = "100%";
+//   document.body.style.overflow = "hidden";
+
+//   // GSAP ScrollTrigger bhi freeze
+//   if (typeof ScrollTrigger !== "undefined") {
+//     ScrollTrigger.getAll().forEach(st => st.disable());
+//   }
+// };
+
+// const enableScroll = () => {
+//   document.body.style.position = "";
+//   document.body.style.top = "";
+//   document.body.style.left = "";
+//   document.body.style.right = "";
+//   document.body.style.width = "";
+//   document.body.style.overflow = "";
+
+//   window.scrollTo(0, scrollY);
+
+//   if (typeof ScrollTrigger !== "undefined") {
+//     ScrollTrigger.getAll().forEach(st => st.enable());
+//   }
+// };
+
+
+
+
+
   /* ---------------- GRID ANIMATION ---------------- */
 
   const animateGridExcept = useCallback((excludeSelector, opacity) => {
@@ -182,6 +221,7 @@ const OurTeam = ({
   const div99Ref = useRef(null);
 
   const ActiveForm = () => {
+    if(window.lenis){window.lenis.stop()}
     // 1️⃣ Current state capture karo
     // 🔥 Save original position
     flipStateRef.current = Flip.getState(div99Ref.current);
@@ -217,6 +257,7 @@ const OurTeam = ({
   };
 
   const DeactivateForm = () => {
+     if(window.lenis){window.lenis.start()}
     // 1️⃣ Capture fullscreen state
     const state = Flip.getState(div99Ref.current);
 
@@ -243,7 +284,7 @@ const OurTeam = ({
       duration: 1,
       ease: "power3.inOut",
       absolute: true,
-      onComplete: () => SetmemberActive(false),
+      onComplete: () => { SetmemberActive(false)}
     });
   };
 
@@ -254,6 +295,7 @@ const OurTeam = ({
     }
   }, [FormAnimDeactive]);
 
+
   return (
     <div className="w-full min-h-screen z-100 relative bg-white  ">
       <div className=" w-full px-10 pb-42">
@@ -263,7 +305,7 @@ const OurTeam = ({
             if (member.id === 99) {
               return (
                 <div
-                  onClick={ActiveForm}
+                  onClick={()=>{  ActiveForm()}}
                   key={member.id}
                   ref={div99Ref}
                   className="w-full div99  aspect-[4/5] bg-[#002BBA] hover:bg-[#0735cc] flex flex-col justify-end p-6 gap-[20px] text-white cursor-pointer"
@@ -297,12 +339,13 @@ const OurTeam = ({
                     onMouseLeave={() =>
                       DeActiveAinmationGrid(`.GridBox${member.id} `)
                     }
-                    className={` GridBox${member.id} absolute top-0 left-0 w-full h-full grid grid-cols-20 grid-rows-20`}
+                    style={{ gridTemplateColumns: "repeat(10, 1fr)" }}
+                    className={` GridBox${member.id} absolute top-0 left-0 w-full h-full grid`}
                   >
-                    {[...Array(20 * 20)].map((_, i) => (
+                    {[...Array(10 * 10)].map((_, i) => (
                       <div
                         key={i}
-                        className="w-full GDdiv h-full bg-white opacity-0"
+                        className="w-full GDdiv h-full bg-white opacity-0 shrink-0"
                       />
                     ))}
                   </div>

@@ -90,6 +90,7 @@ const ImageEffect = () => {
         y:'100%'
       },
     );
+    
   }, []);
 
   return (
@@ -108,8 +109,8 @@ const ImageEffect = () => {
           </h1>
 
           {/* Video & Img  */}
-          <div className=" absolute w-[300px] h-[400px] top-[200%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-700 cardVI overflow-hidden ">
-            <div className="w-[100vw] h-[100vh]  relative">
+          <div className=" absolute w-[300px] h-[400px] top-[200%] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-700 cardVI center overflow-hidden ">
+            <div className="w-[100vw] h-[100vh]  relative center">
               {/* Img */}
               <div className="w-[100vw] h-[100vh] absolute top-0 left-0 z-40  VCI ">
                 <img
@@ -120,18 +121,18 @@ const ImageEffect = () => {
               </div>
 
               {/* Video */}
-              <div className="w-full h-[100vh] absolute top-0 left-0 z-20  VCV ">
+              <div className="w-[100%] h-[100%] absolute center top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 z-20  VCV ">
                 <video
                   autoPlay
                   muted
                   loop
                   src="https://www.pexels.com/download/video/6773762/"
-                  className="w-[100vw] h-[100vh] object-cover  whitespace-nowrap"
+                  className="w-[100%] h-full object-cover "
                 ></video>
               </div>
 
               {/* Text-Animater */}
-              <div className="w-full h-screen relative z-80 ">
+              <div className="w-[100vw] shrink-0 h-screen relative z-80 ">
                 <div className="w-full h-fit absolute top-[60%] left-0 -translate-y-1/2">
                   <div className="w-full h-fit relative text-white">
 

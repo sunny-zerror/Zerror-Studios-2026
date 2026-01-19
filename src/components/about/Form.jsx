@@ -14,14 +14,14 @@ const Form = ({ SetmemberActive, SetFormAnimDeactive }) => {
 
   const formRef = useRef();
 
-   useEffect(() => {
+  useEffect(() => {
     // Animate the form once when it mounts
     gsap.to(formRef.current, {
       opacity: 1,
-      y: 0,          // slide up from below
+      y: 0, // slide up from below
       duration: 1,
       ease: "power3.out",
-      stagger: 0.1,   // if multiple child elements, animate them one by one
+      stagger: 0.1, // if multiple child elements, animate them one by one
     });
   }, []);
 
@@ -109,9 +109,10 @@ const Form = ({ SetmemberActive, SetFormAnimDeactive }) => {
         {/* Phone */}
         <Input label="Phone Number*" type="tel" />
 
-        {/* Tell Us About Yourself */}
         <div className="md:col-span-2">
-          <label className="block text-sm mb-2 ">Tell us about yourself*</label>
+          <label className="block text-[1rem] mb-2 ">
+            Tell us about yourself*
+          </label>
           <textarea
             rows="1"
             className="w-full bg-transparent border-b border-[#ffffff42]  outline-none transition-all duration-300 resize-none"

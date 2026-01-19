@@ -49,7 +49,6 @@ const about = () => {
     <>
       <div className="w-full h-fit relative ABOUTMAINCONT">
         <HeroSection />
-
         <CanvasSection />
       </div>
 
@@ -66,11 +65,11 @@ const about = () => {
       {/* Contact-FORM */}
       {memberActive == true && (
         <div
-          className={` transition-all duration-500 ease-out ${
+          className={` transition-all duration-600 ease-out ${
             memberActive
               ? "opacity-100 scale-100 visible"
               : "opacity-0 scale-95 invisible"
-          } w-full h-screen bg-[#f5f5f53b] fixed top-0 left-0 z-101 flex justify-center items-center `}
+          } w-full h-screen bg-[#f5f5f577] backdrop-blur-[4px] fixed top-0 left-0 z-101 flex justify-center items-center `}
         >
           <Form SetmemberActive={SetmemberActive} SetFormAnimDeactive={SetFormAnimDeactive} />
         </div>

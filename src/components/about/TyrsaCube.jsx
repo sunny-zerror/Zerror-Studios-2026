@@ -36,7 +36,7 @@ const TyrsaCube = () => {
         z: 0,
         ease: "none",
       },
-      "a1"
+      "a1",
     );
     tl.to(
       groupRef.current.rotation,
@@ -45,7 +45,7 @@ const TyrsaCube = () => {
         x: "+=" + Math.PI * 2, // full rotation
         ease: "none",
       },
-      "a1"
+      "a1",
     );
     tl.to(groupRef.current.rotation, {
       x: "+=" + Math.PI * 2,
@@ -77,7 +77,7 @@ const TyrsaCube = () => {
         z: 0,
         ease: "none",
       },
-      "a1"
+      "a1",
     );
     tl.to(
       groupRef.current.rotation,
@@ -86,7 +86,7 @@ const TyrsaCube = () => {
         x: "+=" + Math.PI * 2, // full rotation
         ease: "none",
       },
-      "a1"
+      "a1",
     );
     tl.to(groupRef.current.rotation, {
       x: "+=" + Math.PI * 2,
@@ -100,21 +100,36 @@ const TyrsaCube = () => {
   }, []);
 
   useEffect(() => {
+    // const ST = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: ".ABOUTMAINCONT",
+    //     start: "bottom 50%",
+    //     // end:'bottom bottom',
+    //     toggleActions: "play none none reverse",
+    //     // markers:true
+    //   },
+    // });
+
+    // ST.to(".CanvasDiv", {
+    //   // position:'sticky'
+    //   position: "absolute",
+    //   top: 200,
+    //   // left:0
+    // });
+
     const ST = gsap.timeline({
       scrollTrigger: {
-        trigger: ".ABOUTMAINCONT",
-        start: "bottom 50%",
-        // end:'bottom bottom',
-        toggleActions: "play none none reverse",
-        // markers:true
+        trigger: ".IVMainCont",
+        start: "top 30%",
+        end: "top -20%",
+        // toggleActions: "play none none reverse",
+        scrub:true,
+        // markers: true,
       },
     });
-
     ST.to(".CanvasDiv", {
-      // position:'sticky'
-      position: "absolute",
-      top: 200,
-      // left:0
+     top:-800,
+     ease:'none'
     });
   }, []);
 

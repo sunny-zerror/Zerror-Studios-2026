@@ -299,7 +299,7 @@ const OurTeam = ({
   return (
     <div className="w-full min-h-screen z-100 relative bg-white  ">
       <div className=" w-full px-10 pb-42">
-        <div className="grid gap-25 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid  gap-25 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {teamMembers.map((member) => {
             // 👉 Special Blue Card for id 99
             if (member.id === 99) {
@@ -308,7 +308,7 @@ const OurTeam = ({
                   onClick={()=>{  ActiveForm()}}
                   key={member.id}
                   ref={div99Ref}
-                  className="w-full div99  aspect-[4/5] bg-[#002BBA] hover:bg-[#0735cc] flex flex-col justify-end p-6 gap-[20px] text-white cursor-pointer"
+                  className="w-full h-full div99  aspect-[4/5] bg-[#002BBA] hover:bg-[#0735cc] flex flex-col justify-end p-6 gap-[20px] text-white cursor-pointer"
                 >
                   <h2 className="text-[3.1rem] OTText leading-[3.1rem] RF_Font font-semibold spirit ">
                     Become A <br /> Zerrorian

@@ -92,7 +92,7 @@ const Form = ({ SetmemberActive, SetFormAnimDeactive }) => {
 
       <form
         ref={formRef}
-        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 translate-y-10 gap-x-16 gap-y-12 text-white opacity-0"
+        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 translate-y-10 gap-x-16 gap-y-6 text-white opacity-0"
       >
         {/* Full Name */}
         <Input label="Full Name*" />
@@ -110,13 +110,21 @@ const Form = ({ SetmemberActive, SetFormAnimDeactive }) => {
         <Input label="Phone Number*" type="tel" />
 
         <div className="md:col-span-2">
-          <label className="block text-[1rem] mb-2 ">
+          <div className="form  pt-4">
+            {/* ------------------------------------ */}
+            <input type="text" name="name" required />
+            <label htmlFor="name" className="label-name">
+              <span className="content-name">Tell us about yourself*</span>
+            </label>
+          </div>
+
+          {/* <label className="block text-[1rem] mb-2 ">
             Tell us about yourself*
-          </label>
-          <textarea
+          </label> */}
+          {/* <textarea
             rows="1"
             className="w-full bg-transparent border-b border-[#ffffff42]  outline-none transition-all duration-300 resize-none"
-          />
+          /> */}
         </div>
 
         {/* attach Resume */}
@@ -214,19 +222,18 @@ export default Form;
 /* Reusable Input */
 const Input = ({ label, type = "text" }) => (
   <div className="text-white">
-    <label className="block text-[1rem] leading-[1rem] mb-2 text-white">
-      {label}
-    </label>
-    <input
-      type={type}
-      className="w-full bg-transparent border-b border-[#ffffff42] text-white  outline-none transition-all duration-300"
-    />
+    <div className="form  pt-4">
+      <input type={type} name="name" required />
+      <label htmlFor="name" className="label-name">
+        <span className="content-name">{label}</span>
+      </label>
+    </div>
   </div>
 );
 
 /* Reusable Select */
 const Select = ({ label, options }) => (
-  <div className="text-white">
+  <div className="text-white flex flex-col justify-end pb-2">
     <label className="block text-[1rem] leading-[1rem] mb-2 text-white">
       {label}
     </label>

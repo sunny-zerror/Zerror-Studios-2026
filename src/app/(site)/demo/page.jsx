@@ -1,74 +1,193 @@
 "use client";
-import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ImageEffect = () => {
-    const rows = 20;
-    const cols = 40;
-    const totalCells = rows * cols;
+export default function PixelCollapseScroll() {
+  const canvasRef = useRef(null);
 
-    const gridRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
 
-    useEffect(() => {
-        const cells = gridRef.current.children;
+    const sources = [
+      `/images/outTeam/1.png`,
+      `/images/outTeam/2.png`,
+      `/images/outTeam/3.png`,
+      `/images/outTeam/4.png`
+    ];
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".ImgEffectCont",
-                start: "top 60%",
-                toggleActions: "play none none reverse",
-                //   markers: true,
-            },
-        });
+    const images = [];
+    let loaded = 0;
 
-        tl.to(cells, {
-            opacity: 0,
-            duration: 0.1,
-            stagger: {
-                each: 0.001,
-                from: "random",
-            },
-            ease: "expo.out",
-        });
+    const ROW_HEIGHT = 30;
+    let ROWS = 0;
 
-        return () => {
-            tl.scrollTrigger.kill();
-        };
-    }, []);
+    function getContainRect(img, cw, ch) {
+      const imgRatio = img.width / img.height;
+      const canvasRatio = cw / ch;
 
+      let drawWidth, drawHeight;
 
-    return (
-        <>
-            <div className="w-full h-screen" />
+      if (imgRatio > canvasRatio) {
+        drawWidth = cw;
+        drawHeight = cw / imgRatio;
+      } else {
+        drawHeight = ch;
+        drawWidth = ch * imgRatio;
+      }
 
-            <div className="w-full ImgEffectCont h-screen relative overflow-hidden">
-                <Image
-                    src="/images/homePage/mask_img.webp"
-                    alt="img"
-                    width={1920}
-                    height={1080}
-                    className="w-full h-full object-cover"
-                />
+      return {
+        x: (cw - drawWidth) / 2,
+        y: (ch - drawHeight) / 2,
+        width: drawWidth,
+        height: drawHeight,
+      };
+    }
 
-                <div
-                    ref={gridRef}
-                    style={{
-                        gridTemplateColumns: `repeat(${cols}, 1fr)`,
-                        gridTemplateRows: `repeat(${rows}, 1fr)`
-                    }}
-                    className="absolute top-0 left-0 w-full h-full z-40 grid"
-                >
-                    {Array.from({ length: totalCells }).map((_, i) => (
-                        <div key={i} className="bg-white opacity-100" />
-                    ))}
-                </div>
-            </div>
-        </>
-    );
-};
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      ROWS = Math.ceil(canvas.height / ROW_HEIGHT);
+      draw(0);
+    }
 
-export default ImageEffect;
+    window.addEventListener("resize", resize);
+
+    sources.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loaded++;
+        if (loaded === sources.length) init();
+      };
+      images.push(img);
+    });
+
+    function init() {
+      resize();
+
+      const state = { p: 0 };
+
+      gsap.to(state, {
+        p: images.length - 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: canvas,
+          start: "top top",
+          end: "+=400%",
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+        },
+        onUpdate: () => draw(state.p),
+      });
+    }
+
+    function draw(progress) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const index = Math.floor(progress);
+      const local = progress - index;
+
+      const current = images[index];
+      const next = images[index + 1];
+
+      // CURRENT IMAGE
+      if (current) {
+        const rect = getContainRect(
+          current,
+          canvas.width,
+          canvas.height
+        );
+
+        for (let r = 0; r < ROWS; r++) {
+          const yCanvas =
+            canvas.height - (r + 1) * ROW_HEIGHT;
+
+          if (
+            yCanvas + ROW_HEIGHT < rect.y ||
+            yCanvas > rect.y + rect.height
+          )
+            continue;
+
+          const srcY =
+            ((yCanvas - rect.y) / rect.height) *
+            current.height;
+          const srcH =
+            (ROW_HEIGHT / rect.height) * current.height;
+
+          ctx.drawImage(
+            current,
+            0,
+            srcY,
+            current.width,
+            srcH,
+            rect.x,
+            yCanvas,
+            rect.width,
+            ROW_HEIGHT
+          );
+        }
+      }
+
+      // NEXT IMAGE HARD REVEAL
+      if (next) {
+        const rectNext = getContainRect(
+          next,
+          canvas.width,
+          canvas.height
+        );
+
+        const revealRows = Math.floor(local * ROWS);
+
+        for (let r = 0; r < revealRows; r++) {
+          const yCanvas =
+            canvas.height - (r + 1) * ROW_HEIGHT;
+
+          if (
+            yCanvas + ROW_HEIGHT < rectNext.y ||
+            yCanvas > rectNext.y + rectNext.height
+          )
+            continue;
+
+          const srcY =
+            ((yCanvas - rectNext.y) / rectNext.height) *
+            next.height;
+          const srcH =
+            (ROW_HEIGHT / rectNext.height) *
+            next.height;
+
+          ctx.drawImage(
+            next,
+            0,
+            srcY,
+            next.width,
+            srcH,
+            rectNext.x,
+            yCanvas,
+            rectNext.width,
+            ROW_HEIGHT
+          );
+        }
+      }
+    }
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
+
+  return (
+    <section style={{ height: "500vh" }}>
+      <div className="sticky top-0 h-screen">
+        <canvas ref={canvasRef} />
+      </div>
+    </section>
+  );
+}
+

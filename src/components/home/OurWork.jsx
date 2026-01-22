@@ -159,9 +159,9 @@ const OurWork = () => {
                         </div>
 
                         <div className="w-full text_blue">
-                            <div className="flex font-bold justify-between">
-                                <p className="text-xl uppercase">disrptve</p>
-                                <p className="text-xl uppercase">2025</p>
+                            <div className="flex  justify-between">
+                                <p className="text-xl font-semibold  uppercase">disrptve</p>
+                                <p className="text-xl font-semibold  uppercase">2025</p>
                             </div>
                             <p className="  text-sm">Website Design</p>
                         </div>
@@ -170,7 +170,7 @@ const OurWork = () => {
             </div>
             <div className="w-full center py-10">
                 <Link href={"/work"}>
-                    <button className="px-4 uppercase text_blue py-2 rounded-md border-[#012CBA] border ">
+                    <button className="px-4 font-semibold uppercase text_blue py-2 rounded-md border-[#012CBA] border-[2px] ">
                         view All
                     </button>
                 </Link>

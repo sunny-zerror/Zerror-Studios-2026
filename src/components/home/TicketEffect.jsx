@@ -1,8 +1,9 @@
 "use client"
-import React, { useRef } from 'react'
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap';
-import { RiArrowRightUpLine } from '@remixicon/react';
+import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
+
+gsap.registerPlugin(MotionPathPlugin);
 
 const TicketEffect = () => {
 
@@ -60,20 +61,124 @@ const TicketEffect = () => {
         });
     };
 
+useEffect(() => {
+  const button = document.querySelector(".contact_btn");
+  const plane = document.querySelector(".plane");
+
+  let isAnimating = false;
+  let cloudInterval = null;
+
+  const tl = gsap.timeline({
+    paused: true,
+    onComplete: () => {
+      isAnimating = false;
+      clearInterval(cloudInterval);
+    },
+  });
+
+  tl.to(plane, {
+    duration: 10,
+    ease: "power2.inOut",
+    motionPath: {
+      path: [
+        { x: 0, y: 0 },
+        { x: 500, y: -400 },
+        { x: 260, y: -20 },
+        { x: -100, y: -400 },
+        { x: -500, y: -100 },
+        { x: -600, y: -400 },
+        { x: 0, y: 0 },
+      ],
+      autoRotate: true,
+    },
+    width: "20rem",
+  }).to(
+    plane,
+    {
+      width: "1.25rem",
+      ease: "expo.out",
+      duration: 1,
+    },
+    "<+=9"
+  );
+
+const createCloud = () => {
+  const cloud = document.createElement("img");
+  cloud.src = "/svg/cloud.png";
+  cloud.className = "cloud";
+
+  document.body.appendChild(cloud);
+
+  const rect = plane.getBoundingClientRect();
+
+  // PLACE IT EXACTLY BEHIND THE PLANE
+  gsap.set(cloud, {
+    x: rect.left + rect.width / 2,
+    y: rect.top + rect.height / 2,
+    rotation: gsap.getProperty(plane, "rotation"),
+    scale: gsap.utils.random(0.6, 1),
+  });
+
+  // FADE IN → FADE OUT
+  gsap.fromTo(
+    cloud,
+    { opacity: 0 },
+    {
+      opacity: 1,
+      duration: 0.15,
+      ease: "power1.out",
+    }
+  );
+
+  gsap.to(cloud, {
+    opacity: 0,
+    scale: "+=2",
+    duration: 1.8,
+    ease: "power2.out",
+    delay: 0.2,
+    onComplete: () => cloud.remove(),
+  });
+};
+
+
+  const handleMouseEnter = () => {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    // spawn clouds while plane is flying
+    cloudInterval = setInterval(createCloud, 120);
+
+    tl.restart();
+  };
+
+  button.addEventListener("mouseenter", handleMouseEnter);
+
+  return () => {
+    clearInterval(cloudInterval);
+    button.removeEventListener("mouseenter", handleMouseEnter);
+  };
+}, []);
+
+
     return (
         <div>
             <div className="w-full pt-32 center text_blue text-center space-y-10 flex-col">
-                <p className='text-8xl font-bold uppercase   leading-none'>Ready for your <br />
+                <p className='text-8xl font-bold    leading-none'>Ready for your <br />
                     game-changing <br />website?</p>
 
-                <p className='text-sm '>Step on the Zerror Studios and <br />
+                <p className='text-sm font-medium leading-tight '>Step on the Zerror Studios and <br />
                     request a project with a few clicks.</p>
 
-                <button className='flex relative group items-center gap-1'>
+                <button className="contact_btn relative flex group items-center gap-1">
                     <div className="w-0 group-hover:w-full transition-all duration-300 absolute bg_blue bottom-0 rounded-full h-0.5"></div>
-                    <p className=''>Contact</p>
-                    <RiArrowRightUpLine size={18} />
+                    <p>Contact</p>
+                    <img
+                        className="w-5 absolute -right-6 contrast-[6]  plane"
+                        src="https://cdn-icons-png.flaticon.com/512/12567/12567273.png"
+                        alt="plane"
+                    />
                 </button>
+
 
 
                 <div

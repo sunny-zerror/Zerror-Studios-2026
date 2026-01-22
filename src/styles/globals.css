@@ -68,12 +68,33 @@ button {
   content: "";
 }
 
-
-
-.Shine{
-  background: linear-gradient(-45deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 70%);
+.menu_deck::after{
+      content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 70%);
+    transform: translate(-100%, -100%);
+    animation: 5s linear infinite glow;
 }
 
+@keyframes glow {
+  0% {
+    transform: translate(-100%, -100%);
+}
+60% {
+    transform: translate(-100%, -100%);
+}
+90% {
+    transform: translate(100%, 100%);
+}
+100% {
+    transform: translate(100%, 100%);
+}
+  
+}
 
 .scene {
   perspective: 1000px;
@@ -84,6 +105,16 @@ button {
   transform: rotateY(-180deg);
 }
 
+.cloud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2rem;
+  pointer-events: none;
+  z-index: 999; /* ABOVE plane */
+  opacity: 0;
+  will-change: transform, opacity;
+}
 
 
 
@@ -147,7 +178,6 @@ button {
 }
 .made{
   position:absolute;
-   
   bottom:10%;
 }
 .made i{

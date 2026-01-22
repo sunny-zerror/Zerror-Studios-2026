@@ -47,7 +47,7 @@ const about = () => {
 
   return (
     <>
-      <div className="w-full h-fit relative ABOUTMAINCONT">
+      <div className="w-full relative ABOUTMAINCONT">
         <HeroSection />
         <CanvasSection />
       </div>

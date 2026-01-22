@@ -164,30 +164,30 @@ const About = () => {
                 <div className="sticky top-0 center w-full h-screen ">
                     <div className="circ_1 size-[22vw] center  absolute  border border-white rounded-full">
                         <div className="block w-fit overflow-hidden">
-                            <p className=' abt_spt_1 text-3xl uppercase'>Creativity</p>
+                            <p className=' abt_spt_1 text-3xl uppercase font-medium '>Creativity</p>
                         </div>
                     </div>
                     <div className="circ_2 size-[22vw] center  absolute  border border-white rounded-full">
                         <div className="block w-fit overflow-hidden">
-                            <p className='abt_spt_2 text-3xl uppercase'>Efficiency</p>
+                            <p className='abt_spt_2 text-3xl uppercase font-medium '>Efficiency</p>
                         </div>
                     </div>
                     <div className="circ_3 size-[22vw] center  absolute  border border-white rounded-full">
                         <div className="block w-fit overflow-hidden">
-                            <p className='abt_spt_3 text-3xl uppercase'>Entertainment</p>
+                            <p className='abt_spt_3 text-3xl uppercase font-medium '>Entertainment</p>
                         </div>
                     </div>
                     <div className="circ_4 size-[22vw] center  absolute  border border-white rounded-full">
                         <div className="block w-fit overflow-hidden">
-                            <p className='abt_spt_4 text-3xl uppercase'>Empathy</p>
+                            <p className='abt_spt_4 text-3xl uppercase font-medium '>Empathy</p>
                         </div>
                     </div>
 
-                    <div className=" drop_ltr_z opacity-0 z-[2] fixed top-1/2 left-[30%] -translate-x-1/2 -translate-y-1/2">
+                    <div className=" drop_ltr_z opacity-0 z-[2] fixed top-1/2 left-[29.8%] pointer-events-none -translate-x-1/2 -translate-y-1/2">
                         <div className="relative h-[10vw]  center w-[12vw]">
-                            <div className=" bar_center w-[12vw] absolute  -rotate-45 h-[2.25vw] rounded-xs bg-white"></div>
-                            <div className=" bar_top w-[6vw] absolute  top-0 left-[1.25vw] h-[2.25vw] rounded-xs bg-white"></div>
-                            <div className=" bar_bottom w-[6vw] absolute  bottom-0 right-[1.25vw] h-[2.25vw] rounded-xs bg-white "></div>
+                            <div className="bar_center w-[12vw] absolute  -rotate-45 h-[2.25vw] rounded-lg bg-white"></div>
+                            <div className="bar_top w-[6vw] absolute  top-0 left-[1.5vw] h-[2.25vw] rounded-lg bg-white"></div>
+                            <div className="bar_bottom w-[6vw] absolute  bottom-0 right-[1.5vw] h-[2.25vw] rounded-lg bg-white "></div>
                         </div>
                     </div>
 
@@ -209,10 +209,11 @@ const About = () => {
                                 <img className='h-[10vw]' src="/svg/r.svg" alt="" />
                             </div>
                         </div>
-                        <div className="  word_zerror flex gap-4">
+                        <div className="  word_zerror flex">
                             <div className=" anim_letter opacity_z">
                                 <img className='h-[10vw]' src="/svg/z.svg" alt="" />
                             </div>
+                            <div className="flex gap-x-4">
                             <div className=" anim_letter">
                                 <img className='h-[10vw]' src="/svg/e.svg" alt="" />
                             </div>
@@ -228,20 +229,21 @@ const About = () => {
                             <div className=" anim_letter">
                                 <img className='h-[10vw]' src="/svg/r.svg" alt="" />
                             </div>
+                            </div>
                         </div>
                     </div>
 
                     <div className=" works_paren_header center fixed overflow-hidden  top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-0 h-0 bg-white">
                         <div className="w-full  padding text_blue grid grid-cols-[28%_29%_43%]">
                             <div className="">
-                                <p className=' wrk_split_wrd text-6xl font-bold uppercase  leading-none'>Projects</p>
+                                <p className=' wrk_split_wrd  spirit  text-6xl   leading-none'>Selected  <br />Work</p>
                             </div>
-                            <div className="text-xs uppercase leading-tight pt-5">
-                                <p className='wrk_split_wrd'>Thoughtful design.</p>
-                                <p className='wrk_split_wrd'>Strong technology.</p>
+                            <div className="text-xs  leading-tight pt-4">
+                                <p className='wrk_split_wrd font-medium'>Thoughtful design.</p>
+                                <p className='wrk_split_wrd font-medium'>Strong technology.</p>
                             </div>
-                            <div className="text-4xl  pl-2">
-                                <p className=" wrk_split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
+                            <div className="text-4xl pl-2">
+                                <p className=" wrk_split_wrd font-medium"> <span className='opacity-0 pointer-events-none'>................</span> We exist to end that trade off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
                             </div>
                         </div>
                     </div>

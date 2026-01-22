@@ -29,7 +29,7 @@ const ServicesData = [
     services: ["Brand Identity", "Visual Systems", "Digital Marketing", "SEO Strategy", "Growth Optimization"]
   },
 ]
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase();
 
 const Services = () => {
 
@@ -117,23 +117,24 @@ const Services = () => {
               className={`service-item  w-full group center flex-col gap-y-5  text-center h-full ${i === 0 || i === 1 ? "" : "border-t border-[#D3D3D3]"
                 }`}
             >
-              <p className="text-3xl  text_blue leading-none transition-all duration-300">
-                <span className="block">
-                  {splitToChars(words.slice(0, mid).join(" "))}
-                </span>
-                <span className="block">
-                  {splitToChars(words.slice(mid).join(" "))}
-                </span>
+              <p className="text-3xl uppercase font-bold w-[40%]  text_blue leading-none transition-all duration-300">
+                {item.title}
               </p>
 
-              <p className=" w-1/2  text_blue leading-tight ">
+              <p className="w-1/2 text_blue leading-tight">
                 {item.services.map((service, i) => (
-                  <span key={service}>
-                    {service}
-                    {i !== item.services.length - 1 && " / "}
+                  <span key={i} className="inline-block">
+                    {splitToChars(service)}
+
+                    {i !== item.services.length - 1 && (
+                      <span className="inline-block mx-1">
+                        {splitToChars("/")}
+                      </span>
+                    )}
                   </span>
                 ))}
               </p>
+
             </div>
           );
         })}
@@ -141,14 +142,14 @@ const Services = () => {
         <div className="expand_circ overflow-hidden size-3.5 z-10 center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 shrink-0 bg_blue rounded-full ">
           <div className="w-screen  padding text-white grid grid-cols-[28%_29%_43%]">
             <div className="">
-              <p className=' split_wrd text-6xl  uppercase font-bold leading-none'>Our <br /> Clients</p>
+              <p className=' split_wrd text-6xl  spirit leading-none'>Our <br /> Clients</p>
             </div>
-            <div className="text-xs uppercase leading-tight pt-5">
+            <div className="text-xs  leading-tight pt-4">
               <p className='split_wrd'>Brands we’ve </p>
               <p className='split_wrd'>worked with.</p>
             </div>
             <div className="text-4xl  pl-2">
-              <p className=" split_wrd"> <span className='opacity-0 pointer-events-none'>..............................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
+              <p className=" split_wrd font-medium"> <span className='opacity-0 pointer-events-none'>...........................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
             </div>
           </div>
         </div>
@@ -168,7 +169,7 @@ const splitToChars = (text) =>
   text.split("").map((char, i) => (
     <span
       key={i}
-      className={`char inline-block uppercase font-bold  opacity-0 ${char === " " ? "w-[0.35em]" : ""
+      className={`char inline-block   opacity-0 ${char === " " ? "w-[0.35em]" : ""
         }`}
       data-char={char}
     >
@@ -199,7 +200,7 @@ const animateChars = (chars) => {
           letters[Math.floor(Math.random() * letters.length)];
         iterations++;
 
-        if (iterations > 8) {
+        if (iterations > 3) {
           clearInterval(scramble);
           char.textContent = original;
         }

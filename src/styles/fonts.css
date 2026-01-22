@@ -1,26 +1,36 @@
 @font-face {
-  font-family: ibm;
+  font-family: ibm-regular;
   src: url(../../public/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf);
+}
+@font-face {
+  font-family: ibm-medium;
+  src: url(../../public/fonts/IBM_Plex_Sans/IBMPlexSans-Medium.ttf);
+}
+@font-face {
+  font-family: ibm-semibold;
+  src: url(../../public/fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf);
 }
 @font-face {
   font-family: spirit;
   src: url(../../public/fonts/spirits/fonnts.com-Spirits-Sharp-Light.otf);
 }
-@font-face {
-  font-family: pf_nine;
-  src: url(../../public/fonts/67fcd59caa79d68d8f41d825_PerfectlyNineties-Regular.otf);
-}
 
+@media (min-width:1024px) {
+  :root{
+    font-size: 1vw;
+  }
+}
 .ibm {
-  font-family: ibm;
+  font-family: ibm-regular;
 }
-
+.font-medium{
+  font-family: ibm-medium;
+}
+.font-semibold{
+  font-family: ibm-semibold;
+}
 .spirit {
   font-family: spirit;
-}
-
-.pf_nine {
-  font-family: pf_nine;
 }
 
 a,
@@ -30,5 +40,5 @@ input,
 li,
 ul,
 button {
-  font-family: ibm;
+  font-family: ibm-regular;
 }

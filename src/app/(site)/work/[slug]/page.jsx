@@ -1,6 +1,6 @@
 "use client";
 import TicketEffect from '@/components/home/TicketEffect'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 
 import "swiper/css"
@@ -41,31 +41,31 @@ const projectsData = [
 
 const WorkDetail = () => {
 
-  useGSAP(() => {
-const wrk_anim_txt = SplitText.create(".wrk_anim_txt", {
-  type: "lines",
-  linesClass: "wrk-line",
-});
+  useEffect(() => {
+    const wrk_anim_txt = SplitText.create(".wrk_anim_txt", {
+      type: "lines",
+      linesClass: "wrk-line",
+    });
 
-const more_project_header_split_wrd = SplitText.create(
-  ".more_project_header_split_wrd",
-  {
-    type: "lines",
-    linesClass: "wrk-line",
-  }
-);
+    const more_project_header_split_wrd = SplitText.create(
+      ".more_project_header_split_wrd",
+      {
+        type: "lines",
+        linesClass: "wrk-line",
+      }
+    );
 
-[wrk_anim_txt.lines, more_project_header_split_wrd.lines].forEach(lines => {
-  lines.forEach(line => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "overflow-hidden block";
+    [wrk_anim_txt.lines, more_project_header_split_wrd.lines].forEach(lines => {
+      lines.forEach(line => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "overflow-hidden block";
 
-    line.parentNode.insertBefore(wrapper, line);
-    wrapper.appendChild(line);
+        line.parentNode.insertBefore(wrapper, line);
+        wrapper.appendChild(line);
 
-    line.classList.add("block");
-  });
-});
+        line.classList.add("block");
+      });
+    });
 
 
     gsap.to(".wrk_hero_video", {
@@ -175,7 +175,33 @@ const more_project_header_split_wrd = SplitText.create(
       }
     })
 
-  })
+  }, [])
+
+  const wrapperRef = useRef(null);
+  const dragRef = useRef(null);
+
+  useEffect(() => {
+
+    const swiper = document.querySelector(".mySwiper");
+    const dragBtn = document.querySelector(".drag_btn");
+
+    swiper.addEventListener("mousemove", (e) => {
+      gsap.to(dragBtn, {
+        x: e.clientX - 50,
+        y: e.clientY - 40,
+        opacity: 1,
+        duration: 0.2,
+        ease: "power3.out",
+      });
+    });
+
+    swiper.addEventListener("mouseleave", () => {
+      gsap.to(dragBtn, {
+        opacity: 0,
+        duration: 0.3,
+      });
+    });
+  }, []);
 
   return (
     <>
@@ -184,27 +210,27 @@ const more_project_header_split_wrd = SplitText.create(
       </div>
 
       <div className="w-full py-32! text_blue  padding grid grid-cols-[80%_20%]">
-        <div className=" uppercase space-y-10">
-          <p className='wrk_anim_txt font-bold text-9xl '>
+        <div className=" w-[60%] uppercase space-y-10">
+          <p className='wrk_anim_txt font-bold text-8xl '>
             Disrupting the Norm
           </p>
-          <div className="w-[60%]  space-y-5  capitalize leading-tight text-lg">
+          <div className="  space-y-5  capitalize leading-tight text-lg">
             <div className="">
-              <p className='wrk_anim_txt'>This project reimagines how digital products should feel and function. By blending clear strategy, thoughtful design, and robust engineering, we created an experience that removes friction and elevates interaction.</p>
+              <p className='wrk_anim_txt font-medium'>This project reimagines how digital products should feel and function. By blending clear strategy, thoughtful design, and robust engineering, we created an experience that removes friction and elevates interaction.</p>
             </div>
             <div className="">
-              <p className='wrk_anim_txt'>This project reimagines how digital products should feel and function. By blending clear strategy, thoughtful design, and robust engineering, we created an experience that removes friction and elevates interaction.</p>
+              <p className='wrk_anim_txt font-medium'>This project reimagines how digital products should feel and function. By blending clear strategy, thoughtful design, and robust engineering, we created an experience that removes friction and elevates interaction.</p>
             </div>
           </div>
         </div>
 
         <div className="space-y-10 pt-16">
           <div className="space-y-2">
-            <p className='wrk_anim_txt font-bold text-xl uppercase'>CLIENT</p>
+            <p className='wrk_anim_txt font-semibold text-xl uppercase'>CLIENT</p>
             <p className='wrk_anim_txt'>Disrptve</p>
           </div>
           <div className="space-y-2">
-            <p className='wrk_anim_txt font-bold text-xl uppercase'>Project type</p>
+            <p className='wrk_anim_txt font-semibold text-xl uppercase'>Project type</p>
             <div className="">
 
               <p className='wrk_anim_txt'>Product Build</p>
@@ -215,7 +241,7 @@ const more_project_header_split_wrd = SplitText.create(
             </div>
           </div>
           <div className="space-y-2">
-            <p className='wrk_anim_txt  font-bold text-xl uppercase'>team</p>
+            <p className='wrk_anim_txt  font-semibold text-xl uppercase'>team</p>
             <div className="">
               <p className='wrk_anim_txt'>Product Design </p>
               <p className='wrk_anim_txt'> Development</p>
@@ -263,36 +289,42 @@ const more_project_header_split_wrd = SplitText.create(
 
       <div className=" more_project_header w-screen py-32!  padding text_blue grid grid-cols-[28%_29%_43%]">
         <div className="">
-          <p className=' more_project_header_split_wrd text-6xl uppercase font-bold leading-none'>Projects</p>
+          <p className=' more_project_header_split_wrd text-6xl capitalize spirit leading-none'>selected <br /> works</p>
         </div>
-        <div className="text-xs uppercase leading-tight pt-5">
-          <p className='more_project_header_split_wrd'>Brands we’ve </p>
-          <p className='more_project_header_split_wrd'>worked with.</p>
+        <div className="text-xs  leading-tight pt-4">
+          <p className='more_project_header_split_wrd font-medium'>Brands we’ve </p>
+          <p className='more_project_header_split_wrd font-medium'>worked with.</p>
         </div>
         <div className="text-4xl  pl-2">
-          <p className=" more_project_header_split_wrd  "> <span className='opacity-0 pointer-events-none'>.........................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
+          <p className=" more_project_header_split_wrd font-medium "> <span className='opacity-0 pointer-events-none'>.........................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
         </div>
       </div>
 
 
-      <div className="padding py-0!">
+      <div className="padding py-0! relative ">
+
+        <div
+          className="drag_btn fixed top-0 left-0 pointer-events-none bg-white/15 backdrop-blur-[1.25rem] rounded-lg z-[10] px-3 py-1.5 opacity-0 scale-100">
+          <p className="font-medium">DRAG</p>
+        </div>
+
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={20}
-          className="mySwiper relative  text_blue cursor-grab active:cursor-grabbing">
+          className="mySwiper relative cursor-grab active:cursor-grabbing  text_blue">
 
           {projectsData.map((item, i) => (
             <SwiperSlide key={i} style={{ width: "35vw" }}>
               <div
-                className=" w-full cursor-grab active:cursor-grabbing"
+                className=" w-full"
               >
                 <div className=" w-full aspect-[5/6]">
                   <img src={item.img} alt="" className="cover" />
                 </div>
                 <div className="mt-2">
                   <div className="w-full flex items-center justify-between">
-                    <p className="text-lg uppercase font-semibold ">{item.title}</p>
-                    <p className="text-lg font-semibold ">2025</p>
+                    <p className="text-xl font-semibold  uppercase">{item.title}</p>
+                    <p className="text-xl font-semibold  uppercase">2025</p>
                   </div>
                   <p className="text-sm">{item.category}</p>
 

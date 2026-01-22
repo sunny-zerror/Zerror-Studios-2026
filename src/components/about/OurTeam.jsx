@@ -204,9 +204,9 @@ const OurTeam = ({
 
     gsap.to(pixels, {
       opacity,
-      duration: 0.001,
+      duration: 0.1,
       stagger: {
-        each: 0.0001,
+        each: 0.01,
         from: "random",
       },
       ease: "expo.out",
@@ -299,7 +299,7 @@ const OurTeam = ({
   return (
     <div className="w-full min-h-screen z-100 relative bg-white  ">
       <div className=" w-full px-10 pb-42">
-        <div className="grid  gap-25 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid  gap-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {teamMembers.map((member) => {
             // 👉 Special Blue Card for id 99
             if (member.id === 99) {
@@ -328,7 +328,7 @@ const OurTeam = ({
                   <img
                     src={member.img}
                     alt={member.name}
-                    className="w-full aspect-[4/5] object-cover object-top  mb-4"
+                    className="w-full aspect-[4/5] object-cover object-top"
                   />
 
                   {/* Grid */}
@@ -350,10 +350,10 @@ const OurTeam = ({
                     ))}
                   </div>
                 </div>
-                <h3 className="text-[#002BBA] RF_Font uppercase font-bold">
+                <p className="text-xl font-semibold leading-none mt-2 mb-1 uppercase text_blue">
                   {member.name}
-                </h3>
-                <p className="text-[#002BBA]  font-normal">{member.role}</p>
+                </p>
+                <p className="text_blue  leading-none text-sm">{member.role}</p>
               </div>
             );
           })}

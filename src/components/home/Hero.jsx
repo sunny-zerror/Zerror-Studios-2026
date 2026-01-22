@@ -102,14 +102,14 @@ const Hero = () => {
       <div className="w-full   padding text-white ">
         <div className="w-full  grid grid-cols-[28%_29%_43%]">
           <div className="">
-            <p className='uppercase font-bold text-6xl   leading-none'>about us</p>
+            <p className=' capitalize spirit  text-6xl   leading-none'>about us</p>
           </div>
-          <div className="text-xs uppercase leading-tight pt-5">
-            <p className=''>Thoughtful design.</p>
-            <p className=''>Strong technology.</p>
+          <div className="text-xs leading-tight pt-4">
+            <p className='font-medium'>Thoughtful design.</p>
+            <p className='font-medium'>Strong technology.</p>
           </div>
-          <div className="capitalize  text-4xl  pl-2">
-            <p className=""> <span className='opacity-0 pointer-events-none'>..............................</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
+          <div className="capitalize    text-4xl  pl-2">
+            <p className="font-medium"> <span className='opacity-0 pointer-events-none'>...............</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
           </div>
         </div>
       </div>

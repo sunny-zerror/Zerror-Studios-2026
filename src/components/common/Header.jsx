@@ -1,406 +1,237 @@
-"use client";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { Link } from "next-view-transitions";
-import { useLayoutEffect } from "react";
-import { usePathname } from "next/navigation";
-import { RiArrowRightUpLine } from "@remixicon/react";
+import { RiArrowRightUpLine } from '@remixicon/react';
+import gsap from 'gsap';
+import { Link } from 'next-view-transitions'
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 
-const MENU_ITEMS = [
+const menuLinks = [
   {
-    id: "home",
-    label: "Home",
-    image: "/images/menu/1.jpg",
-    href: `/`,
+    id: 1,
+    title: "Home",
+    href: "/",
+    img: "/images/menu/1.webp"
   },
   {
-    id: "about",
-    label: "About",
-    image: "/images/menu/2.jpg",
-    href: `/about`,
+    id: 2,
+    title: "about",
+    href: "/about",
+    img: "/images/menu/2.webp"
   },
   {
-    id: "work",
-    label: "Our Work",
-    image: "/images/menu/3.jpg",
-    href: `/work`,
+    id: 3,
+    title: "our work",
+    href: "/work",
+    img: "/images/menu/3.webp"
   },
   {
-    id: "expertise",
-    label: "Expertise",
-    image: "/images/menu/4.jpg",
-    expertise: [
-      "⁠Website Development",
+    id: 4,
+    title: "expertise",
+    href: "/expertise",
+    img: "/images/menu/4.webp",
+    sublinks: [
+      "Website Development",
       "E-commerce Development",
       "Custom CMS Development",
-      "Branding, Marketing & SEO",
-    ],
-    href: `/`,
+      "Branding, Marketing & SEO"
+    ]
   },
   {
-    id: "contact",
-    label: "Contact",
-    image: "/images/menu/5.jpg",
-    href: `/contact`,
+    id: 5,
+    title: "contact",
+    href: "/contact",
+    img: "/images/menu/5.webp"
   },
-];
+]
 
-const SOCIAL_LINKS = ["LinkedIn", "Instagram", "Behance"];
-
-//  Without Opacity down hove ->
-
-// const MenuItem = React.forwardRef(({ item, showBorderTop, href, closeMenu }, ref) => {
-//   return (
-//     <Link href={href} onClick={closeMenu} >
-
-//       <div
-//         ref={ref}
-//         className={`w-full flex gap-2 py-2.5 border-b border-[#c9cfe482]
-//       ${showBorderTop ? "border-t" : ""}
-//        transition-opacity duration-300 ease-out
-//     group-hover/menu:opacity-70
-//     hover:!opacity-100
-
-//       `}
-//       >
-//         <div className="w-28 aspect-4/3  overflow-hidden">
-//           <img src={item.image} className="w-26 aspect-4/3  object-cover" />
-//         </div>
-
-//         <p className={`mr-auto  ${item.expertise? ('mt-[1.5vw]'):('my-auto')}   uppercase text-[1rem] text-[#002BBA] ibm font-semibold `}>{item.label}</p>
-
-//         {item.expertise && (
-//           <div className="w-1/2 grid grid-cols-2 border-l border-[#c9cfe482] text-[#001BA7]">
-//             {item.expertise.map((text, i) => (
-//               <div
-//                 key={i}
-//                 className="px-3 py-2 border-r border-[#c9cfe482] flex flex-col text-[0.9rem] gap-1"
-//               >
-//                 <p className=" text-sm ibm font-semibold ">{String(i + 1).padStart(2, "0")}/</p>
-//                 <p className="text-sm leading-3.75">{text}</p>
-//               </div>
-//             ))}
-//           </div>
-//         )}
-//       </div>
-//     </Link>
-//   );
-// });
-
-// Opacity down hove ->
-const MenuItem = React.forwardRef(
-  ({ item, showBorderTop, href, closeMenu }, ref) => {
-    return (
-      <Link
-        href={href}
-        onClick={closeMenu}
-        className="block opacity-100 transition-opacity duration-300 ease-out group-hover/menu:opacity-50 hover:!opacity-100"
-      >
-        <div
-          ref={ref}
-          className={`w-full flex gap-2 py-2.5 border-b border-[#c9cfe482] ${
-            showBorderTop ? "border-t" : ""
-          }`}
-        >
-          <div className="w-28 aspect-4/3  overflow-hidden">
-            <img src={item.image} className="w-26 aspect-4/3  object-cover" />
-          </div>
-
-          <p
-            className={`mr-auto ${
-              item.expertise ? "mt-[1.5vw]" : "my-auto"
-            } uppercase text-[1rem] text-[#002BBA] ibm font-semibold`}
-          >
-            {item.label}
-          </p>
-
-          {item.expertise && (
-            <div className="w-1/2 grid grid-cols-2 border-l border-[#c9cfe482] text-[#001BA7]">
-              {item.expertise.map((text, i) => (
-                <div
-                  key={i}
-                  className="px-3 py-2 border-r border-[#c9cfe482] flex flex-col gap-1"
-                >
-                  <p className="text-sm ibm font-semibold">
-                    {String(i + 1).padStart(2, "0")}/
-                  </p>
-                  <p className="text-sm leading-tight">{text}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </Link>
-    );
+const socialLinks = [
+  {
+    title: "instagram",
+    href: ""
+  }, {
+    title: "linkedin",
+    href: ""
+  },
+  {
+    title: "behance",
+    href: ""
   }
-);
-
-MenuItem.displayName = "MenuItem";
+]
 
 const Header = () => {
+
+  const [openMenu, setOpenMenu] = useState(false)
+
   const pathname = usePathname();
-  const menuTL = useRef();
-  const menuRef = useRef();
-  const preMenuRef = useRef();
-  const itemsRef = useRef([]);
 
-  // useLayoutEffect(() => {
-  //   // INITIAL STATES (CRITICAL)
-  //   gsap.set(menuRef.current, {
-  //     autoAlpha: 0,
-  //     pointerEvents: "none",
-  //   });
+  useEffect(() => {
 
-  //   gsap.set(preMenuRef.current, {
-  //     autoAlpha: 1,
-  //     pointerEvents: "auto",
-  //   });
+    if (openMenu) {
 
-  //   gsap.set(itemsRef.current, {
-  //     autoAlpha: 0,
-  //     y: 20,
-  //   });
-
-  //   // TIMELINE
-  //   menuTL.current = gsap.timeline({ paused: true });
-
-  //   menuTL.current
-  //   .from(menuRef.current, {
-  //     height:'48px',
-  //   })
-  //     .to(menuRef.current, {
-  //       autoAlpha: 1,
-  //       pointerEvents: "auto",
-  //       duration: 0.2,
-  //       ease: "power4.inOut",
-  //     })
-  //     .to(
-  //       preMenuRef.current,
-  //       {
-  //         autoAlpha: 0,
-  //         pointerEvents: "none",
-  //         duration: 0.8,
-  //         ease: "power1.out",
-  //       },
-  //       "<"
-  //     )
-  //     .to(
-  //       itemsRef.current,
-  //       {
-  //         autoAlpha: 1,
-  //         y: 0,
-  //         stagger: 0.08,
-  //         duration: 0.5,
-  //         ease: "power1.out",
-  //       },
-  //       "-=0.4"
-  //     );
-
-  //   return () => menuTL.current.kill();
-  // }, []);
-
-  // const openMenu = () => menuTL.current.play();
-  // const closeMenu = () => menuTL.current.timeScale(2).reverse();
-
-  useLayoutEffect(() => {
-    /* Premium motion defaults */
-    gsap.defaults({
-      ease: "power3.out",
-    });
-
-    /* INITIAL STATES */
-    gsap.set(menuRef.current, {
-      autoAlpha: 0,
-      pointerEvents: "none",
-      scaleY: 0.88,
-      y: -4,
-      transformOrigin: "top",
-      willChange: "transform, opacity",
-    });
-
-    gsap.set(preMenuRef.current, {
-      autoAlpha: 1,
-    });
-
-    gsap.set(itemsRef.current, {
-      autoAlpha: 0,
-      y: 16,
-      willChange: "transform, opacity",
-    });
-
-    /* TIMELINE */
-    menuTL.current = gsap.timeline({ paused: true });
-
-    menuTL.current
-      /* Container reveal */
-      .to(menuRef.current, {
-        autoAlpha: 1,
-        scaleY: 1,
-        y: 0,
+      if (window.lenis) { window.lenis.stop() }
+      const openMenuTl = gsap.timeline();
+      openMenuTl.to(".drop_menu", {
+        height: "auto",
         pointerEvents: "auto",
-        duration: 0.38,
-        ease: "expo.out",
+        opacity: 1,
+        duration: .5,
+        ease: "expo.out"
       })
+      openMenuTl.to(".menu_img_paren", {
+        clipPath: "inset(0%)",
+        duration: 1,
+        ease: "expo.out",
+        stagger: 0.1
+      }, "<+=0.1")
+      openMenuTl.to(".menu_img", {
+        scale: 1,
+        duration: 1,
+        ease: "expo.out",
+        stagger: 0.1
+      }, "<")
+      openMenuTl.to([".menu_title", ".social_anim_links"], {
+        transform: "translateY(0%)",
+        duration: 1,
+        ease: "expo.out",
+        stagger: 0.1
+      }, "<")
+      openMenuTl.to(".sublinks_title_paren", {
+        opacity: 1,
+        transform: "translateY(0%)",
+        duration: 1,
+        ease: "expo.out",
+        stagger: 0.1
+      }, "<+=0.5")
 
-      /* MENU → fade */
-      .to(
-        preMenuRef.current,
-        {
-          autoAlpha: 0,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        "<"
-      )
-      .to(
-        ".bgBlur",
-        {
-          opacity: 1,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        "<"
-      )
+    } else {
+      if (window.lenis) { window.lenis.start() }
+      const closeMenuTl = gsap.timeline();
+      closeMenuTl.to(".sublinks_title_paren", {
+        opacity: 0,
+        transform: "translateY(1rem)",
+        duration: 1,
+        ease: "expo.out",
+        stagger: {
+          amount: 0.1,
+          from: "end"
+        }
+      })
+      closeMenuTl.to([".menu_title", ".social_anim_links"], {
+        transform: "translateY(105%)",
+        duration: 1,
+        ease: "expo.out",
+        stagger: {
+          amount: 0.1,
+          from: "end"
+        }
+      }, "<")
+      closeMenuTl.to(".menu_img_paren", {
+        clipPath: "inset(50%)",
+        duration: 1,
+        ease: "expo.out",
+        stagger: {
+          amount: 0.1,
+          from: "end"
+        }
+      }, "<")
+      closeMenuTl.to(".menu_img", {
+        scale: 0,
+        duration: 1,
+        ease: "expo.out",
+        stagger: {
+          amount: 0.1,
+          from: "end"
+        }
+      }, "<")
+      closeMenuTl.to(".drop_menu", {
+        height: "0",
+        pointerEvents: "none",
+        opacity: 0,
+        duration: .5,
+        ease: "expo.out"
+      }, "<+=0.2")
+    }
 
-      /* Items cascade */
-      .to(
-        itemsRef.current,
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.45,
-          stagger: {
-            each: 0.055,
-            ease: "power3.out",
-          },
-        },
-        "-=0.25"
-      )
-      .to(
-        ".bgBlur",
-        {
-          opacity: 1,
-          pointerEvents: "auto",
-          duration: 0.4,
-          ease: "power2.out",
-        },
-        "<"
-      );
-
-    return () => menuTL.current?.kill();
-  }, []);
-
-  const openMenu = () => {
-    /* Smooth & calm open */
-    menuTL.current.timeScale(1).play();
-  };
-
-  const closeMenu = () => {
-    /* Fast, clean close */
-    menuTL.current.timeScale(3).reverse();
-  };
+  }, [openMenu])
 
   return (
-    <div className="fixed top-0 left-0 w-full   z-180 px-10 pt-5 flex justify-center">
-      <div className="flex gap-4 z-100 backdrop-blur-sm  rounded-lg ">
-        {/* MENU BUTTON */}
-        <div className="relative   w-[35vw] h-12 bg-[#81818159] backdrop-blur-sm rounded-lg px-7  group transition-all duration-150 ease-out  flex justify-between items-center gap-4">
-          <div
-            onClick={openMenu}
-            className="  w-full h-12 flex justify-between items-center select-none cursor-pointer group transition-all duration-150 ease-in"
-          >
-            <p
-              ref={preMenuRef}
-              // onClick={openMenu}
-              className="premenu  text-white select-none cursor-pointer"
-            >
-              MENU
-            </p>
-
-            <div
-              // onClick={openMenu}
-              className="w-fit h-12 select-none cursor-pointer  flex flex-col justify-center items-center gap-1 group transition-all duration-150 ease-in  group-hover:gap-2 "
-            >
-              <span className="w-8  h-[1px] bg-[#ffffff]" />
-              <span className="w-8  h-[1px] bg-[#ffffff]" />
+    <>
+      <div className="w-full fixed py-5  z-[9999] center">
+        <div className="w-full relative z-[99999] flex justify-center gap-x-3 ">
+        <div onClick={()=>setOpenMenu(false)} className={`w-full h-screen fixed bg-black/20 backdrop-blur-sm z-[9] top-0 left-0 transition-all duration-300 ease-out ${openMenu ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} `}></div>
+        
+          <div onClick={() => setOpenMenu(!openMenu)} className="menu_paren relative z-[100] w-[35vw]">
+            <div className={`menu_header border border-black/10 cursor-pointer group px-6 w-full flex items-center justify-between h-12  rounded-lg ${openMenu ? "rounded-b-none bg-white" : "bg-white/15! backdrop-blur-[1.25rem]"} transition-all duration-300 ease-out  `}>
+              <div className="relative flex items-center ">
+                <div className="absolute block overflow-hidden w-20 ">
+                  <Image width={50} height={20} className={`w-full ${openMenu ? "translate-y-0" : " translate-y-5 "}  transition-all duration-300 ease-out `} src="/logo.svg" alt="" />
+                </div>
+                <p className={`uppercase text-sm leading-none translate-y-[1px] text-white ${openMenu ? "opacity-0" : ""} transition-all duration-300 ease-out `}>MENU</p>
+              </div>
+              <div className={`ros_paren flex flex-col transition-all duration-150 ease-out ${openMenu ? "gap-y-0" : " gap-y-1 group-hover:gap-y-2.5"} `}>
+                <div className={`w-7 bar_1   h-px  transition-all duration-150 ease-out ${openMenu ? "rotate-[30deg] bg_blue" : "bg-white"} `}></div>
+                <div className={`w-7 bar_2   h-px  transition-all duration-150 ease-out  ${openMenu ? "-rotate-[30deg] bg_blue" : "bg-white"} `}></div>
+              </div>
             </div>
-          </div>
-
-          {/* OPEN MENU */}
-          <div
-            ref={menuRef}
-            className="absolute top-0 left-0 w-full opacity-0 bg-white rounded-lg  pointer-events-none pt-2"
-          >
-            <div
-              onClick={closeMenu}
-              className="h-12 px-7 flex justify-between items-center  select-none cursor-pointer"
-            >
-              <Link href={"/"}>
-                <img src="/svg/zerror.svg" className="h-5" />
-              </Link>
-              <span className="w-4 h-[2px] bg-[#001BA7]" />
-            </div>
-
-            <div className="px-7 pt-4 pb-7 group/menu">
-              {MENU_ITEMS.map((item, i) => (
-                <MenuItem
-                  closeMenu={closeMenu}
-                  key={item.id}
-                  item={item}
-                  showBorderTop={i === 0}
-                  href={item.href}
-                  ref={(el) => (itemsRef.current[i] = el)}
-                />
-              ))}
-
-              <div className="pt-6 flex flex-col gap-1 uppercase text_blue ">
-                {SOCIAL_LINKS.map((link, i) => (
-                  <button
-                    key={link}
-                    ref={(el) => (itemsRef.current[MENU_ITEMS.length + i] = el)}
-                    className=" relative w-fit opacity-100 transition-all duration-300 ease-out group/social group-hover/menu:opacity-50 hover:!opacity-100"
-                  >
-                    {/* underline */}
-                    <span className=" absolute left-0 -bottom-[2px] h-[1px] w-0 bg_blue transition-all duration-300 ease-out group-hover/social:w-full" />
-
-                    <p className="capitalize ibm font-semibold text-sm">
-                      {link}
-                    </p>
-                  </button>
+            <div className=" drop_menu h-0 opacity-0 overflow-hidden pointer-events-none w-full bg-white rounded-b-lg  pb-5 px-6 ">
+              <div className="">
+                {
+                  menuLinks.map((menu) => (
+                    <Link href={menu.href} key={menu.id} className="w-full  text_blue  capitalize  border-b border-black/10 py-3.5 flex  justify-between ">
+                      <div className="flex gap-x-3">
+                        <div
+                          style={{ clipPath: "inset(50%)" }} className=" menu_img_paren aspect-4/3 overflow-hidden rounded-xs h-[4.75rem] ">
+                          <Image width={100} height={75} src={menu.img} alt="" className=" menu_img  cover scale-[1.5]" />
+                        </div>
+                        <div className="w-fit h-fit block overflow-hidden -translate-y-0.5">
+                          <p className=' menu_title font-medium text-lg  translate-y-full leading-none'>{menu.title}</p>
+                        </div>
+                      </div>
+                      {menu.sublinks && (
+                        <div className="w-1/2 relative border-l border-r border-black/10 px-3 gap-y-5 gap-x-5 grid grid-cols-2">
+                          <div className=" h-full absolute top-0 left-[46.5%] border-l border-black/10"></div>
+                          {
+                            menu.sublinks?.map((sublink, i) => (
+                              <div key={i} className=" sublinks_title_paren translate-y-4 w-full opacity-0 text-sm space-y-2">
+                                <p className=' leading-none font-semibold'>0{i + 1}/</p>
+                                <p className=' leading-none'>{sublink}</p>
+                              </div>
+                            ))
+                          }
+                        </div>
+                      )}
+                    </Link>
+                  ))
+                }
+              </div>
+              <div className=" pt-4  flex flex-col gap-y-2">
+                {socialLinks.map((link, i) => (
+                  <Link href={link.href} key={i} className="w-fit overflow-hidden  pb-1 text_blue group    ">
+                    <div className=" social_anim_links capitalize translate-y-[110%] relative flex items-center ">
+                      <div className="w-0 group-hover:w-full transition-all duration-300 h-px bg_blue absolute -bottom-1 "></div>
+                      <p className='leading-none'>{link.title}</p>
+                      <RiArrowRightUpLine size={14} />
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>
+
           </div>
+
+          <Link href={`${pathname === "/" ? "/deck" : "/"}`} className='relative z-[100]'>
+            <div className={` menu_deck border border-black/10 relative w-16 h-12 cursor-pointer group ${openMenu ? " bg-white" : "bg-white/15! backdrop-blur-[1.25rem]"} transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center`}>
+              <div className={`w-4  h-3 border  rounded-xs group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[55%] left-[54%] ${openMenu ? "border-[#002bba]" : "border-[#fafafa]"}  -translate-x-[50%] -translate-y-[50%] `}></div>
+              <div className={`w-4  h-3 border-l border-t  group-hover:top-1/2 group-hover:left-1/2  rounded-xs transition-all duration-300 absolute top-[50%] left-[50%] ${openMenu ? "border-[#002bba]" : "border-[#fafafa]"}  -translate-x-[50%] -translate-y-[50%] `}></div>
+              <div className={`w-4  h-3 border-l border-t  group-hover:top-1/2 group-hover:left-1/2  rounded-xs transition-all duration-300 absolute top-[45%] left-[46%]  ${openMenu ? "border-[#002bba]" : "border-[#fafafa]"} -translate-x-[50%] -translate-y-[50%] `}></div>
+            </div>
+          </Link>
+
+
         </div>
-
-        {/* SECOND BUTTON */}
-        {pathname === "/deck" ? (
-          <Link href={"/"}>
-            <div className="w-17 h-12   bg-[#81818159] backdrop-blur-sm group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
-              <div className="w-5  h-3 border border-[#d4d4d4] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
-            </div>
-          </Link>
-        ) : (
-          <Link href="/deck">
-            <div className="w-17 h-12   bg-[#81818159] backdrop-blur-sm  group transition-all duration-300  rounded-lg overflow-hidden flex items-center relative justify-center">
-              <div className="w-5  h-3 border border-[#ffffff] rounded-[2px] group-hover:top-1/2 group-hover:left-1/2  transition-all duration-300 absolute top-[50.5%] left-[55%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[44.5%] left-[51%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="w-5  h-3 border-l border-t border-[#ffffffbd] group-hover:top-1/2 group-hover:left-1/2  rounded-[2px] transition-all duration-300 absolute top-[40%] left-[47%] -translate-x-[50%] -translate-y-[50%] "></div>
-              <div className="absolute inset-[-100%] pointer-events-none z-20 bg-[linear-gradient(-45deg,transparent_30%,rgba(255,255,255,0.6)_50%,transparent_70%)]  -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-full group-hover:translate-y-full" />
-            </div>
-          </Link>
-        )}
       </div>
+    </>
+  )
+}
 
-      <div
-        onClick={closeMenu}
-        className={` bgBlur w-full h-screen absolute top-0 left-0 inset-0 bg-black/20 backdrop-blur-sm z-90 opacity-0 pointer-events-none `}
-      ></div>
-    </div>
-  );
-};
-
-export default Header;
+export default Header

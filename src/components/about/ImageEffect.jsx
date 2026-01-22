@@ -97,14 +97,15 @@ const ImageEffect = () => {
     <>
       <div className="w-full h-[700vh] relative IVMainCont">
         {/* Cont */}
-        <div className="w-full h-screen sticky top-0 left-0 flex flex-col justify-center items-center text-[#002BBA] scene">
-          <p className=" uppercase font-semibold text-[1vw] leading-[1.5vw]">
+        <div className="w-full h-screen sticky top-0 left-0 flex flex-col justify-center items-center text_blue scene">
+
+          <p className=" uppercase font-medium text-lg">
             WHY US?
           </p>
-          <h1 className=" uppercase text-[3vw] leading-[3vw] font-bold">
+          <h1 className="  text-6xl leading-none font-semibold">
             5 Reasons
           </h1>
-          <h1 className=" uppercase text-[3vw] leading-[3vw] font-bold">
+          <h1 className="  text-6xl leading-none font-semibold">
             To Be With Zerrorian
           </h1>
 

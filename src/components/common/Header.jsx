@@ -159,8 +159,9 @@ const Header = () => {
       <div className="w-full fixed py-5  z-[9999] center">
         <div className="w-full relative z-[99999] flex justify-center gap-x-3 ">
         <div onClick={()=>setOpenMenu(false)} className={`w-full h-screen fixed bg-black/20 backdrop-blur-sm z-[9] top-0 left-0 transition-all duration-300 ease-out ${openMenu ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} `}></div>
-        
-          <div onClick={() => setOpenMenu(!openMenu)} className="menu_paren relative z-[100] w-[35vw]">
+      
+          <div onClick={() => setOpenMenu(!openMenu)} className="menu_paren relative z-[100] w-[38vw]">
+            
             <div className={`menu_header border border-black/10 cursor-pointer group px-6 w-full flex items-center justify-between h-12  rounded-lg ${openMenu ? "rounded-b-none bg-white" : "bg-white/15! backdrop-blur-[1.25rem]"} transition-all duration-300 ease-out  `}>
               <div className="relative flex items-center ">
                 <div className="absolute block overflow-hidden w-20 ">
@@ -169,10 +170,11 @@ const Header = () => {
                 <p className={`uppercase text-sm leading-none translate-y-[1px] text-white ${openMenu ? "opacity-0" : ""} transition-all duration-300 ease-out `}>MENU</p>
               </div>
               <div className={`ros_paren flex flex-col transition-all duration-150 ease-out ${openMenu ? "gap-y-0" : " gap-y-1 group-hover:gap-y-2.5"} `}>
-                <div className={`w-7 bar_1   h-px  transition-all duration-150 ease-out ${openMenu ? "rotate-[30deg] bg_blue" : "bg-white"} `}></div>
-                <div className={`w-7 bar_2   h-px  transition-all duration-150 ease-out  ${openMenu ? "-rotate-[30deg] bg_blue" : "bg-white"} `}></div>
+                <div className={`w-7 bar_1   h-px   transition-all duration-150 ease-out ${openMenu ? "rotate-[30deg] translate-y-[1px] bg_blue" : "bg-white"} `}></div>
+                <div className={`w-7 bar_2   h-px   transition-all duration-150 ease-out  ${openMenu ? "-rotate-[30deg] bg_blue" : "bg-white"} `}></div>
               </div>
             </div>
+
             <div className=" drop_menu h-0 opacity-0 overflow-hidden pointer-events-none w-full bg-white rounded-b-lg  pb-5 px-6 ">
               <div className="">
                 {
@@ -180,7 +182,7 @@ const Header = () => {
                     <Link href={menu.href} key={menu.id} className="w-full  text_blue  capitalize  border-b border-black/10 py-3.5 flex  justify-between ">
                       <div className="flex gap-x-3">
                         <div
-                          style={{ clipPath: "inset(50%)" }} className=" menu_img_paren aspect-4/3 overflow-hidden rounded-xs h-[4.75rem] ">
+                          style={{ clipPath: "inset(50%)" }} className=" menu_img_paren aspect-5/3 overflow-hidden rounded-xs h-[5rem] ">
                           <Image width={100} height={75} src={menu.img} alt="" className=" menu_img  cover scale-[1.5]" />
                         </div>
                         <div className="w-fit h-fit block overflow-hidden -translate-y-0.5">
@@ -188,8 +190,8 @@ const Header = () => {
                         </div>
                       </div>
                       {menu.sublinks && (
-                        <div className="w-1/2 relative border-l border-r border-black/10 px-3 gap-y-5 gap-x-5 grid grid-cols-2">
-                          <div className=" h-full absolute top-0 left-[46.5%] border-l border-black/10"></div>
+                        <div className="w-1/2 relative border-l border-r border-black/10 px-5 gap-y-5 gap-x-5 grid grid-cols-2">
+                          <div className=" h-full absolute top-0 left-[47%] border-l border-black/10"></div>
                           {
                             menu.sublinks?.map((sublink, i) => (
                               <div key={i} className=" sublinks_title_paren translate-y-4 w-full opacity-0 text-sm space-y-2">

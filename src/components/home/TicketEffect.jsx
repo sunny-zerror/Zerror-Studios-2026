@@ -163,17 +163,17 @@ const createCloud = () => {
     return (
         <div>
             <div className="w-full pt-32 center text_blue text-center space-y-10 flex-col">
-                <p className='text-8xl font-bold    leading-none'>Ready for your <br />
-                    game-changing <br />website?</p>
+                <p className='text-9xl pfn    leading-none'>Ready for your <br />
+                    game-changing <br /> <span className='pfn_italic'> website? </span> </p>
 
-                <p className='text-sm font-medium leading-tight '>Step on the Zerror Studios and <br />
+                <p className=' '>Step on the Zerror Studios and <br />
                     request a project with a few clicks.</p>
 
                 <button className="contact_btn relative flex group items-center gap-1">
-                    <div className="w-0 group-hover:w-full transition-all duration-300 absolute bg_blue bottom-0 rounded-full h-0.5"></div>
+                    <div className="w-0 group-hover:w-full transition-all duration-300 absolute bg_blue bottom-1 rounded-full h-px"></div>
                     <p>Contact</p>
                     <img
-                        className="w-5 absolute -right-6 contrast-[6]  plane"
+                        className="w-5 absolute -right-7 contrast-[6]  plane"
                         src="https://cdn-icons-png.flaticon.com/512/12567/12567273.png"
                         alt="plane"
                     />

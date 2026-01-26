@@ -1,3 +1,4 @@
+/* IBM Font */
 @font-face {
   font-family: ibm-regular;
   src: url(../../public/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf);
@@ -10,24 +11,57 @@
   font-family: ibm-semibold;
   src: url(../../public/fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf);
 }
+
+/* Spirit sharp */
 @font-face {
   font-family: spirit;
   src: url(../../public/fonts/spirits/fonnts.com-Spirits-Sharp-Light.otf);
 }
 
-@media (min-width:1024px) {
-  :root{
-    font-size: 1vw;
+/* PP Neu */
+@font-face {
+  font-family: pp-semibold;
+  src: url(../../public/fonts/pp_neu/67fcd4974b30a00d13095558_PPNeueMontreal-SemiBold.otf);
+}
+@font-face {
+  font-family: pp-regular;
+  src: url(../../public/fonts/pp_neu/67fcd4974b30a00d13095559_PPNeueMontreal-Regular.otf);
+}
+@font-face {
+  font-family: pp-medium;
+  src: url(../../public/fonts/pp_neu/67fcd4974b30a00d1309555a_PPNeueMontreal-Medium.otf);
+}
+
+/* Perfectly Nineties */
+
+@font-face {
+  font-family: pfn-italic;
+  src: url(../../public/fonts/perfectly_nineties/67fcd59c403eb3237ee8acf8_PerfectlyNineties-Italic.otf);
+}
+
+@font-face {
+  font-family: pfn-regular;
+  src: url(../../public/fonts/perfectly_nineties/67fcd59caa79d68d8f41d825_PerfectlyNineties-Regular.otf);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    font-size: .98vw;
   }
 }
-.ibm {
-  font-family: ibm-regular;
+
+.pfn {
+  font-family: pfn-regular;
 }
-.font-medium{
-  font-family: ibm-medium;
+.pfn_italic{
+  font-family: pfn-italic;
 }
-.font-semibold{
-  font-family: ibm-semibold;
+
+.font-medium {
+  font-family: pp-medium;
+}
+.font-semibold {
+  font-family: pp-semibold;
 }
 .spirit {
   font-family: spirit;
@@ -40,5 +74,5 @@ input,
 li,
 ul,
 button {
-  font-family: ibm-regular;
+  font-family: pp-regular;
 }

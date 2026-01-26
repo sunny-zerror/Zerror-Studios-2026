@@ -1,6 +1,10 @@
 import "../styles/globals.css";
 import "../styles/fonts.css";
 
+export const experimental = {
+  viewTransition: true,
+};
+
 export const metadata = {
   other: {
     "view-transition": "same-origin",

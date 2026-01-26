@@ -155,36 +155,36 @@ const OurTeam = ({
 
   // let scrollY = 0;
 
-// const disableScroll = () => {
-//   scrollY = window.scrollY;
+  // const disableScroll = () => {
+  //   scrollY = window.scrollY;
 
-//   document.body.style.position = "fixed";
-//   document.body.style.top = `-${scrollY}px`;
-//   document.body.style.left = "0";
-//   document.body.style.right = "0";
-//   document.body.style.width = "100%";
-//   document.body.style.overflow = "hidden";
+  //   document.body.style.position = "fixed";
+  //   document.body.style.top = `-${scrollY}px`;
+  //   document.body.style.left = "0";
+  //   document.body.style.right = "0";
+  //   document.body.style.width = "100%";
+  //   document.body.style.overflow = "hidden";
 
-//   // GSAP ScrollTrigger bhi freeze
-//   if (typeof ScrollTrigger !== "undefined") {
-//     ScrollTrigger.getAll().forEach(st => st.disable());
-//   }
-// };
+  //   // GSAP ScrollTrigger bhi freeze
+  //   if (typeof ScrollTrigger !== "undefined") {
+  //     ScrollTrigger.getAll().forEach(st => st.disable());
+  //   }
+  // };
 
-// const enableScroll = () => {
-//   document.body.style.position = "";
-//   document.body.style.top = "";
-//   document.body.style.left = "";
-//   document.body.style.right = "";
-//   document.body.style.width = "";
-//   document.body.style.overflow = "";
+  // const enableScroll = () => {
+  //   document.body.style.position = "";
+  //   document.body.style.top = "";
+  //   document.body.style.left = "";
+  //   document.body.style.right = "";
+  //   document.body.style.width = "";
+  //   document.body.style.overflow = "";
 
-//   window.scrollTo(0, scrollY);
+  //   window.scrollTo(0, scrollY);
 
-//   if (typeof ScrollTrigger !== "undefined") {
-//     ScrollTrigger.getAll().forEach(st => st.enable());
-//   }
-// };
+  //   if (typeof ScrollTrigger !== "undefined") {
+  //     ScrollTrigger.getAll().forEach(st => st.enable());
+  //   }
+  // };
 
 
 
@@ -221,7 +221,7 @@ const OurTeam = ({
   const div99Ref = useRef(null);
 
   const ActiveForm = () => {
-    if(window.lenis){window.lenis.stop()}
+    if (window.lenis) { window.lenis.stop() }
     // 1️⃣ Current state capture karo
     // 🔥 Save original position
     flipStateRef.current = Flip.getState(div99Ref.current);
@@ -257,7 +257,7 @@ const OurTeam = ({
   };
 
   const DeactivateForm = () => {
-     if(window.lenis){window.lenis.start()}
+    if (window.lenis) { window.lenis.start() }
     // 1️⃣ Capture fullscreen state
     const state = Flip.getState(div99Ref.current);
 
@@ -284,7 +284,7 @@ const OurTeam = ({
       duration: 1,
       ease: "power3.inOut",
       absolute: true,
-      onComplete: () => { SetmemberActive(false)}
+      onComplete: () => { SetmemberActive(false) }
     });
   };
 
@@ -305,12 +305,12 @@ const OurTeam = ({
             if (member.id === 99) {
               return (
                 <div
-                  onClick={()=>{  ActiveForm()}}
+                  onClick={() => { ActiveForm() }}
                   key={member.id}
                   ref={div99Ref}
                   className="w-full h-full div99  aspect-[4/5] bg-[#002BBA] hover:bg-[#0735cc] flex flex-col justify-end p-6 gap-[20px] text-white cursor-pointer"
                 >
-                  <h2 className="text-[3.1rem] OTText leading-[3.1rem] RF_Font font-semibold spirit ">
+                  <h2 className="text-[3.1rem] OTText leading-[3.1rem] RF_Font font-semibold pfn ">
                     Become A <br /> Zerrorian
                   </h2>
 

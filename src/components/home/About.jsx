@@ -214,36 +214,36 @@ const About = () => {
                                 <img className='h-[10vw]' src="/svg/z.svg" alt="" />
                             </div>
                             <div className="flex gap-x-4">
-                            <div className=" anim_letter">
-                                <img className='h-[10vw]' src="/svg/e.svg" alt="" />
-                            </div>
-                            <div className=" anim_letter">
-                                <img className='h-[10vw]' src="/svg/r.svg" alt="" />
-                            </div>
-                            <div className=" anim_letter">
-                                <img className='h-[10vw]' src="/svg/r.svg" alt="" />
-                            </div>
-                            <div className=" anim_letter">
-                                <img className='h-[10vw]' src="/svg/o.svg" alt="" />
-                            </div>
-                            <div className=" anim_letter">
-                                <img className='h-[10vw]' src="/svg/r.svg" alt="" />
-                            </div>
+                                <div className=" anim_letter">
+                                    <img className='h-[10vw]' src="/svg/e.svg" alt="" />
+                                </div>
+                                <div className=" anim_letter">
+                                    <img className='h-[10vw]' src="/svg/r.svg" alt="" />
+                                </div>
+                                <div className=" anim_letter">
+                                    <img className='h-[10vw]' src="/svg/r.svg" alt="" />
+                                </div>
+                                <div className=" anim_letter">
+                                    <img className='h-[10vw]' src="/svg/o.svg" alt="" />
+                                </div>
+                                <div className=" anim_letter">
+                                    <img className='h-[10vw]' src="/svg/r.svg" alt="" />
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div className=" works_paren_header center fixed overflow-hidden  top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-0 h-0 bg-white">
-                        <div className="w-full  padding text_blue grid grid-cols-[28%_29%_43%]">
+                        <div className="w-full  padding text_blue grid grid-cols-[28%_30%_42%]">
                             <div className="">
-                                <p className=' wrk_split_wrd  spirit  text-6xl   leading-none'>Selected  <br />Work</p>
+                                <p className=' wrk_split_wrd  pfn  text-6xl   leading-none'>Selected  <br />Works</p>
                             </div>
-                            <div className="text-xs  leading-tight pt-4">
-                                <p className='wrk_split_wrd font-medium'>Thoughtful design.</p>
-                                <p className='wrk_split_wrd font-medium'>Strong technology.</p>
+                            <div className="text-xs pt-4">
+                                <p className='wrk_split_wrd '>Thoughtful Design.</p>
+                                <p className='wrk_split_wrd '>Strong Technology.</p>
                             </div>
                             <div className="text-4xl pl-2">
-                                <p className=" wrk_split_wrd font-medium"> <span className='opacity-0 pointer-events-none'>................</span> We exist to end that trade off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
+                                <p className=" wrk_split_wrd font-medium leading-11"> <span className='opacity-0 pointer-events-none'>................</span> We exist to end that trade off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
                             </div>
                         </div>
                     </div>

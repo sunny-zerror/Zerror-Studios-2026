@@ -26,8 +26,6 @@ export default function SiteLayout({ children }) {
     return () => clearTimeout(timeout);
   }, [pathname]);
 
-
-
   return (
     <ViewTransitions routeKey={pathname}>
       <LenisScroll>

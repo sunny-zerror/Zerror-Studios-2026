@@ -69,10 +69,10 @@ const Form = ({ SetmemberActive, SetFormAnimDeactive }) => {
       {/* Info */}
       <div className="w-full max-w-5xl  grid grid-cols-[25%_32%_43%] mb-15 ">
         <div className="">
-          <p className="capitalize pf_nine text-[2.5rem]  leading-none spirit">
+          <p className="capitalize pf_nine text-[2.5rem]  leading-none pfn">
             Become a{" "}
           </p>
-          <p className="capitalize pf_nine text-[2.5rem]  leading-none spirit">
+          <p className="capitalize pf_nine text-[2.5rem]  leading-none pfn">
             Zerrorian
           </p>
         </div>

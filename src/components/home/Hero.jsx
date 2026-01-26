@@ -93,23 +93,23 @@ const Hero = () => {
       <div className=" txt_slider_paren w-full h-[400vh]  ">
         <div className="w-full h-screen top-0 sticky overflow-hidden">
           <div className=" z-[2] hero_scroll_txt w-full translate-x-[30vw] absolute top-[80%] -translate-y-1/2 text-white  whitespace-nowrap left-0  ">
-            <p className=" split_hero_title text-[12vw] font-bold origin-bottom-left tracking-tighter">We design and build thoughtful digital experiences that go beyond visuals.</p>
+            <p className=" split_hero_title text-[12vw] font-bold origin-bottom-left tracking-tight">We design and build thoughtful digital experiences that go beyond visuals.</p>
           </div>
         </div>
       </div>
 
 
       <div className="w-full   padding text-white ">
-        <div className="w-full  grid grid-cols-[28%_29%_43%]">
+        <div className="w-full  grid grid-cols-[28%_30%_42%]">
           <div className="">
-            <p className=' capitalize spirit  text-6xl   leading-none'>about us</p>
+            <p className=' capitalize pfn  text-6xl   leading-none'>about us</p>
           </div>
-          <div className="text-xs leading-tight pt-4">
-            <p className='font-medium'>Thoughtful design.</p>
-            <p className='font-medium'>Strong technology.</p>
+          <div className="text-xs pt-4">
+            <p className=''>Who</p>
+            <p className=''>We Are?</p>
           </div>
           <div className="capitalize    text-4xl  pl-2">
-            <p className="font-medium"> <span className='opacity-0 pointer-events-none'>...............</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
+            <p className="font-medium leading-11"> <span className='opacity-0 pointer-events-none'>...............</span> We exist to end that trade-off.  At Zerror, design and technology move as one — from first thought to final build. Every decision is intentional. Every detail measured. Every release stable.</p>
           </div>
         </div>
       </div>

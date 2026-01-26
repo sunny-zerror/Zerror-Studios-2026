@@ -97,15 +97,6 @@ const footerRows = [
 ];
 
 const Footer = () => {
-  const pathname = usePathname();
-
-  // Hide footer on /contact
-  if (pathname === "/contact") return null;
-  if (pathname === "/deck") return null;
-  // if (pathname === "/about") return null;
-  else{
-    
-  }
 
   useEffect(() => {
     const TEXTS = document.querySelectorAll(".glitch-text");
@@ -148,7 +139,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-[#012CBA] p-[2vw] relative z-100">
+    <div className="w-full h-screen bg_blue padding relative z-100">
       <div className="w-full h-full p-3">
         {footerRows.map((row) => (
           <div key={row.id} className="w-full h-1/3 grid grid-cols-9">

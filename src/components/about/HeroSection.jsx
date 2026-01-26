@@ -32,7 +32,7 @@ const HeroSection = () => {
         from: "random",
       },
       ease: "expo.out",
-    },'a1');
+    }, 'a1');
     tl.to(cells2, {
       opacity: 0,
       duration: 0.5,
@@ -41,7 +41,7 @@ const HeroSection = () => {
         from: "random",
       },
       ease: "expo.out",
-    },'a1');
+    }, 'a1');
 
     return () => {
       tl.scrollTrigger.kill();
@@ -64,7 +64,7 @@ const HeroSection = () => {
     <div className="w-full   padding">
 
       <div className="w-full aboutTitle flex py-44  opacity-0">
-        <p className="text-8xl leading-none capitalize spirit text_blue">
+        <p className="text-8xl leading-none capitalize pfn text_blue">
           We believe a great user experience is not just intuitive it’s
           entertaining. Because clarity is good, but delight is better.
         </p>
@@ -73,7 +73,7 @@ const HeroSection = () => {
       <div className="w-full flex">
         <div className="w-1/2  space-y-10">
           <div className="w-[60%] ">
-            <p className="spirit text_blue text-3xl">
+            <p className="pfn text_blue text-3xl">
               We make stuff look good. We make it work better. Creative.
               Scalable. Reliable. Fresh. Tech-first. Entertaining.
             </p>
@@ -83,7 +83,7 @@ const HeroSection = () => {
             <div
               ref={gridRefl}
               style={{
-                gridTemplateColumns:"repeat(20,1fr)"
+                gridTemplateColumns: "repeat(20,1fr)"
               }}
               className=" absolute pointer-events-none top-0 left-0 w-full h-full  z-40 grid"
             >
@@ -92,8 +92,8 @@ const HeroSection = () => {
               ))}
             </div>
 
-            <img src={'/images/about/AboutMainBg.jpg'} alt="l-Img"  className="cover"/>
-            
+            <img src={'/images/about/AboutMainBg.jpg'} alt="l-Img" className="cover" />
+
           </div>
 
         </div>
@@ -124,17 +124,17 @@ const HeroSection = () => {
             {/* Img */}
             <div className="w-full aspect-5/6 mt-8 bg-[#002BBA] overflow-hidden relative">
               <div
-              ref={gridRefR}
+                ref={gridRefR}
                 style={{
-                gridTemplateColumns:"repeat(20,1fr)"
-              }}
-              className=" absolute pointer-events-none top-0 left-0 w-full  z-40 grid"
-            >
-              {Array.from({ length: totalCells }).map((_, i) => (
-                <div key={i} className="bg-white opacity-100" />
-              ))}
-            </div>
-            <img src={'/images/about/AboutMainBg.jpg'} alt="l-Img"  className="cover"/>
+                  gridTemplateColumns: "repeat(20,1fr)"
+                }}
+                className=" absolute pointer-events-none top-0 left-0 w-full  z-40 grid"
+              >
+                {Array.from({ length: totalCells }).map((_, i) => (
+                  <div key={i} className="bg-white opacity-100" />
+                ))}
+              </div>
+              <img src={'/images/about/AboutMainBg.jpg'} alt="l-Img" className="cover" />
             </div>
           </div>
         </div>

@@ -4,10 +4,10 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='w-full min-h-screen flex flex-col'>
+    <>
         <Exp_HeroSection />
         <Our_Services/>
-    </div>
+    </>
   )
 }
 

@@ -1,4 +1,11 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef } from "react";
+
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
+
 
 const servicesContent = [
   {
@@ -6,59 +13,227 @@ const servicesContent = [
     title: "Website Development",
     description:
       "We Design And Develop Websites That Are More Than Just Good-Looking—They’re Engineered For Speed, Clarity, And Conversion.",
-    buttonText: "VIEW MORE",
-    image: "/images/hourglass.png",
   },
   {
     id: 2,
     title: "E-Commerce Development",
     description:
       "We Design And Develop Websites That Are More Than Just Good-Looking—They’re Engineered For Speed, Clarity, And Conversion.",
-    buttonText: "VIEW MORE",
-    image: "/images/hand.png",
   },
   {
     id: 3,
     title: "Branding, Marketing & SEO",
     description:
       "We Design And Develop Websites That Are More Than Just Good-Looking—They’re Engineered For Speed, Clarity, And Conversion.",
-    buttonText: "VIEW MORE",
-    image: "/images/branding.png",
   },
   {
     id: 4,
     title: "Branding, Marketing & SEO",
     description:
       "We Design And Develop Websites That Are More Than Just Good-Looking—They’re Engineered For Speed, Clarity, And Conversion.",
-    buttonText: "VIEW MORE",
-    image: "/images/branding.png",
   },
 ];
 
 const Our_Services = () => {
+
+  const canvasRef = useRef(null)
+  const parentRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext("2d")
+
+    const STRIPS = 32
+    const imageSources = [
+      "/images/expertisePage/bit-mano.svg",
+      "/images/expertisePage/bit-pocima.svg",
+      "/images/expertisePage/bit-reloj.svg",
+      "/images/expertisePage/bit-trofeo.svg",
+    ]
+
+    const images = []
+    let loaded = 0
+    const state = { progress: 0 }
+
+    let sx = 0, sy = 0, sw = 0, sh = 0
+
+    function setupImage(img) {
+      const imgRatio = img.width / img.height
+      const canvasRatio = canvas.width / canvas.height
+
+      if (imgRatio > canvasRatio) {
+        sh = img.height
+        sw = sh * canvasRatio
+        sx = (img.width - sw) / 2
+        sy = 0
+      } else {
+        sw = img.width
+        sh = sw / canvasRatio
+        sx = 0
+        sy = (img.height - sh) / 2
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      const stripSrcH = sh / STRIPS
+      const stripDstH = canvas.height / STRIPS
+
+      const TOTAL = images.length - 1
+      const segment = Math.min(TOTAL - 1, Math.floor(state.progress))
+      const t = state.progress - segment // 0 → 1
+
+      const current = images[segment]
+      const next = images[segment + 1]
+
+      const stagger = 0.6 / STRIPS
+      const animDuration = 0.1
+
+      for (let i = 0; i < STRIPS; i++) {
+        const revI = STRIPS - 1 - i
+
+        const srcY = sy + revI * stripSrcH
+        const dstY = revI * stripDstH
+
+        const delay = i * stagger
+
+        let r = (t - delay) / animDuration
+        r = Math.max(0, Math.min(1, r))
+
+        const h1 = stripDstH * (1 - r)
+        if (h1 > 0) {
+          ctx.save()
+          ctx.beginPath()
+          ctx.rect(
+            0,
+            dstY + (stripDstH - h1),
+            canvas.width,
+            h1
+          )
+          ctx.clip()
+          ctx.drawImage(
+            current,
+            sx, srcY, sw, stripSrcH,
+            0, dstY,
+            canvas.width, stripDstH
+          )
+          ctx.restore()
+        }
+
+        const h2 = stripDstH * r
+        if (h2 > 0) {
+          ctx.save()
+          ctx.beginPath()
+          ctx.rect(
+            0,
+            dstY + (stripDstH - h2),
+            canvas.width,
+            h2
+          )
+          ctx.clip()
+          ctx.drawImage(
+            next,
+            sx, srcY, sw, stripSrcH,
+            0, dstY,
+            canvas.width, stripDstH
+          )
+          ctx.restore()
+        }
+      }
+    }
+
+
+    function initScroll() {
+      const TOTAL = images.length - 1
+
+      gsap.to(state, {
+        progress: TOTAL,
+        ease: "linear",
+        scrollTrigger: {
+          trigger: parentRef.current,
+          start: "5% top",
+          end: "bottom bottom",
+          scrub: true
+        },
+        onUpdate: draw
+      })
+    }
+    imageSources.forEach(src => {
+      const img = new Image()
+      img.src = src
+      img.onload = () => {
+        loaded++
+        if (loaded === imageSources.length) {
+          setupImage(img)
+          initScroll()
+          draw()
+        }
+      }
+      images.push(img)
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill())
+    }
+  }, [])
+
   return (
-    <div className={`w-full h-fit flex flex-col relative px-10 py-10`}>
-      {servicesContent.map((item, index) => {
+    <div ref={parentRef} className={` serv_page_paren  w-full padding relative py-0! h-[400vh] `}>
+
+      <div className="sticky w-full h-screen top-0 center  ">
+        <canvas
+          ref={canvasRef}
+          width={400}
+          height={400}
+          className="block"
+        />
+      </div>
+
+      <div className="absolute padding w-full h-screen left-0 top-0">
+        <div className="w-full h-screen grid grid-cols-[70%_30%]">
+          <div className="w-1/2">
+            <p className=" w-[70%] text-6xl text_blue pfn">
+              {servicesContent[0].title}
+            </p>
+          </div>
+          <div className=" space-y-10 ">
+            <p className="text-3xl font-medium text_blue">
+              {servicesContent[0].description}
+            </p>
+
+            <button className="px-4 w-fit  font-semibold text-sm uppercase text_blue py-2 rounded-md border-[#012CBA] border-[2px] ">
+              <p className="translate-y-px">
+                view more
+              </p>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {servicesContent.slice(1, 4).map((item, index) => {
         return (
           <div
             key={index}
-            className={`w-full h-screen flex justify-start py-10 ${index == 0 ? "" : "border-t border-black/40"}  `}
+            className={`w-full h-screen flex justify-start pt-[2.5rem] border-t border-black/50  `}
           >
-            <div className="w-full h-fit flex justify-between">
+            <div className="w-full grid grid-cols-[70%_30%]">
               {/* Left */}
-              <div className="max-w-[10%] h-fit flex">
-                <h1 className="text-[3rem] text-[#002BBA] leading-[3.2rem] spirit">
+              <div className="w-1/2">
+                <p className=" w-[70%] text-6xl text_blue pfn">
                   {item.title}
-                </h1>
+                </p>
               </div>
               {/* Right */}
-              <div className="w-[30%] h-fit flex flex-col ">
-                <p className="text-[2rem] text-justify leading-[2.2rem] text-[#002BBA] ibm">
+              <div className=" space-y-10 ">
+                <p className="text-3xl font-medium text_blue">
                   {item.description}
                 </p>
 
-                <button className="w-fit rounded-sm font-semibold h-fit text-[1rem] ibm  text-[#002BBA] mt-5 tracking-tight leading-[1rem] px-2.5 py-2.5 rounded-sm border-[1.5px] border-[#002BBA]">
-                  {item.buttonText}
+                <button className="px-4 w-fit  font-semibold text-sm uppercase text_blue py-2 rounded-md border-[#012CBA] border-[2px] ">
+                  <p className="translate-y-px">
+                    view more
+                  </p>
                 </button>
               </div>
             </div>
@@ -66,11 +241,6 @@ const Our_Services = () => {
         );
       })}
 
-      <div className="w-full h-screen fixed top-0 left-0 flex justify-center items-center z-[-1] ">
-        <div className=" w-[300px] aspect-square absolute z-10">
-            <img src={'/images/Try.svg'} alt="try" className="w-full h-full object-center object-cover" />
-        </div>
-      </div>
     </div>
   );
 };

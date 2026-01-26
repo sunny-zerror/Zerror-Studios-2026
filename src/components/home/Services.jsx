@@ -140,16 +140,16 @@ const Services = () => {
         })}
 
         <div className="expand_circ overflow-hidden size-3.5 z-10 center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 shrink-0 bg_blue rounded-full ">
-          <div className="w-screen  padding text-white grid grid-cols-[28%_29%_43%]">
+          <div className="w-screen  padding text-white grid grid-cols-[28%_30%_42%]">
             <div className="">
-              <p className=' split_wrd text-6xl  spirit leading-none'>Our <br /> Clients</p>
+              <p className=' split_wrd text-6xl  pfn leading-none'>Our <br /> Clients</p>
             </div>
-            <div className="text-xs  leading-tight pt-4">
+            <div className="text-xs pt-4">
               <p className='split_wrd'>Brands we’ve </p>
               <p className='split_wrd'>worked with.</p>
             </div>
             <div className="text-4xl  pl-2">
-              <p className=" split_wrd font-medium"> <span className='opacity-0 pointer-events-none'>...........................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful.</p>
+              <p className=" split_wrd font-medium leading-11"> <span className='opacity-0 pointer-events-none'>...........................</span> We work with startups, studios, and growing brands to design and build digital products that are clear, scalable, and impactful. From strategy to launch, we focus on thoughtful design, clean code, and meaningful user experiences.</p>
             </div>
           </div>
         </div>

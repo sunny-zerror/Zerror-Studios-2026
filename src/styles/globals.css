@@ -123,19 +123,11 @@ button {
 
 /* --------------------------------------------------- */
 
-
-/*==== form Div====  */
-.form{
- 
-  position:relative;
-  overflow:hidden;
-  margin-bottom:10px;
-}
 .form input{
   width:100%;
   height:100%;
   color:#ffffff;
-  padding-top:25px;
+  padding-top:1rem;
   border:none;
   outline:none;
 }
@@ -152,7 +144,7 @@ button {
   content:"";
   position:absolute;
   width:100%;
-  height:100%;
+  border-radius: 1000px;
   border-bottom:3px solid #ffffff;
   bottom:-1px;
   left:0px;
@@ -167,14 +159,13 @@ button {
 }
 .form input:focus + .label-name .content-name ,
 .form input:valid+ .label-name .content-name{
-  transform:translateY(-150%);
-  font-size:14px;
+  transform:translateY(-100%);
+  font-size:1rem;
   color:#ffffff;
 }
 .form input:focus+ .label-name::after, 
 .form input:valid+ .label-name::after {
   transform:translateX(0%);
-   
 }
 .made{
   position:absolute;

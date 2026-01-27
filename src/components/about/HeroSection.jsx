@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-import PixelTrail from "@/components/about/PixelTrail";
 
 const HeroSection = () => {
   const rows = 20;
@@ -48,22 +47,10 @@ const HeroSection = () => {
     };
   }, []);
 
-
-  useEffect(() => {
-    // Animate the form once when it mounts
-    gsap.to('.aboutTitle', {
-      opacity: 1,
-      y: 0,          // slide up from below
-      duration: 1,
-      ease: "power3.out",
-      stagger: 0.1,   // if multiple child elements, animate them one by one
-    });
-  }, []);
-
   return (
-    <div className="w-full   padding">
+    <div className=" about_hero_paren  w-full   padding">
 
-      <div className="w-full aboutTitle flex py-44  opacity-0">
+      <div className="w-full aboutTitle flex py-44  ">
         <p className="text-8xl leading-none capitalize pfn text_blue">
           We believe a great user experience is not just intuitive it’s
           entertaining. Because clarity is good, but delight is better.
@@ -103,18 +90,18 @@ const HeroSection = () => {
           {/* cont*/}
           <div className="w-1/2 flex flex-col gap-3">
             {/* Text */}
-            <p className=" capitalize text-lg  font-semibold">
+            <p className=" uppercase text-lg  font-semibold">
               Why we exist
             </p>
             <div className="w-full flex flex-col gap-3">
-              <p className="text-sm font-medium leading-tight">
+              <p className=" font-medium leading-tight">
                 We’re here to help you stand out—even in a crowded digital
                 world. From turning napkin sketches into fully functional
                 platforms to moving fast without breaking your brand, we focus
                 on building experiences that scale smoothly and entertain, not
                 just inform or convert.
               </p>
-              <p className="text-sm font-medium leading-tight">
+              <p className=" font-medium leading-tight">
                 While most teams do either design or development, few truly
                 understand both—and even fewer do it fast. We’re here to change
                 that.
@@ -126,12 +113,12 @@ const HeroSection = () => {
               <div
                 ref={gridRefR}
                 style={{
-                  gridTemplateColumns: "repeat(20,1fr)"
+                  gridTemplateColumns: "repeat(10,1fr)"
                 }}
-                className=" absolute pointer-events-none top-0 left-0 w-full  z-40 grid"
+                className=" absolute pointer-events-none top-0 left-0 w-full h-full  z-40 grid"
               >
                 {Array.from({ length: totalCells }).map((_, i) => (
-                  <div key={i} className="bg-white opacity-100" />
+                  <div key={i} className="bg-white w-full aspect-square opacity-100" />
                 ))}
               </div>
               <img src={'/images/about/AboutMainBg.jpg'} alt="l-Img" className="cover" />

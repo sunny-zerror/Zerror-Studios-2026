@@ -1,362 +1,328 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import Flip from "gsap/dist/Flip";
+import Image from "next/image";
+import Form from "./Form";
 gsap.registerPlugin(Flip);
 
 gsap.registerPlugin(ScrollTrigger);
 
-const OurTeam = ({
-  SetmemberActive,
-  flipStateRef,
-  FormAnimDeactive,
-  SetFormAnimDeactive,
-}) => {
+const teamMembers = [
+  {
+    id: 1,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/1.png",
+  },
+  {
+    id: 2,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/2.png",
+  },
+  {
+    id: 3,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/3.png",
+  },
+  {
+    id: 4,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/4.png",
+  },
+  {
+    id: 5,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/1.png",
+  },
+  {
+    id: 6,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/2.png",
+  },
+  {
+    id: 7,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/3.png",
+  },
+  {
+    id: 8,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/4.png",
+  },
+  {
+    id: 9,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/2.png",
+  },
+  {
+    id: 10,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/3.png",
+  },
+  {
+    id: 11,
+    name: "ARTUR SHARF",
+    role: "Co-Founder And Lead Architect",
+    img: "/images/outTeam/3.png",
+  },
+];
 
-  const teamMembers = [
-    {
-      id: 1,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/1.png",
-    },
-    {
-      id: 2,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/2.png",
-    },
-    {
-      id: 3,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/3.png",
-    },
-    {
-      id: 4,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/4.png",
-    },
-    {
-      id: 5,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/1.png",
-    },
-    {
-      id: 6,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/2.png",
-    },
-    {
-      id: 7,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/3.png",
-    },
-    {
-      id: 8,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/4.png",
-    },
-    {
-      id: 9,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/2.png",
-    },
-    {
-      id: 10,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/3.png",
-    },
-    {
-      id: 11,
-      name: "ARTUR SHARF",
-      role: "Co-Founder And Lead Architect",
-      img: "/images/outTeam/3.png",
-    },
-    {
-      id: 99,
-    },
-  ];
+const OurTeam = () => {
 
-  // const ActiveAinmationGrid = (selector) => {
-  //   const GT = gsap.timeline();
-
-  //   // ❌ hovered grid ke pixels
-  //   const excludedPixels = document.querySelectorAll(`${selector} .GDdiv`);
-
-  //   // ✅ saare pixels
-  //   const allPixels = document.querySelectorAll(".GDdiv");
-
-  //   // 🔥 baaki sab (except hovered)
-  //   const pixelsToAnimate = Array.from(allPixels).filter(
-  //     (el) => !Array.from(excludedPixels).includes(el)
-  //   );
-
-  //   // safety
-  //   gsap.killTweensOf(pixelsToAnimate);
-
-  //   GT.to(pixelsToAnimate, {
-  //     opacity: 1,
-  //     duration: 0.001,
-  //     stagger: {
-  //       each: 0.0001,
-  //       from: "random",
-  //     },
-  //     ease: "expo.out",
-  //   });
-
-  //   // GT.to(pixelsToAnimate, {
-  //   //   opacity: 0,
-  //   //   duration: 0.03,
-  //   //   stagger: {
-  //   //     each: 0.001,
-  //   //     from: "random",
-  //   //   },
-  //   //   ease: "expo.out",
-  //   // });
-  // };
-
-  // const DeActiveAinmationGrid = (selector) => {
-  //   const GTB = gsap.timeline();
-
-  //   // ❌ hovered grid ke pixels
-  //   const excludedPixels = document.querySelectorAll(`${selector} .GDdiv`);
-
-  //   // ✅ saare pixels
-  //   const allPixels = document.querySelectorAll(".GDdiv");
-
-  //   // 🔥 baaki sab (except hovered)
-  //   const pixelsToAnimate = Array.from(allPixels).filter(
-  //     (el) => !Array.from(excludedPixels).includes(el)
-  //   );
-
-  //   // safety
-  //   gsap.killTweensOf(pixelsToAnimate);
-
-  //   GTB.to(pixelsToAnimate, {
-  //     opacity: 0,
-  //     duration: 0.001,
-  //     stagger: {
-  //       each: 0.0001,
-  //       from: "random",
-  //     },
-  //     ease: "expo.out",
-  //   });
-  // };
+  const [isOpen, setIsOpen] = useState(false);
+  const ctaRef = useRef(null);
+  const placeholderRef = useRef(null);
 
 
-  // let scrollY = 0;
+  const cardsRef = useRef([]);
+  const tlRef = useRef([]);
 
-  // const disableScroll = () => {
-  //   scrollY = window.scrollY;
+  useEffect(() => {
+    cardsRef.current.forEach((card, i) => {
+      const blocks = card.querySelectorAll(".grid_blocks");
+      const border = card.querySelector(".card_border");
 
-  //   document.body.style.position = "fixed";
-  //   document.body.style.top = `-${scrollY}px`;
-  //   document.body.style.left = "0";
-  //   document.body.style.right = "0";
-  //   document.body.style.width = "100%";
-  //   document.body.style.overflow = "hidden";
+      tlRef.current[i] = gsap.timeline({
+        paused: true,
+        defaults: {
+          ease: "power2.out",
+        },
+      })
+        // blocks animation
+        .to(blocks, {
+          opacity: 1,
+          duration: 0.01,
+          stagger: {
+            each: 0.01,
+            from: "random",
+          },
+        }, 0)
 
-  //   // GSAP ScrollTrigger bhi freeze
-  //   if (typeof ScrollTrigger !== "undefined") {
-  //     ScrollTrigger.getAll().forEach(st => st.disable());
-  //   }
-  // };
-
-  // const enableScroll = () => {
-  //   document.body.style.position = "";
-  //   document.body.style.top = "";
-  //   document.body.style.left = "";
-  //   document.body.style.right = "";
-  //   document.body.style.width = "";
-  //   document.body.style.overflow = "";
-
-  //   window.scrollTo(0, scrollY);
-
-  //   if (typeof ScrollTrigger !== "undefined") {
-  //     ScrollTrigger.getAll().forEach(st => st.enable());
-  //   }
-  // };
-
-
-
-
-
-  /* ---------------- GRID ANIMATION ---------------- */
-
-  const animateGridExcept = useCallback((excludeSelector, opacity) => {
-    const excluded = document.querySelectorAll(`${excludeSelector} .GDdiv`);
-    const excludedSet = new Set(excluded);
-
-    const pixels = gsap.utils
-      .toArray(".GDdiv")
-      .filter((el) => !excludedSet.has(el));
-
-    gsap.killTweensOf(pixels);
-
-    gsap.to(pixels, {
-      opacity,
-      duration: 0.1,
-      stagger: {
-        each: 0.01,
-        from: "random",
-      },
-      ease: "expo.out",
-      overwrite: "auto",
+        // border animation (sync with blocks)
+        .to(border, {
+          opacity: 1,
+          duration: 0.5,
+          ease: "linear",
+        }, 0);
     });
   }, []);
 
-  const ActiveAinmationGrid = (selector) => animateGridExcept(selector, 1);
-
-  const DeActiveAinmationGrid = (selector) => animateGridExcept(selector, 0);
-
-  const div99Ref = useRef(null);
-
-  const ActiveForm = () => {
-    if (window.lenis) { window.lenis.stop() }
-    // 1️⃣ Current state capture karo
-    // 🔥 Save original position
-    flipStateRef.current = Flip.getState(div99Ref.current);
-
-    const state = Flip.getState(div99Ref.current);
-
-    // 2️⃣ Final fullscreen styles apply karo (no animation yet)
-    div99Ref.current.style.position = "fixed";
-    div99Ref.current.style.top = "50%";
-    div99Ref.current.style.left = "50%";
-    div99Ref.current.style.width = "75vw";
-    div99Ref.current.style.height = "80vh";
-    div99Ref.current.style.transform = "translate(-50%, -50%)";
-    div99Ref.current.style.zIndex = "120";
-
-    // 3️⃣ Text fade
-    gsap.to(".OTText", {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power4.Out",
-    });
-
-    // 4️⃣ FLIP animation (magic ✨)
-    Flip.from(state, {
-      duration: 1.2,
-      ease: "power3.inOut",
-      absolute: true,
-      onComplete: () => {
-        SetmemberActive(true);
-        SetFormAnimDeactive(true);
-      },
+  const handleEnter = (index) => {
+    tlRef.current.forEach((tl, i) => {
+      if (!tl) return;
+      i !== index ? tl.play() : tl.pause(0);
     });
   };
 
-  const DeactivateForm = () => {
-    if (window.lenis) { window.lenis.start() }
-    // 1️⃣ Capture fullscreen state
-    const state = Flip.getState(div99Ref.current);
+  const handleLeave = () => {
+    tlRef.current.forEach((tl) => {
+      if (!tl) return;
+      tl.reverse();
+    });
+  };
 
-    // 2️⃣ Reset styles (original grid styles)
-    Object.assign(div99Ref.current.style, {
-      position: "",
-      top: "",
-      left: "",
-      width: "",
-      height: "",
-      transform: "",
-      zIndex: "",
+  const openForm = () => {
+
+    const card = ctaRef.current;
+    const rect = card.getBoundingClientRect();
+
+    const placeholder = document.createElement("div");
+    placeholder.style.width = `${rect.width}px`;
+    placeholder.style.height = `${rect.height}px`;
+    card.parentNode.insertBefore(placeholder, card);
+    placeholderRef.current = placeholder;
+
+    gsap.set(card, {
+      position: "fixed",
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+      zIndex: 999999,
     });
 
-    // 3️⃣ Fade text back
-    gsap.to(".OTText", {
+    setIsOpen(true);
+    if (window.lenis) window.lenis.stop();
+
+    gsap.to(card, {
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      duration: 0.8,
+      ease: "power3.inOut",
+    });
+    gsap.set(".form_paren", {
+      display: "flex",
+      delay: 0.8
+    });
+    gsap.to(".inner_paren", {
+      width: "90%",
+      height: "44vw",
+      duration: 0.8,
+      ease: "power3.inOut",
+    });
+    gsap.to(".dummy_txt", {
+      opacity: 0,
+      duration: 0.4,
+      ease: "power3.inOut",
+    });
+    gsap.to(".form_paren", {
       opacity: 1,
       duration: 0.4,
-      ease: "power2.inOut",
-    });
-
-    // 4️⃣ FLIP → back to grid
-    Flip.from(state, {
-      duration: 1,
+      delay: 0.9,
       ease: "power3.inOut",
-      absolute: true,
-      onComplete: () => { SetmemberActive(false) }
     });
-  };
+    gsap.to(".form_blur_overlay", {
+      opacity: 1,
+      pointerEvents: "auto",
+      duration: 0.8,
+      ease: "power3.inOut",
+    })
+  }
 
-  useEffect(() => {
-    // jab FormAnimDeactive false ho
-    if (FormAnimDeactive === false && div99Ref.current) {
-      DeactivateForm();
-    }
-  }, [FormAnimDeactive]);
+  const closeForm = () => {
+
+    const card = ctaRef.current;
+    const rect = placeholderRef.current.getBoundingClientRect();
+
+    gsap.to(".form_paren", {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power3.inOut",
+    });
+    gsap.set(".form_paren", {
+      display: "none",
+      delay: 0.2
+    });
+
+    gsap.to(".inner_paren", {
+      width: "100%",
+      height: "100%",
+      duration: 0.5,
+      delay: 0.3,
+      ease: "power3.inOut",
+    });
+    gsap.to(".dummy_txt", {
+      opacity: 1,
+      duration: 0.4,
+      delay: 0.4,
+      ease: "power3.inOut",
+    });
+
+    gsap.to(card, {
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+      duration: 0.8,
+      delay: 0.3,
+      ease: "power3.inOut",
+      onComplete: () => {
+        gsap.set(card, {
+          position: "relative",
+          top: "auto",
+          left: "auto",
+          width: "100%",
+          height: "100%",
+          zIndex: "auto",
+        });
+
+        placeholderRef.current.remove();
+        placeholderRef.current = null;
+        setIsOpen(false);
+        if (window.lenis) window.lenis.start();
+      },
+    });
+
+    gsap.to(".form_blur_overlay", {
+      opacity: 0,
+      duration: 0.8,
+      pointerEvents: "none",
+      ease: "power3.inOut",
+    })
+
+  }
 
 
   return (
-    <div className="w-full min-h-screen z-100 relative bg-white  ">
-      <div className=" w-full px-10 pb-42">
-        <div className="grid  gap-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {teamMembers.map((member) => {
-            // 👉 Special Blue Card for id 99
-            if (member.id === 99) {
-              return (
-                <div
-                  onClick={() => { ActiveForm() }}
-                  key={member.id}
-                  ref={div99Ref}
-                  className="w-full h-full div99  aspect-[4/5] bg-[#002BBA] hover:bg-[#0735cc] flex flex-col justify-end p-6 gap-[20px] text-white cursor-pointer"
-                >
-                  <h2 className="text-[3.1rem] OTText leading-[3.1rem] RF_Font font-semibold pfn ">
-                    Become A <br /> Zerrorian
-                  </h2>
+    <div className="w-full relative">
+      <div className=" form_blur_overlay opacity-0 fixed top-0 left-0 z-[9999] backdrop-blur-xs pointer-events-none w-full h-screen"></div>
+      <div className="w-full px-10 pb-42">
+        <div className="grid gap-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
-                  <p className="mt-4 text-[1rem] OTText leading-[1.1rem] opacity-90">
-                    Join us in creating great work <br />
-                    share your resume.
-                  </p>
-                </div>
-              );
-            }
-
-            return (
-              <div key={member.id} className="text-start relative">
-                <div className="w-full h-fit relative ">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full aspect-[4/5] object-cover object-top"
-                  />
-
-                  {/* Grid */}
+          {teamMembers.map((member, index) => (
+            <div
+              key={member.id}
+              ref={(el) => (cardsRef.current[index] = el)}
+              onMouseEnter={() => handleEnter(index)}
+              onMouseLeave={handleLeave}
+              className="   relative overflow-hidden"
+            >
+              <div className="card_border absolute inset-0 border border-black/10 opacity-0 pointer-events-none z-20" />
+              {/* Blocks */}
+              <div className="absolute inset-0 grid grid-cols-7 z-10">
+                {[...Array(70)].map((_, i) => (
                   <div
-                    onMouseEnter={() =>
-                      ActiveAinmationGrid(`.GridBox${member.id} `)
-                    }
-                    onMouseLeave={() =>
-                      DeActiveAinmationGrid(`.GridBox${member.id} `)
-                    }
-                    style={{ gridTemplateColumns: "repeat(10, 1fr)" }}
-                    className={` GridBox${member.id} absolute top-0 left-0 w-full h-full grid`}
-                  >
-                    {[...Array(10 * 10)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-full GDdiv h-full bg-white opacity-0 shrink-0"
-                      />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-xl font-semibold leading-none mt-2 mb-1 uppercase text_blue">
+                    key={i}
+                    className="grid_blocks shrink-0  w-full aspect-square bg-white opacity-0 pointer-events-none"
+                  />
+                ))}
+              </div>
+
+              {/* Image */}
+              <div className="w-full aspect-4/5">
+                <Image
+                  width={400}
+                  height={500}
+                  src={member.img}
+                  alt={member.name}
+                  className="cover"
+                />
+              </div>
+
+              {/* Text */}
+              <div>
+                <p className="text-xl font-semibold mt-2 uppercase text_blue">
                   {member.name}
                 </p>
-                <p className="text_blue  leading-none text-sm">{member.role}</p>
+                <p className="text_blue text-sm">{member.role}</p>
               </div>
-            );
-          })}
+            </div>
+          ))}
+
+          <div
+            ref={ctaRef}
+            onClick={!isOpen ? openForm : undefined}
+            className="w-full h-full center overflow-hidden relative"
+          >
+            <div className=" inner_paren w-full h-full overflow-hidden text-white bg_blue  ">
+
+              <Form closeForm={closeForm} />
+
+              <div className="dummy_txt absolute  bottom-8 left-8 space-y-5 w-[80%]">
+                <p className="pfn leading-none text-6xl">
+                  Become A <br /> Zerrorian
+                </p>
+                <p className="leading-tight">
+                  Join us in creating great work share your resume.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>

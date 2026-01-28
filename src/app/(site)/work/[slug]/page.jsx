@@ -41,144 +41,133 @@ const projectsData = [
 
 const WorkDetail = () => {
 
-  useEffect(() => {
-    const wrk_anim_txt = SplitText.create(".wrk_anim_txt", {
-      type: "lines",
-      linesClass: "wrk-line",
-    });
+  const containerRef = useRef(null)
 
-    const more_project_header_split_wrd = SplitText.create(
-      ".more_project_header_split_wrd",
-      {
+  useGSAP(
+    () => {
+      ScrollTrigger.refresh()
+      const wrk_anim_txt = SplitText.create(".wrk_anim_txt", {
         type: "lines",
         linesClass: "wrk-line",
-      }
-    );
-
-    [wrk_anim_txt.lines, more_project_header_split_wrd.lines].forEach(lines => {
-      lines.forEach(line => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "overflow-hidden block";
-
-        line.parentNode.insertBefore(wrapper, line);
-        wrapper.appendChild(line);
-
-        line.classList.add("block");
       });
-    });
 
+      const more_project_header_split_wrd = SplitText.create(
+        ".more_project_header_split_wrd",
+        {
+          type: "lines",
+          linesClass: "wrk-line",
+        }
+      );
 
-    gsap.to(".wrk_hero_video", {
-      y: 400,
-      filter: "brightness(0.3)",
-      ease: "linear",
-      scrollTrigger: {
-        trigger: ".wrk_hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-        // markers:true
-      }
-    })
+      gsap.to(".wrk_hero_video", {
+        y: 400,
+        filter: "brightness(0.3)",
+        ease: "linear",
+        scrollTrigger: {
+          trigger: ".wrk_hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          // markers:true
+        }
+      })
 
-    gsap.fromTo(wrk_anim_txt.lines, {
-      yPercent: 100,
-      opacity: 0,
-    }, {
-      yPercent: 0,
-      opacity: 1,
-      ease: "power3.out",
-      stagger: 0.03,
-      scrollTrigger: {
-        trigger: ".wrk_hero",
-        start: "bottom 30%",
-        toggleActions: "play none none reverse",
-        // scrub: true,
-        // markers: true
-      }
-    })
+      gsap.fromTo(wrk_anim_txt.lines, {
+        yPercent: 100,
+        opacity: 0,
+      }, {
+        yPercent: 0,
+        opacity: 1,
+        ease: "power3.out",
+        stagger: 0.03,
+        scrollTrigger: {
+          trigger: ".wrk_hero",
+          start: "bottom 30%",
+          toggleActions: "play none none reverse",
+          // scrub: true,
+          // markers: true
+        }
+      })
 
-    gsap.to(".mob_1", {
-      y: -300,
-      ease: "linear",
-      scrollTrigger: {
-        trigger: ".mob_1",
-        start: "top bottom",
-        end: "bottom top",
-        // toggleActions: "play none none reverse",
-        scrub: true,
-        // markers: true
-      }
-    })
-    gsap.to(".mob_2", {
-      y: -300,
-      ease: "linear",
-      scrollTrigger: {
-        trigger: ".mob_2",
-        start: "top bottom",
-        end: "bottom top",
-        // toggleActions: "play none none reverse",
-        scrub: true,
-        // markers: true
-      }
-    })
-    gsap.to(".mob_3", {
-      y: -300,
-      ease: "linear",
-      scrollTrigger: {
-        trigger: ".mob_3",
-        start: "top bottom",
-        end: "bottom top",
-        // toggleActions: "play none none reverse",
-        scrub: true,
-        // markers: true
-      }
-    })
-    const clip_img_tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".clip_img_effect",
-        start: "top 60%",
-        toggleActions: "play none none reverse",
-        // scrub: true,
-        // markers: true
-      }
-    })
-    clip_img_tl.to(".clip_img_effect", {
-      opacity: 1,
-      clipPath: "inset(0%)",
-      stagger: 0.03,
-      duration: 1,
-      ease: "expo.out",
-    })
-    clip_img_tl.to(".clip_img_effect_img", {
-      scale: 1,
-      stagger: 0.03,
-      duration: 1,
-      ease: "expo.out",
-    }, "<")
+      gsap.to(".mob_1", {
+        y: -300,
+        ease: "linear",
+        scrollTrigger: {
+          trigger: ".mob_1",
+          start: "top bottom",
+          end: "bottom top",
+          // toggleActions: "play none none reverse",
+          scrub: true,
+          // markers: true
+        }
+      })
+      gsap.to(".mob_2", {
+        y: -300,
+        ease: "linear",
+        scrollTrigger: {
+          trigger: ".mob_2",
+          start: "top bottom",
+          end: "bottom top",
+          // toggleActions: "play none none reverse",
+          scrub: true,
+          // markers: true
+        }
+      })
+      gsap.to(".mob_3", {
+        y: -300,
+        ease: "linear",
+        scrollTrigger: {
+          trigger: ".mob_3",
+          start: "top bottom",
+          end: "bottom top",
+          // toggleActions: "play none none reverse",
+          scrub: true,
+          // markers: true
+        }
+      })
+      const clip_img_tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".clip_img_effect",
+          start: "top 60%",
+          toggleActions: "play none none reverse",
+          // scrub: true,
+          // markers: true
+        }
+      })
+      clip_img_tl.to(".clip_img_effect", {
+        opacity: 1,
+        clipPath: "inset(0%)",
+        stagger: 0.03,
+        duration: 1,
+        ease: "expo.out",
+      })
+      clip_img_tl.to(".clip_img_effect_img", {
+        scale: 1,
+        stagger: 0.03,
+        duration: 1,
+        ease: "expo.out",
+      }, "<")
 
+      gsap.fromTo(more_project_header_split_wrd.lines, {
+        yPercent: 100,
+        opacity: 0,
+      }, {
+        yPercent: 0,
+        opacity: 1,
+        ease: "power3.out",
+        stagger: 0.03,
+        scrollTrigger: {
+          trigger: ".more_project_header",
+          start: "top 50%",
+          toggleActions: "play none none reverse",
+          // scrub: true,
+          // markers: true
+        }
+      })
 
-    gsap.fromTo(more_project_header_split_wrd.lines, {
-      yPercent: 100,
-      opacity: 0,
-    }, {
-      yPercent: 0,
-      opacity: 1,
-      ease: "power3.out",
-      stagger: 0.03,
-      scrollTrigger: {
-        trigger: ".more_project_header",
-        start: "top 50%",
-        toggleActions: "play none none reverse",
-        // scrub: true,
-        // markers: true
-      }
-    })
-
-  }, [])
-
-  const wrapperRef = useRef(null);
-  const dragRef = useRef(null);
+    },
+    { scope: containerRef }
+  )
 
   useEffect(() => {
 
@@ -204,14 +193,36 @@ const WorkDetail = () => {
   }, []);
 
   return (
-    <>
-      <div className="w-full wrk_hero overflow-hidden h-screen">
-        <video className='cover wrk_hero_video brightness-100 ' loop autoPlay muted playsInline src="https://www.pexels.com/download/video/16834483/"></video>
+    <div ref={containerRef}>
+
+      <div className="w-full wrk_hero overflow-hidden h-screen relative">
+        <video
+          className="cover wrk_hero_video brightness-100"
+          src="/images/work/work_video.mp4"
+          poster="/images/work/video_thumbnail.png"
+          preload="auto"
+          muted
+          autoPlay
+          loop
+          playsInline
+          onLoadedData={(e) => {
+            gsap.fromTo(
+              e.currentTarget,
+              { opacity: 0 },
+              {
+                opacity: 1,
+                duration: 0.6,
+                ease: "power2.out",
+              }
+            )
+            ScrollTrigger.refresh()
+          }}
+        />
       </div>
 
       <div className="w-full py-32! text_blue  padding grid grid-cols-[80%_20%]">
-        <div className=" w-[60%] uppercase space-y-10">
-          <p className='wrk_anim_txt font-bold text-8xl '>
+        <div className=" w-[60%]  space-y-10">
+          <p className='wrk_anim_txt pfn  text-8xl '>
             Disrupting the Norm
           </p>
           <div className="  space-y-5  capitalize leading-tight text-lg">
@@ -251,7 +262,6 @@ const WorkDetail = () => {
 
       </div>
 
-
       <div className="wrk_images_parent w-full">
         <div className="w-full center flex-col relative">
           <img className='w-full h-full absolute z-[-1] ' src="/images/work/bg_img1.png" alt="" />
@@ -286,7 +296,6 @@ const WorkDetail = () => {
         </div>
       </div>
 
-
       <div className=" more_project_header w-screen py-32!  padding text_blue grid grid-cols-[28%_30%_42%]">
         <div className="">
           <p className=' more_project_header_split_wrd text-6xl capitalize pfn leading-none'>selected <br /> works</p>
@@ -300,11 +309,10 @@ const WorkDetail = () => {
         </div>
       </div>
 
-
       <div className="padding py-0! relative ">
 
         <div
-          className="drag_btn fixed top-0 left-0 pointer-events-none bg-white/15 backdrop-blur-[1.25rem] rounded-lg z-[10] px-3 py-1.5 opacity-0 scale-100">
+          className="drag_btn fixed top-0 left-0 pointer-events-none text-sm bg-white/15 backdrop-blur-[1.25rem] rounded-lg z-[10] px-3 py-1.5 opacity-0 scale-100">
           <p className="font-medium">DRAG</p>
         </div>
 
@@ -337,7 +345,8 @@ const WorkDetail = () => {
       </div>
 
       <TicketEffect />
-    </>
+
+    </div>
   )
 }
 

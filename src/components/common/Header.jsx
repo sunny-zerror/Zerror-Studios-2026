@@ -78,7 +78,8 @@ const Header = () => {
         ease: "expo.out"
       })
       openMenuTl.to(".menu_img_paren", {
-        clipPath: "inset(0%)",
+        // clipPath: "inset(0%)",
+        opacity: 1,
         duration: 1,
         ease: "expo.out",
         stagger: 0.1
@@ -117,7 +118,7 @@ const Header = () => {
         }
       })
       closeMenuTl.to([".menu_title", ".social_anim_links"], {
-        transform: "translateY(105%)",
+        transform: "translateY(115%)",
         duration: 1,
         ease: "expo.out",
         stagger: {
@@ -126,7 +127,8 @@ const Header = () => {
         }
       }, "<")
       closeMenuTl.to(".menu_img_paren", {
-        clipPath: "inset(50%)",
+        // clipPath: "inset(50%)",
+        opacity: 0,
         duration: 1,
         ease: "expo.out",
         stagger: {
@@ -135,7 +137,7 @@ const Header = () => {
         }
       }, "<")
       closeMenuTl.to(".menu_img", {
-        scale: 0,
+        scale: 1.5,
         duration: 1,
         ease: "expo.out",
         stagger: {
@@ -158,10 +160,10 @@ const Header = () => {
     <>
       <div className="w-full fixed py-5  z-[9999] center">
         <div className="w-full relative z-[99999] flex justify-center gap-x-3 ">
-        <div onClick={()=>setOpenMenu(false)} className={`w-full h-screen fixed bg-black/20 backdrop-blur-sm z-[9] top-0 left-0 transition-all duration-300 ease-out ${openMenu ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} `}></div>
-      
+          <div onClick={() => setOpenMenu(false)} className={`w-full h-screen fixed bg-black/20 backdrop-blur-sm z-[9] top-0 left-0 transition-all duration-300 ease-out ${openMenu ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} `}></div>
+
           <div onClick={() => setOpenMenu(!openMenu)} className="menu_paren relative z-[100] w-[38vw]">
-            
+
             <div className={`menu_header border border-black/10 cursor-pointer group px-6 w-full flex items-center justify-between h-12  rounded-lg ${openMenu ? "rounded-b-none bg-white" : "bg-white/15! backdrop-blur-[1.25rem]"} transition-all duration-300 ease-out  `}>
               <div className="relative flex items-center ">
                 <div className="absolute block overflow-hidden w-20 ">
@@ -175,18 +177,19 @@ const Header = () => {
               </div>
             </div>
 
-            <div className=" drop_menu h-0 opacity-0 overflow-hidden pointer-events-none w-full bg-white rounded-b-lg  pb-5 px-6 ">
+            <div className=" drop_menu h-0 opacity-0 overflow-hidden pointer-events-none w-full bg-white rounded-b-lg  pb-5  ">
               <div className="">
                 {
                   menuLinks.map((menu) => (
-                    <Link href={menu.href} key={menu.id} className="w-full  text_blue  capitalize  border-b border-black/10 py-3.5 flex  justify-between ">
-                      <div className="flex gap-x-3">
+                    <Link onClick={() => setOpenMenu(false)} href={menu.href} key={menu.id} className={`w-full relative  text_blue  capitalize  border-b border-black/10 py-4 flex  justify-between ${pathname === menu.href ? "" : "group"} `}>
+                      {pathname === menu.href && <div className="w-full h-full absolute  bg-[#00000010] top-0 left-0 z-[9]"></div>}
+                      <div className="flex px-6 gap-x-3">
                         <div
-                          style={{ clipPath: "inset(50%)" }} className=" menu_img_paren aspect-5/3 overflow-hidden rounded-xs h-[5rem] ">
-                          <Image width={100} height={75} src={menu.img} alt="" className=" menu_img  cover scale-[1.5]" />
+                          className=" menu_img_paren opacity-0 aspect-[4.25/3] group-hover:aspect-[5/3] transition-all duration-300 ease-out overflow-hidden rounded-xs h-[4.5rem] ">
+                          <Image width={100} height={75} src={menu.img} alt="" className={` menu_img  cover scale-[1.5] ${pathname === menu.href ? "brightness-75" : ""} `} />
                         </div>
-                        <div className="w-fit h-fit block overflow-hidden -translate-y-0.5">
-                          <p className=' menu_title font-medium text-lg  translate-y-full leading-none'>{menu.title}</p>
+                        <div className="w-fit h-fit block overflow-hidden translate-y-[1.55rem]">
+                          <p className={`menu_title font-medium text-lg  translate-y-full leading-none ${pathname === menu.href ? "opacity-[.4]" : ""} transition-all duration-300 ease-out `}>{menu.title}</p>
                         </div>
                       </div>
                       {menu.sublinks && (
@@ -196,7 +199,7 @@ const Header = () => {
                             menu.sublinks?.map((sublink, i) => (
                               <div key={i} className=" sublinks_title_paren translate-y-4 w-full opacity-0 text-sm space-y-2">
                                 <p className=' leading-none font-semibold'>0{i + 1}/</p>
-                                <p className=' leading-none'>{sublink}</p>
+                                <p className=' leading-4'>{sublink}</p>
                               </div>
                             ))
                           }
@@ -206,10 +209,10 @@ const Header = () => {
                   ))
                 }
               </div>
-              <div className=" pt-4  flex flex-col gap-y-2">
+              <div className=" pt-4 px-6  flex flex-col gap-y-3">
                 {socialLinks.map((link, i) => (
-                  <Link href={link.href} key={i} className="w-fit overflow-hidden  pb-1 text_blue group    ">
-                    <div className=" social_anim_links capitalize translate-y-[110%] relative flex items-center ">
+                  <Link href={link.href} target='_blank' key={i} className="w-fit overflow-hidden  pb-1 text_blue group    ">
+                    <div className=" social_anim_links capitalize translate-y-[115%] relative flex items-center ">
                       <div className="w-0 group-hover:w-full transition-all duration-300 h-px bg_blue absolute -bottom-1 "></div>
                       <p className='leading-none'>{link.title}</p>
                       <RiArrowRightUpLine size={14} />

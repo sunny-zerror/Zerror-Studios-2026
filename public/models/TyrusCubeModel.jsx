@@ -46,7 +46,7 @@ export default function TyrusCubeModel(props) {
     tl.fromTo(
       modelRef.current.scale,
       { x: 0.6, y: 0.6, z: 0.6 },
-      { x: 1.2, y: 1.2, z: 1.2, duration: .2, ease: 'none' }, "<"
+      { x: 1.0, y: 1.0, z: 1.0, duration: .2, ease: 'none' }, "<"
     )
 
     tl.to(

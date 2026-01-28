@@ -15,9 +15,9 @@ const HelpSection = () => {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="w-full h-fit  text-white gap-18 flex flex-col">
-        <h1 className="text-[2.5rem] leading-[3rem] capitalize">
+        <p className="text-4xl">
           Happy to hear from you, Mridula. How can we help you?
-        </h1>
+        </p>
 
         {/* Next */}
         <div className="w-full max-w-md space-y-6">

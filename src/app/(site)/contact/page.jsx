@@ -12,10 +12,10 @@ const contact = () => {
     <div className="w-full h-screen flex bg-[#012CBA]">
       {/* Left */}
       <div className="w-1/2 h-screen relative">
-        <div className=" absolute bottom-[4%] left-[4%] flex flex-col RF_Font text-[4vw] leading-[3.5vw] text-white">
-          <h2>Let’s</h2>
-          <h2>Talk</h2>
-        </div>
+        <p className=" absolute bottom-[4%] left-[4%] flex flex-col pfn text-8xl text-white">
+          Let’s <br />
+          Talk
+        </p>
       </div>
 
       {/* Right */}
@@ -47,14 +47,14 @@ const contact = () => {
               onClick={() => SetNum(Num - 1)}
               className={`bg-white ${
                 Num == 1 && "hidden"
-              }  text-blue-700 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors shadow-lg`}
+              }  text_blue px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors `}
             >
               Prev
             </button>
 
             <button
               onClick={() => SetNum(Num + 1)}
-              className="bg-white text-blue-700 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors shadow-lg"
+              className="bg-white text_blue px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors "
             >
               Next
             </button>

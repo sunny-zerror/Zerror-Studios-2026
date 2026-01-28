@@ -50,7 +50,8 @@ button {
 }
 
 .site-background:before {
-  background: url(https://soleilnoir.com/wp-content/themes/soleil-noir/static/images/noise.png)
+  background:
+    url(https://soleilnoir.com/wp-content/themes/soleil-noir/static/images/noise.png)
       50% / 512px 512px,
     blue;
   background-blend-mode: color;
@@ -68,32 +69,36 @@ button {
   content: "";
 }
 
-.menu_deck::after{
-      content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(-45deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 70%);
-    transform: translate(-100%, -100%);
-    animation: 5s linear infinite glow;
+.menu_deck::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: translate(-100%, -100%);
+  animation: 5s linear infinite glow;
 }
 
 @keyframes glow {
   0% {
     transform: translate(-100%, -100%);
-}
-60% {
+  }
+  60% {
     transform: translate(-100%, -100%);
-}
-90% {
+  }
+  90% {
     transform: translate(100%, 100%);
-}
-100% {
+  }
+  100% {
     transform: translate(100%, 100%);
-}
-  
+  }
 }
 
 .scene {
@@ -116,61 +121,79 @@ button {
   will-change: transform, opacity;
 }
 
-
-
-
-
+.flicker {
+  animation: flicker 2s infinite alternate;
+}
+@keyframes flicker {
+  0% {
+    opacity: 0.2;
+  }
+  5% {
+    opacity: 0.8;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
 
 /* --------------------------------------------------- */
 
-.form input{
-  width:100%;
-  height:100%;
-  color:#ffffff;
-  padding-top:1rem;
-  border:none;
-  outline:none;
+.form input {
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  padding-top: 1rem;
+  border: none;
+  outline: none;
 }
 .form label {
   position: absolute;
-  width:100%;
-  height:100%;
-  bottom:0px;
-  left:0%;
-  pointer-events:none;
-  border-bottom:1px solid #ffffff42;
+  width: 100%;
+  height: 100%;
+  bottom: 0px;
+  left: 0%;
+  pointer-events: none;
+  border-bottom: 1px solid #ffffff42;
 }
-.form label::after{
-  content:"";
-  position:absolute;
-  width:100%;
+.form label::after {
+  content: "";
+  position: absolute;
+  width: 100%;
   border-radius: 1000px;
-  border-bottom:3px solid #ffffff;
-  bottom:-1px;
-  left:0px;
-  transform:translateX(-100%);
-  transition:all 0.3s ease;
+  border-bottom: 3px solid #ffffff;
+  bottom: -1px;
+  left: 0px;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
 }
-.content-name{
-  position:absolute;
-  bottom:5px;
-  left:0px;
-  transition:all .3s ease;
+.content-name {
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  transition: all 0.3s ease;
 }
-.form input:focus + .label-name .content-name ,
-.form input:valid+ .label-name .content-name{
-  transform:translateY(-100%);
-  font-size:1rem;
-  color:#ffffff;
+.form input:focus + .label-name .content-name,
+.form input:valid + .label-name .content-name {
+  transform: translateY(-100%);
+  font-size: 1rem;
+  color: #ffffff;
 }
-.form input:focus+ .label-name::after, 
-.form input:valid+ .label-name::after {
-  transform:translateX(0%);
+.form input:focus + .label-name::after,
+.form input:valid + .label-name::after {
+  transform: translateX(0%);
 }
-.made{
-  position:absolute;
-  bottom:10%;
+.made {
+  position: absolute;
+  bottom: 10%;
 }
-.made i{
-  color:red;
+.made i {
+  color: red;
 }
+
+/* Page transition using view transition api */

@@ -84,7 +84,7 @@ const Hero = () => {
 
 
   return (
-    <div className=" hero_paren w-full relative">
+    <div data-theme="dark" className=" hero_paren w-full relative">
 
       <div className="site-background fixed top-0 left-0   w-full h-screen z-[-1]">
         <HeroScene />

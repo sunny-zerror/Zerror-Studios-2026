@@ -4,11 +4,11 @@ const ThanksSection = () => {
   return (
    <div className="w-full h-full flex flex-col ">
       <div className="w-full h-fit  text-white gap-8 flex flex-col">
-        <h1 className="text-[2.5rem] leading-[3rem] capitalize">
+        <p className="text-4xl">
           Thank you
-        </h1>
+        </p>
 
-        <p className='text-[1.1rem] leading-[1.5rem] capitalize'>Your message is with us. We’ll get back <br/> to you soon.</p>
+        <p className='text-xl'>Your message is with us.  <br />We’ll get back to you soon.</p>
       </div>
     </div>
   )

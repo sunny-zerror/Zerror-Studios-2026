@@ -728,7 +728,7 @@ const plp = () => {
             <div className="w-full h-screen flex text-center  justify-center items-center pointer-events-none ">
               <div className="w-full h-screen relative flex justify-center pointer-events-none px-[20px] ">
 
-                <div className="w-fit WEBETEXT h-fit flex flex-col gap-1 text-[#002BBA] text-start absolute top-[23%] left-[70%]">
+                <div className="w-fit WEBETEXT opacity-0 h-fit flex flex-col gap-1 text-[#002BBA] text-start absolute top-[23%] left-[70%]">
                   <p className="text-[1rem] leading-[1rem]">Website Design</p>
                   <p className="text-[1.5rem] leading-[1.5rem] RF_Font">2025</p>
                 </div>

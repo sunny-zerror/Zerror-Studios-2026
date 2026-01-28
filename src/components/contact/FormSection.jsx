@@ -4,46 +4,46 @@ const FormSection = () => {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="w-full h-fit  text-white gap-18 flex flex-col">
-        <h1 className="text-[2.5rem] leading-[3rem] capitalize">
+        <p className="text-4xl">
           Tell us a little bit about yourself and we will get back to you as
           soon as we can
-        </h1>
+        </p>
 
         {/* Form */}
         <div className="w-full">
           <div className="space-y-8">
             <div>
-              <label className="block text-white text-lg mb-2">
-                First Name<span className="text-red-500">*</span>
+              <label className="block text-white  mb-2">
+                First Name <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="firstName"
-                className="w-full bg-transparent border-b-2 border-white text-white placeholder-blue-300 focus:outline-none focus:border-blue-200 pb-2 text-lg transition-colors"
+                className="w-full bg-transparent border-b-2 border-white text-white placeholder-blue-300 focus:outline-none focus:border-blue-200 pb-2  transition-colors"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-white text-lg mb-2">
-                Phone Number<span className="text-red-500">*</span>
+              <label className="block text-white  mb-2">
+                Phone Number <span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
                 name="phoneNumber"
-                className="w-full bg-transparent border-b-2 border-white text-white placeholder-blue-300 focus:outline-none focus:border-blue-200 pb-2 text-lg transition-colors"
+                className="w-full bg-transparent border-b-2 border-white text-white placeholder-blue-300 focus:outline-none focus:border-blue-200 pb-2  transition-colors"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-white text-lg mb-2">
-                Email<span className="text-red-500">*</span>
+              <label className="block text-white  mb-2">
+                Email <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
                 name="email"
-                className="w-full bg-transparent border-b-2 border-white text-white placeholder-blue-300 focus:outline-none focus:border-blue-200 pb-2 text-lg transition-colors"
+                className="w-full bg-transparent border-b-2 border-white text-white placeholder-blue-300 focus:outline-none focus:border-blue-200 pb-2  transition-colors"
                 required
               />
             </div>

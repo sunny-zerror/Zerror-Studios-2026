@@ -1,0 +1,9 @@
+text-8xl
+text-6xl
+text-4xl
+text-3xl
+text-xl - uppercase - semibold
+text-lg
+text-base
+text-sm
+text-xs

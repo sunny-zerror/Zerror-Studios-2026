@@ -24,10 +24,10 @@ const SocialSection = () => {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="w-full h-fit  text-white gap-18 flex flex-col">
-        <h1 className="text-[2.5rem] leading-[3rem] capitalize">
+      <div className="w-full h-fit  text-white gap-10 flex flex-col">
+        <p className="text-4xl">
           How did you hear about us?
-        </h1>
+        </p>
 
         {/* Next */}
         <div className="grid grid-cols-2 gap-4 max-w-2xl w-full">

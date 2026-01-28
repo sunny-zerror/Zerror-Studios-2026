@@ -15,6 +15,8 @@ gsap.registerPlugin(ScrollTrigger);
 export default function SiteLayout({ children }) {
   const pathname = usePathname();
 
+  const skipFooterPaths = ["/deck", "/contact"];
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       ScrollTrigger.refresh();
@@ -32,7 +34,7 @@ export default function SiteLayout({ children }) {
         <div className="page-root">
           <Header />
           <main>{children}</main>
-          <Footer />
+          {!skipFooterPaths.includes(pathname) && <Footer />}
         </div>
       </LenisScroll>
     </ViewTransitions>

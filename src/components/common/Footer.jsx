@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { usePathname } from "next/navigation";
 
@@ -98,48 +98,18 @@ const footerRows = [
 
 const Footer = () => {
 
+  const flickerRefs = useRef([]);
+
   useEffect(() => {
-    const TEXTS = document.querySelectorAll(".glitch-text");
+    flickerRefs.current.forEach((el) => {
+      const delay = Math.random() * 10;
 
-    const glitchAnim = () => {
-      if (TEXTS.length < 1) return;
-
-      // pick 1–2 random
-      const sample = gsap.utils.shuffle(Array.from(TEXTS)).slice(0, 2);
-
-      gsap
-        .timeline()
-        .to(sample, {
-          opacity: 0,
-          x: () => gsap.utils.random(-3, 3),
-          y: () => gsap.utils.random(-2, 2),
-          duration: 0.08,
-          ease: "steps(1)",
-          stagger: 0.02,
-        })
-        .to(sample, {
-          opacity: 1,
-          x: 0,
-          y: 0,
-          duration: 0.15,
-          ease: "power1.out",
-          stagger: 0.03,
-          onComplete: () => {
-            // random recur
-            gsap.delayedCall(gsap.utils.random(0.2, 0.6), glitchAnim);
-          },
-        });
-    };
-
-    glitchAnim();
-
-    return () => {
-      gsap.killTweensOf(TEXTS);
-    };
+      el.style.animationDelay = `${delay}s`;
+    });
   }, []);
 
   return (
-    <div className="w-full h-screen bg_blue padding relative z-100">
+    <div className="w-full h-screen bg_blue  padding relative z-100">
       <div className="w-full h-full p-3">
         {footerRows.map((row) => (
           <div key={row.id} className="w-full h-1/3 grid grid-cols-9">
@@ -152,22 +122,23 @@ const Footer = () => {
                   key={i}
                   onMouseEnter={() => hoverIn(selector)}
                   onMouseLeave={() => hoverOut(selector)}
-                  className={`w-full hoverBg${
-                    row.id
-                  }${i}  border relative  group border-white/10 rounded-md flex text-white  leading-tight
+                  className={`w-full hoverBg${row.id
+                    }${i}  border relative  group border-white/10 rounded-md flex text-white  leading-tight
                    
-                    ${
-                      isImage ? "px-0 py-0 justify-center  items-center" : "p-5"
+                    ${isImage ? "px-0 py-0 justify-center  items-center" : "p-5"
                     }
                   `}
                 >
                   {item.img && (
-                    <img src={item.img} alt="icon" className="h-[6vw]" />
+                    <img
+                      ref={(el) => (flickerRefs.current.push(el))}
+                      src={item.img} alt="icon" className="flicker h-[6vw]" />
                   )}
 
                   {item.text && (
                     <span
-                      className={`glitch-text text-xs leading-tight  uppercase text-[#f5f5f5]  transition-all duration-300  ${item.align}
+                      ref={(el) => (flickerRefs.current.push(el))}
+                      className={` flicker text-xs leading-tight  uppercase text-[#f5f5f5]  transition-all duration-300  ${item.align}
                         ${item.hover}
                      `}
                       style={{

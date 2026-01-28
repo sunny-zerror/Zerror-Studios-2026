@@ -29,8 +29,6 @@ const DiceCanvas = () => {
     })
   })
 
-
-
   return (
     <div className="CanvasDiv w-full overflow-hidden h-screen fixed top-0 left-0 z-[999] pointer-events-none ">
       <Canvas

@@ -36,7 +36,6 @@ const DiceCanvas = () => {
         camera={{ position: [0, 0, 7], fov: 45 }}
       >
         <TyrusCubeModel />
-        <OrbitControls autoRotate enableZoom={false} />
         <Environment preset="studio" />
       </Canvas>
     </div>
